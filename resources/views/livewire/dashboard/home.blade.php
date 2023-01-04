@@ -1,5 +1,5 @@
-<section class="container font-poppins">
+<main class="container flex justify-end font-poppins">
   @livewire('partials.sidebar')
 
-  {{-- @livewire('admin.home') --}}
-</section>
+  @livewire('admin.home')
+</main>
