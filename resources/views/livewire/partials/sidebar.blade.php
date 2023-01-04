@@ -1,7 +1,7 @@
 <aside class="fixed left-0 flex h-screen flex-col items-center py-10 pl-12 pr-10">
   <div class="relative mb-16">
     <h1
-      class="relative z-10 w-full text-4xl font-bold text-orange before:absolute before:-left-4 before:-top-1 before:-z-10 before:block before:h-[110%] before:w-[125%] before:-rotate-6 before:bg-gray-1">
+      class="relative z-10 w-full text-4xl font-bold text-orange-2 before:absolute before:-left-4 before:-top-1 before:-z-10 before:block before:h-[110%] before:w-[125%] before:-rotate-6 before:bg-gray-1">
       Met<span class="text-navy">rics</span></h1>
   </div>
 

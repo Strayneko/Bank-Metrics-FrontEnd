@@ -14,13 +14,16 @@ module.exports = {
                 poppins: ["Poppins", "sans-serif"],
             },
             colors: {
-                orange: "#FF5927",
+                orange: {
+                    1: "#FCC997",
+                    2: "#FF5927",
+                },
                 navy: "#0F0742",
                 gray: {
                     1: "#E0E0E0",
                     2: "#989898",
-                    3: "#BDBDBD"
-                }
+                    3: "#BDBDBD",
+                },
             },
         },
     },
