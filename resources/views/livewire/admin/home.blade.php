@@ -1,4 +1,4 @@
-<section class="w-[80%] py-10">
+<section class="mt-96 w-[80%] py-10 lg:mt-0">
   <div class="w-full rounded-xl bg-gray-1 p-6">
     <div class="mb-10 flex w-full items-center justify-center gap-6 rounded-xl bg-navy py-12 px-5 text-gray-2">
       <div
