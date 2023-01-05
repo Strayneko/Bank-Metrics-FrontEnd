@@ -25,6 +25,15 @@ module.exports = {
                     3: "#BDBDBD",
                 },
             },
+            keyframes: {
+                spinLeft: {
+                    from: { transform: "rotate(360deg)" },
+                    to: { transform: "rotate(0deg)" },
+                },
+            },
+            animation: {
+                spinLeft: "spinLeft 4.5s linear infinite",
+            },
         },
     },
     plugins: [],
