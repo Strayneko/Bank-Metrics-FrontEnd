@@ -8,5 +8,10 @@
     <div class="container">
         @yield('containt')
     </div>
+
+    <script>
+        AOS.init();
+
+    </script>
 </body>
 </html>
