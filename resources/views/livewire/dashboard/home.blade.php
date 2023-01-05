@@ -1,4 +1,4 @@
-<main class="container relative flex justify-end font-poppins">
+<main class="container relative flex justify-end font-poppins" x-data="{ showSidebar: false }">
   @livewire('partials.nav-mobile')
 
   @livewire('partials.sidebar')
