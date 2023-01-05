@@ -20,11 +20,11 @@
                 <form method="" action="" enctype="multipart/form-data">
                     <div class="m-5 lg:m-0 lg:mb-6">
                         <label for="email" class="block mb-2 text-sm font-medium text-[#0F0742] font-poppins dark:text-white">Email</label>
-                        <input type="email" id="email" class="w-full md:w-[280px] lg:w-[380px] border border-[#FCC997] p-2.5 rounded-lg" placeholder="Insert you email address" required>
+                        <input type="email" id="email" name="email" class="w-full md:w-[280px] lg:w-[380px] border border-[#FCC997] p-2.5 rounded-lg" placeholder="Insert you email address" required>
                     </div>
                     <div class="m-5 lg:m-0 lg:mb-6">
                         <label for="password" class="block mb-2 text-sm font-medium text-[#0F0742] font-poppins dark:text-white">Password</label>
-                        <input type="password" id="email" class="w-full lg:w-[380px] border border-[#FCC997] p-2.5 rounded-lg" placeholder="Insert you password" required>
+                        <input type="password" id="password" name="password" class="w-full lg:w-[380px] border border-[#FCC997] p-2.5 rounded-lg" placeholder="Insert you password" required>
                     </div>
                     <div class="text-right m-5">
                         <a href="" class=" font-poppins text-[#0F0742] hover:text-[#4d36e4]">Forgot Password?</a>
