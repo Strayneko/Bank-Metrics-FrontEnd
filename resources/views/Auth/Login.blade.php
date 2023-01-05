@@ -31,7 +31,7 @@
                     </div>
                     <div class="flex justify-between m-5 mb-20 gap-5 lg:mb-0 lg:m-0 lg:gap-0 ">
                         <button type="submit" class="mt-5 lg:mt-0 bg-[#FCC997] px-5 py-2.5 rounded-lg font-poppins font-bold text-white w-full lg:w-[175px] hover:text-[#0F0742] hover:bg-[#f4f4f4] hover:border hover:border-[#FCC997]">Login</button>
-                    <a href="" class="mt-5 lg:mt-0 border border-[#FCC997] px-5 p-2.5 rounded-lg font-poppins font-bold text-[#0F0742] w-full lg:w-[175px] text-center hover:bg-[#ff972f]  hover:text-white">Sign Up</a>
+                    <a href="{{url('/Register')}}" class="mt-5 lg:mt-0 border border-[#FCC997] px-5 p-2.5 rounded-lg font-poppins font-bold text-[#0F0742] w-full lg:w-[175px] text-center hover:bg-[#ff972f]  hover:text-white">Sign Up</a>
                     </div>
                 </form>
             </div>
