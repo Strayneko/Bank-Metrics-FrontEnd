@@ -15,3 +15,10 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', HomeDashboard::class);
+
+Route::get('/Login', function () {
+    return view('Auth.Login');
+});
+Route::get('/Register', function () {
+    return view('Auth.Register');
+});
