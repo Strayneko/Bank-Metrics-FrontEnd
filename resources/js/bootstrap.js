@@ -34,10 +34,10 @@ window.axios.defaults.headers.common["X-Requested-With"] = "XMLHttpRequest";
 //     enabledTransports: ['ws', 'wss'],
 // });
 
-import Alpine from "alpinejs";
+// import Alpine from "alpinejs";
 
-window.Alpine = Alpine;
+// window.Alpine = Alpine;
 
-Alpine.start();
+// Alpine.start();
 import AOS from 'aos';
 window.AOS = AOS;
