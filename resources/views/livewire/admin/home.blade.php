@@ -1,9 +1,9 @@
 <section class="mt-20 w-full py-10 lg:mt-0 lg:w-[80%]">
   <div class="mx-auto w-11/12 rounded-xl pb-6 lg:mx-0 lg:w-full lg:bg-gray-1 lg:p-6">
     <div
-      class="mb-10 flex w-full flex-wrap items-center justify-center gap-8 gap-y-12 rounded-xl bg-navy py-12 px-1 text-lg text-gray-2 lg:gap-6 lg:px-5 lg:text-xl">
+      class="mb-10 flex w-full flex-wrap items-center justify-center gap-8 gap-y-12 rounded-xl bg-navy py-12 px-1 text-lg text-gray-2 md:gap-12 md:px-5 lg:gap-6 lg:text-xl">
       <div
-        class="group relative h-28 w-32 rounded-xl bg-white px-1 py-3 text-center font-bold transition-all duration-300 hover:rotate-6 lg:h-32 lg:w-40 lg:py-5">
+        class="group relative h-28 w-32 rounded-xl bg-white px-1 py-3 text-center font-bold transition-all duration-300 hover:rotate-6 md:h-32 md:w-40 md:py-5">
         <div
           class="absolute right-1 -top-5 flex h-10 w-10 items-center justify-center rounded-lg bg-orange-2 group-hover:animate-bounce">
           <div class="w-6"><img class="w-full" src="{{ asset('images/icons/user-white.svg') }}" alt="">
@@ -15,7 +15,7 @@
       </div>
 
       <div
-        class="group relative h-28 w-32 rounded-xl bg-white px-1 py-3 text-center font-bold transition-all duration-300 hover:rotate-6 lg:h-32 lg:w-40 lg:py-5">
+        class="group relative h-28 w-32 rounded-xl bg-white px-1 py-3 text-center font-bold transition-all duration-300 hover:rotate-6 md:h-32 md:w-40 md:py-5">
         <div
           class="absolute right-1 -top-5 flex h-10 w-10 items-center justify-center rounded-lg bg-orange-2 group-hover:animate-bounce">
           <div class="w-6"><img class="w-full" src="{{ asset('images/icons/user-white.svg') }}" alt="">
@@ -27,7 +27,7 @@
       </div>
 
       <div
-        class="group relative h-28 w-32 rounded-xl bg-white px-1 py-3 text-center font-bold transition-all duration-300 hover:rotate-6 lg:h-32 lg:w-40 lg:py-5">
+        class="group relative h-28 w-32 rounded-xl bg-white px-1 py-3 text-center font-bold transition-all duration-300 hover:rotate-6 md:h-32 md:w-40 md:py-5">
         <div
           class="absolute right-1 -top-5 flex h-10 w-10 items-center justify-center rounded-lg bg-orange-2 group-hover:animate-bounce">
           <div class="w-6"><img class="w-full" src="{{ asset('images/icons/submission-white.svg') }}" alt="">
@@ -39,7 +39,7 @@
       </div>
 
       <div
-        class="group relative h-28 w-32 rounded-xl bg-white px-1 py-3 text-center font-bold transition-all duration-300 hover:rotate-6 lg:h-32 lg:w-40 lg:py-5">
+        class="group relative h-28 w-32 rounded-xl bg-white px-1 py-3 text-center font-bold transition-all duration-300 hover:rotate-6 md:h-32 md:w-40 md:py-5">
         <div
           class="absolute right-1 -top-5 flex h-10 w-10 items-center justify-center rounded-lg bg-orange-2 group-hover:animate-bounce">
           <div class="w-6"><img class="w-full" src="{{ asset('images/icons/approve-white.svg') }}" alt="">
@@ -51,7 +51,7 @@
       </div>
 
       <div
-        class="group relative h-28 w-32 rounded-xl bg-white px-1 py-3 text-center font-bold transition-all duration-300 hover:rotate-6 lg:h-32 lg:w-40 lg:py-5">
+        class="group relative h-28 w-32 rounded-xl bg-white px-1 py-3 text-center font-bold transition-all duration-300 hover:rotate-6 md:h-32 md:w-40 md:py-5">
         <div
           class="absolute right-1 -top-5 flex h-10 w-10 items-center justify-center rounded-lg bg-orange-2 group-hover:animate-bounce">
           <div class="w-6"><img class="w-full" src="{{ asset('images/icons/not-approved-white.svg') }}"
@@ -89,7 +89,7 @@
           </li>
         </div>
         <div class="flex flex-col gap-3 pl-11 lg:flex-row lg:items-center lg:pl-0"
-          x-show="width > 640 ? true : showUser" x-transition.duration.700ms>
+          x-show="width > 768 ? true : showUser" x-transition.duration.700ms>
           <li class="lg:w-56"><span class="lg:hidden">Tanggal Lahir : </span>2000 April 03</li>
           <li class="lg:w-80"><span class="lg:hidden">Alamat : </span>Jl. May Ruslan Perum Villa Garden Galic No. 134
           </li>
@@ -111,7 +111,7 @@
           </li>
         </div>
         <div class="flex flex-col gap-3 pl-11 lg:flex-row lg:items-center lg:pl-0"
-          x-show="width > 640 ? true : showUser" x-transition.duration.700ms>
+          x-show="width > 768 ? true : showUser" x-transition.duration.700ms>
           <li class="lg:w-56"><span class="lg:hidden">Tanggal Lahir : </span>2000 April 03</li>
           <li class="lg:w-80"><span class="lg:hidden">Alamat : </span>Jl. May Ruslan Perum Villa Garden Galic No. 134
           </li>
@@ -133,7 +133,7 @@
           </li>
         </div>
         <div class="flex flex-col gap-3 pl-11 lg:flex-row lg:items-center lg:pl-0"
-          x-show="width > 640 ? true : showUser" x-transition.duration.700ms>
+          x-show="width > 768 ? true : showUser" x-transition.duration.700ms>
           <li class="lg:w-56"><span class="lg:hidden">Tanggal Lahir : </span>2000 April 03</li>
           <li class="lg:w-80"><span class="lg:hidden">Alamat : </span>Jl. May Ruslan Perum Villa Garden Galic No. 134
           </li>

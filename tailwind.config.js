@@ -8,13 +8,13 @@ module.exports = {
     theme: {
         container: {
             screens: {
-              xl: "1284px",
+                xl: "1240px",
             },
             center: true,
         },
         extend: {
             fontFamily: {
-                neuton : ["neuton", "sans-serif"],
+                neuton: ["neuton", "sans-serif"],
                 poppins: ["Poppins", "sans-serif"],
             },
             colors: {
