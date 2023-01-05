@@ -1,6 +1,8 @@
 <?php
 
 use App\Http\Livewire\Dashboard\Home as HomeDashboard;
+use App\Http\Livewire\Auth\Login;
+use App\Http\Livewire\Auth\Register;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -16,9 +18,6 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', HomeDashboard::class);
 
-Route::get('/Login', function () {
-    return view('Auth.Login');
-});
-Route::get('/Register', function () {
-    return view('Auth.Register');
-});
+Route::get('/Login', Login::class);
+
+Route::get('/Register', Register::class);
