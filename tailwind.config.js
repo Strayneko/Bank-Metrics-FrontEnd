@@ -7,10 +7,14 @@ module.exports = {
     ],
     theme: {
         container: {
+            screens: {
+              xl: "1284px",
+            },
             center: true,
         },
         extend: {
             fontFamily: {
+                neuton : ["neuton", "sans-serif"],
                 poppins: ["Poppins", "sans-serif"],
             },
             colors: {
@@ -25,18 +29,16 @@ module.exports = {
                     3: "#BDBDBD",
                 },
             },
-
-      container: {
-        screens: {
-          xl: "1284px",
+            keyframes: {
+                spinLeft: {
+                    from: { transform: "rotate(360deg)" },
+                    to: { transform: "rotate(0deg)" },
+                },
+            },
+            animation: {
+                spinLeft: "spinLeft 4.5s linear infinite",
+            },
         },
-        center:true,
-      },
-      fontFamily: {
-        "neuton" : "neuton",
-        "poppins" : "Poppins",
-      }
-    },
     },
     plugins: [],
 };

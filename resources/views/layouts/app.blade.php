@@ -15,7 +15,18 @@
 
   @livewireStyles
 
-  @vite('resources/css/app.css')
+  @vite(['resources/css/app.css', 'resources/js/app.js'])
+  <style>
+    [x-cloak] {
+      display: hidden
+    }
+
+    @media screen and (max-width: 768px) {
+      [x-cloak="mobile"] {
+        display: flex
+      }
+    }
+  </style>
 </head>
 
 <body>

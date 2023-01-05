@@ -1,4 +1,6 @@
-<aside class="fixed left-0 flex h-screen flex-col items-center py-10 pl-12 pr-10">
+<aside
+  class="fixed z-30 flex h-screen flex-col items-center bg-white py-10 pl-8 pr-10 transition-all duration-500 lg:left-0 lg:pl-12"
+  :class="showSidebar ? 'left-0' : '-left-96'">
   <div class="relative mb-16">
     <h1
       class="relative z-10 w-full text-4xl font-bold text-orange-2 before:absolute before:-left-4 before:-top-1 before:-z-10 before:block before:h-[110%] before:w-[125%] before:-rotate-6 before:bg-gray-1">
