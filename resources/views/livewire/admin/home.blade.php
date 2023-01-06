@@ -1,3 +1,17 @@
+<script>
+  Alpine.data('usersDashboard', () => ({
+    users: [],
+    getUsers() {
+      fetch(`{{ env('API_URL') }}/api/user`, {
+        method: 'GET'
+      }).then(async res => {
+        data = await res.json()
+        this.users = data.data
+        console.log(this.users)
+      })
+    }
+  }))
+</script>
 <section class="mt-20 w-full py-10 lg:mt-0 lg:w-[80%]">
   <div class="mx-auto w-11/12 rounded-xl pb-6 lg:mx-0 lg:w-full lg:bg-gray-1 lg:p-6">
     <div
@@ -64,7 +78,7 @@
       </div>
     </div>
 
-    <div class="bg-white">
+    <div class="bg-white" x-data="usersDashboard" x-init="getUsers()">
       <ul class="flex gap-3 bg-orange-1 px-3 py-4 font-semibold text-navy">
         <li class="w-10 text-center">No</li>
         <li class="w-64">Nama</li>
@@ -74,71 +88,9 @@
         </div>
       </ul>
 
-      <ul class="flex flex-col gap-3 px-3 py-4 font-medium text-navy lg:flex-row lg:items-center"
-        x-data="{
-            showUser: false,
-            width: (window.innerWidth > 0) ? window.innerWidth : screen.width
-        }" x-on:click="showUser = !showUser">
-        <div class="flex items-center gap-3">
-          <li class="w-10 text-center font-semibold">1</li>
-          <li class="flex w-64 items-center gap-5">
-            <div class="h-14 w-14 rounded-lg bg-gray-3">
-              <img src="" alt="">
-            </div>
-            <span>Apriando Pratama</span>
-          </li>
-        </div>
-        <div class="flex flex-col gap-3 pl-11 lg:flex-row lg:items-center lg:pl-0"
-          x-show="width > 768 ? true : showUser" x-transition.duration.700ms>
-          <li class="lg:w-56"><span class="lg:hidden">Tanggal Lahir : </span>2000 April 03</li>
-          <li class="lg:w-80"><span class="lg:hidden">Alamat : </span>Jl. May Ruslan Perum Villa Garden Galic No. 134
-          </li>
-        </div>
-      </ul>
-
-      <ul class="flex flex-col gap-3 px-3 py-4 font-medium text-navy lg:flex-row lg:items-center"
-        x-data="{
-            showUser: false,
-            width: (window.innerWidth > 0) ? window.innerWidth : screen.width
-        }" x-on:click="showUser = !showUser">
-        <div class="flex items-center gap-3">
-          <li class="w-10 text-center font-semibold">2</li>
-          <li class="flex w-64 items-center gap-5">
-            <div class="h-14 w-14 rounded-lg bg-gray-3">
-              <img src="" alt="">
-            </div>
-            <span>Apriando Pratama</span>
-          </li>
-        </div>
-        <div class="flex flex-col gap-3 pl-11 lg:flex-row lg:items-center lg:pl-0"
-          x-show="width > 768 ? true : showUser" x-transition.duration.700ms>
-          <li class="lg:w-56"><span class="lg:hidden">Tanggal Lahir : </span>2000 April 03</li>
-          <li class="lg:w-80"><span class="lg:hidden">Alamat : </span>Jl. May Ruslan Perum Villa Garden Galic No. 134
-          </li>
-        </div>
-      </ul>
-
-      <ul class="flex flex-col gap-3 px-3 py-4 font-medium text-navy lg:flex-row lg:items-center"
-        x-data="{
-            showUser: false,
-            width: (window.innerWidth > 0) ? window.innerWidth : screen.width
-        }" x-on:click="showUser = !showUser">
-        <div class="flex items-center gap-3">
-          <li class="w-10 text-center font-semibold">3</li>
-          <li class="flex w-64 items-center gap-5">
-            <div class="h-14 w-14 rounded-lg bg-gray-3">
-              <img src="" alt="">
-            </div>
-            <span>Apriando Pratama</span>
-          </li>
-        </div>
-        <div class="flex flex-col gap-3 pl-11 lg:flex-row lg:items-center lg:pl-0"
-          x-show="width > 768 ? true : showUser" x-transition.duration.700ms>
-          <li class="lg:w-56"><span class="lg:hidden">Tanggal Lahir : </span>2000 April 03</li>
-          <li class="lg:w-80"><span class="lg:hidden">Alamat : </span>Jl. May Ruslan Perum Villa Garden Galic No. 134
-          </li>
-        </div>
-      </ul>
+      <template x-for="(user, i) of users">
+        @livewire('components.list-user')
+      </template>
 
     </div>
   </div>
