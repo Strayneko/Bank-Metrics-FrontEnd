@@ -5,12 +5,29 @@
 
   <section class="mt-20 w-full py-10 lg:mt-0 lg:w-[80%]">
     <div class="mx-auto w-11/12 rounded-xl pb-6 lg:mx-0 lg:w-full lg:bg-gray-1 lg:p-6">
-      <div class="relative mx-auto flex w-max flex-col items-center justify-center gap-3">
+      <div class="relative mx-auto mb-12 flex w-max flex-col items-center justify-center gap-3">
         <h1 class="text-3xl font-bold text-orange-2">List <span class="text-navy">Admin</span></h1>
         <div
           class="relative h-2 w-52 rounded-lg bg-orange-1 after:absolute after:inset-0 after:m-auto after:h-5 after:w-16 after:rounded-xl after:bg-navy">
         </div>
       </div>
+
+      <div class="mb-6">
+        <a href="#"
+          class="inline-block rounded-md bg-white px-6 py-2 font-semibold text-navy shadow-md shadow-navy/30 transition-all duration-300 hover:-translate-y-0.5 hover:shadow-lg hover:shadow-navy/40">Create
+          Admin</a>
+      </div>
+
+      <div class="bg-white">
+        <ul class="flex gap-3 bg-orange-1 px-3 py-4 font-semibold text-navy">
+          <li class="w-10 text-center">No</li>
+          <li class="w-80">Nama</li>
+          <li class="w-80">Email</li>
+        </ul>
+
+        @livewire('components.list-admin')
+      </div>
+
     </div>
   </section>
 </main>
