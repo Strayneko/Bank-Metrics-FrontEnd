@@ -20,7 +20,7 @@
         class="group relative h-28 w-32 rounded-xl bg-white px-1 py-3 text-center font-bold transition-all duration-300 hover:rotate-6 md:h-32 md:w-40 md:py-5">
         <div
           class="absolute right-1 -top-5 flex h-10 w-10 items-center justify-center rounded-lg bg-orange-2 group-hover:animate-bounce">
-          <div class="w-6"><img class="w-full" src="{{ asset('images/icons/user-white.svg') }}" alt="">
+          <div class="w-6"><img class="w-full" src="{{ asset('assets/icons/admin-white.svg') }}" alt="">
           </div>
         </div>
         <p>Admins</p>
@@ -32,7 +32,7 @@
         class="group relative h-28 w-32 rounded-xl bg-white px-1 py-3 text-center font-bold transition-all duration-300 hover:rotate-6 md:h-32 md:w-40 md:py-5">
         <div
           class="absolute right-1 -top-5 flex h-10 w-10 items-center justify-center rounded-lg bg-orange-2 group-hover:animate-bounce">
-          <div class="w-6"><img class="w-full" src="{{ asset('images/icons/user-white.svg') }}" alt="">
+          <div class="w-6"><img class="w-full" src="{{ asset('assets/icons/user-white.svg') }}" alt="">
           </div>
         </div>
         <p>Users</p>
@@ -44,7 +44,7 @@
         class="group relative h-28 w-32 rounded-xl bg-white px-1 py-3 text-center font-bold transition-all duration-300 hover:rotate-6 md:h-32 md:w-40 md:py-5">
         <div
           class="absolute right-1 -top-5 flex h-10 w-10 items-center justify-center rounded-lg bg-orange-2 group-hover:animate-bounce">
-          <div class="w-6"><img class="w-full" src="{{ asset('images/icons/submission-white.svg') }}" alt="">
+          <div class="w-6"><img class="w-full" src="{{ asset('assets/icons/submission-white.svg') }}" alt="">
           </div>
         </div>
         <p>Submission</p>
@@ -56,7 +56,7 @@
         class="group relative h-28 w-32 rounded-xl bg-white px-1 py-3 text-center font-bold transition-all duration-300 hover:rotate-6 md:h-32 md:w-40 md:py-5">
         <div
           class="absolute right-1 -top-5 flex h-10 w-10 items-center justify-center rounded-lg bg-orange-2 group-hover:animate-bounce">
-          <div class="w-6"><img class="w-full" src="{{ asset('images/icons/approve-white.svg') }}" alt="">
+          <div class="w-6"><img class="w-full" src="{{ asset('assets/icons/approve-white.svg') }}" alt="">
           </div>
         </div>
         <p>Approved</p>
@@ -68,7 +68,7 @@
         class="group relative h-28 w-32 rounded-xl bg-white px-1 py-3 text-center font-bold transition-all duration-300 hover:rotate-6 md:h-32 md:w-40 md:py-5">
         <div
           class="absolute right-1 -top-5 flex h-10 w-10 items-center justify-center rounded-lg bg-orange-2 group-hover:animate-bounce">
-          <div class="w-6"><img class="w-full" src="{{ asset('images/icons/not-approved-white.svg') }}"
+          <div class="w-6"><img class="w-full" src="{{ asset('assets/icons/not-approved-white.svg') }}"
               alt="">
           </div>
         </div>
