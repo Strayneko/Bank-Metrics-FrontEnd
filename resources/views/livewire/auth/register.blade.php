@@ -23,7 +23,7 @@
                 // console.log(this.msg.password[0])
                 if(status == false){
                     alert(this.msg.password[0])
-                    // window.location.replace('')
+                    window.location.replace('')
                 }
                 window.location.replace(`{{ env('APP_URL') }}/Login`)
 
