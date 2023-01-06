@@ -12,7 +12,7 @@
             data.append('email', this.user.email)
             data.append('password', this.user.password)
 
-            fetch("http://127.0.0.1:8000/api/user/register", {
+            fetch(`{{ env('API_URL') }}/api/user/register`, {
                 method: "POST",
                 body: data
             })
@@ -23,9 +23,9 @@
                 // console.log(this.msg.password[0])
                 if(status == false){
                     alert(this.msg.password[0])
-                    // window.location.replace('')
+                    window.location.replace('')
                 }
-                window.location.replace("http://127.0.0.1:8001/Login")
+                window.location.replace(`{{ env('APP_URL') }}/Login`)
 
 
             });
