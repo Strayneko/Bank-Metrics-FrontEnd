@@ -1,3 +1,15 @@
+<script>
+  Alpine.data('listAdmin', () => ({
+    admins: [],
+    getAdmins() {
+      fetch(`{{ env('API_URL') }}/api/admin`)
+        .then(async res => {
+          data = await res.json()
+          this.admins = data.data
+        })
+    }
+  }))
+</script>
 <main class="container relative flex justify-end font-poppins" x-data="{ showSidebar: false }">
   @livewire('partials.nav-mobile')
 
@@ -18,14 +30,16 @@
           Admin</a>
       </div>
 
-      <div class="bg-white">
+      <div class="bg-white" x-data="listAdmin" x-init="getAdmins()">
         <ul class="flex gap-3 bg-orange-1 px-3 py-4 font-semibold text-navy">
           <li class="w-10 text-center">No</li>
           <li class="w-80">Nama</li>
           <li class="w-80">Email</li>
         </ul>
 
-        @livewire('components.list-admin')
+        <template x-for="(admin, i) of admins">
+          @livewire('components.list-admin')
+        </template>
       </div>
 
     </div>
