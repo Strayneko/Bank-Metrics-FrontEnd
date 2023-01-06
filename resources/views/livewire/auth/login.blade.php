@@ -1,4 +1,27 @@
-<div class="container">
+<script>
+    Alpine.data("Login", () => ({
+        user : {email : "",
+            password : ""
+        },
+        dataResponse : [],
+        login(){
+            const data = new FormData()
+            data.append('email', this.user.email)
+            data.append('password', this.user.password)
+
+            fetch("http://127.0.0.1:8000/api/user/login", {
+                method : "POST",
+                body : data
+            })
+            .then(async(response) => {
+                this.dataResponse = await response.json()
+                console.log(this.dataResponse.data)
+                // window.location.replace("http://127.0.0.1:8001/")
+            });
+        }
+    }));
+</script>
+<div class="container" x-data="Login">
     <div class="flex pt-[56px] justify-between">
         <div class="">
             <div class="">
@@ -13,14 +36,14 @@
                 <h1 class="font-poppins font-semibold text-lg lg:text-[32px] text-center items-center text-[#0F0742]">Sign In</h1>
             </div>
             <div class="mt-5 lg:mt-10">
-                <form method="" action="" enctype="multipart/form-data">
+                <form x-on:submit="login()" method="" action="" enctype="multipart/form-data">
                     <div class="m-5 lg:m-0 lg:mb-6">
                         <label for="email" class="block mb-2 text-sm font-medium text-[#0F0742] font-poppins dark:text-white">Email</label>
-                        <input type="email" id="email" name="email" class="w-full md:w-[280px] lg:w-[380px] border border-[#FCC997] p-2.5 rounded-lg" placeholder="Insert you email address" required>
+                        <input x-model="user.email" type="email" id="email" name="email" class="w-full md:w-[280px] lg:w-[380px] border border-[#FCC997] p-2.5 rounded-lg" placeholder="Insert you email address" required>
                     </div>
                     <div class="m-5 lg:m-0 lg:mb-6">
                         <label for="password" class="block mb-2 text-sm font-medium text-[#0F0742] font-poppins dark:text-white">Password</label>
-                        <input type="password" id="password" name="password" class="w-full lg:w-[380px] border border-[#FCC997] p-2.5 rounded-lg" placeholder="Insert you password" required>
+                        <input x-model="user.password" type="password" id="password" name="password" class="w-full lg:w-[380px] border border-[#FCC997] p-2.5 rounded-lg" placeholder="Insert you password" required>
                     </div>
                     <div class="text-right m-5">
                         <a href="" class=" font-poppins text-[#0F0742] hover:text-[#4d36e4]">Forgot Password?</a>
