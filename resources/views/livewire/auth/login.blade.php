@@ -16,7 +16,7 @@
             .then(async(response) => {
                 this.dataResponse = await response.json()
                 console.log(this.dataResponse.data)
-                // window.location.replace("http://127.0.0.1:8001/")
+                window.location.replace("http://127.0.0.1:8001/")
             });
         }
     }));
@@ -36,7 +36,7 @@
                 <h1 class="font-poppins font-semibold text-lg lg:text-[32px] text-center items-center text-[#0F0742]">Sign In</h1>
             </div>
             <div class="mt-5 lg:mt-10">
-                <form x-on:submit="login()" method="" action="" enctype="multipart/form-data">
+                <form x-on:submit.prevent="login()" method="" action="" enctype="multipart/form-data">
                     <div class="m-5 lg:m-0 lg:mb-6">
                         <label for="email" class="block mb-2 text-sm font-medium text-[#0F0742] font-poppins dark:text-white">Email</label>
                         <input x-model="user.email" type="email" id="email" name="email" class="w-full md:w-[280px] lg:w-[380px] border border-[#FCC997] p-2.5 rounded-lg" placeholder="Insert you email address" required>
@@ -45,10 +45,10 @@
                         <label for="password" class="block mb-2 text-sm font-medium text-[#0F0742] font-poppins dark:text-white">Password</label>
                         <input x-model="user.password" type="password" id="password" name="password" class="w-full lg:w-[380px] border border-[#FCC997] p-2.5 rounded-lg" placeholder="Insert you password" required>
                     </div>
-                    <div class="text-right m-5">
+                    <div class="m-5 text-right">
                         <a href="" class=" font-poppins text-[#0F0742] hover:text-[#4d36e4]">Forgot Password?</a>
                     </div>
-                    <div class="flex justify-between m-5 mb-20 gap-5 lg:mb-0 lg:m-0 lg:gap-0 ">
+                    <div class="flex justify-between gap-5 m-5 mb-20 lg:mb-0 lg:m-0 lg:gap-0 ">
                         <button type="submit" class="mt-5 lg:mt-0 bg-[#FCC997] px-5 py-2.5 rounded-lg font-poppins font-bold text-white w-full lg:w-[175px] hover:text-[#0F0742] hover:bg-[#f4f4f4] hover:border hover:border-[#FCC997]">Login</button>
                     <a href="{{url('/Register')}}" class="mt-5 lg:mt-0 border border-[#FCC997] px-5 p-2.5 rounded-lg font-poppins font-bold text-[#0F0742] w-full lg:w-[175px] text-center hover:bg-[#ff972f]  hover:text-white">Sign Up</a>
                     </div>
