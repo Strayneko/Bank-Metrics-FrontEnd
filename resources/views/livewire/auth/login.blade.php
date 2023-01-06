@@ -15,11 +15,11 @@
             })
             .then(async(response) => {
                 this.dataResponse = await response.json()
-                console.log(this.dataResponse.message)
+                // console.log(this.dataResponse.message)
 
                 if (this.dataResponse.status == false){
                     alert(this.dataResponse.message)
-                    // window.location.replace('')
+                    window.location.replace('')
                 }
                 else{
                 window.location.replace(`{{ env('APP_URL') }}`)
