@@ -39,3 +39,5 @@ window.axios.defaults.headers.common["X-Requested-With"] = "XMLHttpRequest";
 // window.Alpine = Alpine;
 
 // Alpine.start();
+import AOS from 'aos';
+window.AOS = AOS;

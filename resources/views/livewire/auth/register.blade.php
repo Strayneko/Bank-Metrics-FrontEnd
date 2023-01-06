@@ -5,6 +5,7 @@
             email : "",
             password : ""
         },
+        msg: '',
         register(){
             const data = new FormData()
             data.append('name', this.user.name)
@@ -12,11 +13,21 @@
             data.append('password', this.user.password)
 
             fetch("http://127.0.0.1:8000/api/user/register", {
-                method : "POST",
-                body : data
+                method: "POST",
+                body: data
             })
             .then(async(response) => {
+                let data = await response.json()
+                let status = data.status
+                this.msg = data.message
+                // console.log(this.msg.password[0])
+                if(status == false){
+                    alert(this.msg.password[0])
+                    // window.location.replace('')
+                }
                 window.location.replace("http://127.0.0.1:8001/Login")
+
+
             });
         }
     }));
@@ -36,7 +47,7 @@
                 <h1 class="font-poppins font-semibold text-lg lg:text-[32px] text-center items-center text-[#0F0742]">Sign Up</h1>
             </div>
             <div class="mt-5 md:mx-5 md:mt-8 lg:mt-10">
-                <form x-on:submit="register()" method="" action="" enctype="multipart/form-data">
+                <form x-on:submit.prevent="register()" method="" action="" enctype="multipart/form-data">
                     <div class="m-5 lg:m-0 lg:mb-6">
                         <label for="name" class="block mb-2 text-sm font-medium text-[#0F0742] font-poppins dark:text-white">Name</label>
                         <input x-model="user.name" type="text" id="name" name="name" class="w-full md:w-full lg:w-[380px] border border-[#FCC997] p-2.5 rounded-lg" placeholder="Insert your name" required>
@@ -49,10 +60,10 @@
                         <label for="password" class="block mb-2 text-sm font-medium text-[#0F0742] font-poppins dark:text-white">Password</label>
                         <input x-model="user.password" type="password" id="password" name="password" class="w-full md:w-full lg:w-[380px] border border-[#FCC997] p-2.5 rounded-lg" placeholder="Insert your password" required>
                     </div>
-                    <div class="flex justify-between m-5 mb-20 gap-5 lg:mb-0 lg:m-0 lg:gap-0 ">
+                    <div class="flex justify-between gap-5 m-5 mb-20 lg:mb-0 lg:m-0 lg:gap-0 ">
                         <button type="submit" class="mt-5 lg:mt-5 border border-[#FCC997] px-5 p-2.5 rounded-lg font-poppins font-bold text-[#0F0742] w-full lg:w-[175px] text-center hover:bg-[#ff972f]  hover:text-white">Sign Up</button>
                         <a href="{{url('/Login')}}" class="mt-5 lg:mt-5 bg-[#FCC997] px-5 py-2.5 rounded-lg font-poppins font-bold text-white text-center w-full lg:w-[175px] hover:text-[#0F0742] hover:bg-[#f4f4f4] hover:border hover:border-[#FCC997]">Sign In</a>
-                    
+
                     </div>
                 </form>
             </div>
