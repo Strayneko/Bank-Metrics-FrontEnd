@@ -3,6 +3,7 @@
 use App\Http\Livewire\Dashboard\Home as HomeDashboard;
 use App\Http\Livewire\Auth\Login;
 use App\Http\Livewire\Auth\Register;
+use App\Http\Livewire\Dashboard\ListAdmins;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -16,8 +17,10 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', HomeDashboard::class);
+Route::get('/', HomeDashboard::class)->name('admin.home');
 
 Route::get('/Login', Login::class);
 
 Route::get('/Register', Register::class);
+
+Route::get('/dashboard/list-admin', ListAdmins::class)->name('admin.list');
