@@ -15,8 +15,16 @@
             })
             .then(async(response) => {
                 this.dataResponse = await response.json()
-                console.log(this.dataResponse.data)
+                console.log(this.dataResponse.message)
+
+                if (this.dataResponse.status == false){
+                    alert(this.dataResponse.message)
+                    // window.location.replace('')
+                }
+                else{
                 window.location.replace("http://127.0.0.1:8001/")
+
+                }
             });
         }
     }));

@@ -5,6 +5,7 @@
             email : "",
             password : ""
         },
+        msg: '',
         register(){
             const data = new FormData()
             data.append('name', this.user.name)
@@ -16,7 +17,17 @@
                 body: data
             })
             .then(async(response) => {
+                let data = await response.json()
+                let status = data.status
+                this.msg = data.message
+                // console.log(this.msg.password[0])
+                if(status == false){
+                    alert(this.msg.password[0])
+                    // window.location.replace('')
+                }
                 window.location.replace("http://127.0.0.1:8001/Login")
+
+
             });
         }
     }));
