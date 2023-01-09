@@ -26,10 +26,17 @@
             window.location.replace(`{{ env('APP_URL') }}`)
           }
         });
+    },
+
+    token: localStorage.getItem('token'),
+    checkLogged() {
+      if (this.token) {
+        window.location.replace(`{{ route('home') }}`)
+      }
     }
   }));
 </script>
-<div class="container" x-data="Login">
+<div class="container" x-data="Login" x-init="checkLogged()">
   <div class="flex justify-between pt-[56px]">
     <div class="">
       <div class="">

@@ -18,8 +18,8 @@
   <div class="my-3 w-full overflow-auto pt-8 text-base font-semibold text-navy">
     <ul class="mb-14 flex flex-col gap-8 px-8">
       <li>
-        <a href="{{ route('admin.home') }}"
-          class="{{ request()->routeIs('admin.home') ? 'before:opacity-100 before:-rotate-6' : 'before:opacity-0 before:rotate-6' }} relative z-10 flex w-full items-center gap-4 before:absolute before:-top-[14px] before:-left-3 before:-z-10 before:block before:h-12 before:w-[120%] before:rounded-lg before:bg-gray-3 before:transition-all before:duration-200 hover:before:-rotate-6 hover:before:opacity-100">
+        <a href="{{ route('home') }}"
+          class="{{ request()->routeIs('home') ? 'before:opacity-100 before:-rotate-6' : 'before:opacity-0 before:rotate-6' }} relative z-10 flex w-full items-center gap-4 before:absolute before:-top-[14px] before:-left-3 before:-z-10 before:block before:h-12 before:w-[120%] before:rounded-lg before:bg-gray-3 before:transition-all before:duration-200 hover:before:-rotate-6 hover:before:opacity-100">
           <div class="w-6"><img class="w-full" src="{{ asset('assets/icons/home.svg') }}" alt=""></div>
           <span>Dashboard</span>
         </a>
