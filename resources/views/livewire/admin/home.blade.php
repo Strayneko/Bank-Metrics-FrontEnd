@@ -19,6 +19,7 @@
   </script>
 
   <div class="mx-auto w-11/12 rounded-xl pb-6 lg:mx-0 lg:w-full lg:bg-gray-1 lg:p-6">
+    {{-- Start Section Navbar --}}
     <div
       class="mb-10 flex w-full flex-wrap items-center justify-center gap-8 gap-y-12 rounded-xl bg-navy py-12 px-1 text-lg text-gray-2 md:gap-12 md:px-5 lg:gap-6 lg:text-xl">
       <div
@@ -82,8 +83,10 @@
         <p>Person</p>
       </div>
     </div>
+    {{-- End Section Navbar --}}
 
-    <div class="bg-white" x-data="usersDashboard" x-init="getUsers()">
+    {{-- Start Section Table --}}
+    <div class="overflow-hidden rounded-xl bg-white" x-data="usersDashboard" x-init="getUsers()">
       <ul class="flex gap-3 bg-orange-1 px-3 py-4 font-semibold text-navy">
         <li class="w-10 text-center">No</li>
         <li class="w-64">Nama</li>
@@ -98,5 +101,6 @@
       </template>
 
     </div>
+    {{-- End Section Table --}}
   </div>
 </section>
