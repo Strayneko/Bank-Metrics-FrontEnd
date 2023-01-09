@@ -31,7 +31,6 @@
 
         });
     },
-
     token: localStorage.getItem('token'),
     checkLogged() {
       if (this.token) {
