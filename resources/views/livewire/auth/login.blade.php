@@ -73,7 +73,7 @@
           <div class="m-5 mb-20 flex justify-between gap-5 lg:m-0 lg:mb-0 lg:gap-0">
             <button type="submit"
               class="mt-5 w-full rounded-lg bg-[#FCC997] px-5 py-2.5 font-poppins font-bold text-white hover:border hover:border-[#FCC997] hover:bg-[#f4f4f4] hover:text-[#0F0742] lg:mt-0 lg:w-[175px]">Login</button>
-            <a href="{{ url('/Register') }}"
+            <a href="{{ url('/register') }}"
               class="mt-5 w-full rounded-lg border border-[#FCC997] p-2.5 px-5 text-center font-poppins font-bold text-[#0F0742] hover:bg-[#ff972f] hover:text-white lg:mt-0 lg:w-[175px]">Sign
               Up</a>
           </div>
