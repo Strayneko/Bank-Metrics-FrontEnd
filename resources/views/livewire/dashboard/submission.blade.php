@@ -19,6 +19,22 @@
       })
     },
 
+    resSubmissionData: [],
+    submissionStatus: '',
+    getSubData() {
+      fetch(`{{ env('API_URL') }}/api/loan/all/${this.submissionStatus}`, {
+        method: 'GET',
+        headers: {
+          'Content-type': 'application/json;charset=UTF-8',
+          'Authorization': this.token
+        }
+      }).then(async res => {
+        this.resSubmissionData = await res.json()
+        console.log(this.resSubmissionData)
+        console.log('aaaa')
+      })
+    },
+
     logout() {
       const confirmLogout = confirm('Yakin?')
 
@@ -55,14 +71,21 @@
       </div>
 
       <ul
-        class="mx-auto mb-14 flex w-96 items-center justify-between gap-2 rounded-lg bg-white py-4 px-2 font-bold text-navy">
-        <li><a x-on:click="isSub = 1" :class="isSub == 1 ? 'bg-orange-1 text-white' : ''"
+        class="mx-auto mb-14 flex w-96 items-center justify-between gap-2 rounded-lg bg-white py-4 px-2 font-bold text-navy"
+        x-init="getSubData()">
+        <li>
+          <a x-on:click="isSub = 1; submissionStatus = ''; getSubData()"
+            :class="isSub == 1 ? 'bg-orange-1 text-white' : ''"
             class="cursor-pointer rounded-lg px-4 py-2 transition-all duration-300 hover:bg-orange-1 hover:text-white">Submission</a>
         </li>
-        <li><a x-on:click="isSub = 2" :class="isSub == 2 ? 'bg-orange-1 text-white' : ''"
+        <li>
+          <a x-on:click="isSub = 2; submissionStatus = 'approved'; getSubData()"
+            :class="isSub == 2 ? 'bg-orange-1 text-white' : ''"
             class="cursor-pointer rounded-lg px-4 py-2 transition-all duration-300 hover:bg-orange-1 hover:text-white">Approved</a>
         </li>
-        <li><a x-on:click="isSub = 3" :class="isSub == 3 ? 'bg-orange-1 text-white' : ''"
+        <li>
+          <a x-on:click="isSub = 3; submissionStatus = 'rejected'; getSubData()"
+            :class="isSub == 3 ? 'bg-orange-1 text-white' : ''"
             class="cursor-pointer rounded-lg px-4 py-2 transition-all duration-300 hover:bg-orange-1 hover:text-white">Rejected</a>
         </li>
       </ul>
