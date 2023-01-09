@@ -63,6 +63,47 @@
         })
     }
   }))
+
+  Alpine.data('createAdmin', () => ({
+    newAdmin: {
+        name: "",
+        email: "",
+        password: ""
+    },
+    message: '',
+    create(){
+        const data = new FormData()
+        data.append('name', this.newAdmin.name)
+        data.append('email', this.newAdmin.email)
+        data.append('password', this.newAdmin.password)
+
+        fetch(`{{ env('API_URL') }}/api/admin`, {
+            method: "POST",
+            body: data,
+            headers: {
+                'Authorization' : localStorage.getItem('token')
+            }
+        })
+        .then(async (response) => {
+            let data = await response.json()
+            let status = data.status
+            this.message = data.message
+
+            if(status == false){
+                console.log(this.message)
+                alert(this.message)
+                window.location.replace('')
+                return
+            }
+            window.location.replace(`{{ env('APP_URL') }}/dashboard/listadmin`)
+        });
+    },
+    checkLogged() {
+            if (!this.token) {
+                window.location.href(`{{ route('home') }}`)
+            }
+        }
+  }))
 </script>
 <main class="container relative flex justify-end font-poppins" x-data="listAdminDashboard" x-init="checkLogin();
 getProfile()">
@@ -78,7 +119,7 @@ getProfile()">
           class="relative h-2 w-52 rounded-lg bg-orange-1 after:absolute after:inset-0 after:m-auto after:h-5 after:w-16 after:rounded-xl after:bg-navy">
         </div>
       </div>
-      <div x-show="isAddActive" x-transition.duration.500ms>
+      <div x-show="isAddActive" x-transition.duration.500ms x-data="createAdmin" x-init="checkLogged()">
         @livewire('components.modal.add-admin')
       </div>
 
