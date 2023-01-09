@@ -74,8 +74,9 @@
       <div class="overflow-hidden rounded-xl bg-white" x-data="listUser" x-init="getUsers()">
         <ul class="flex gap-3 bg-orange-1 px-3 py-4 font-semibold text-navy">
           <li class="w-10 text-center">No</li>
-          <li class="w-80">Nama</li>
-          <li class="w-80">Email</li>
+          <li class="w-56 lg:w-80">Name</li>
+          <li class="hidden w-80 lg:block">Email</li>
+          <li class="hidden w-24 lg:block">Action</li>
         </ul>
         <template x-for="(user, i) of users">
           @livewire('components.list-user-action')
