@@ -2,7 +2,13 @@
   Alpine.data('listAdmin', () => ({
     admins: [],
     getAdmins() {
-      fetch(`{{ env('API_URL') }}/api/admin`)
+      fetch(`{{ env('API_URL') }}/api/admin`, {
+          method: 'GET',
+          headers: {
+            'Content-type': 'application/json;charset=UTF-8',
+            'Authorization': localStorage.getItem('token')
+          }
+        })
         .then(async res => {
           data = await res.json()
           this.admins = data.data
