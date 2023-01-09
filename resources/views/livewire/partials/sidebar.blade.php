@@ -24,28 +24,53 @@
           <span>Dashboard</span>
         </a>
       </li>
-      <li>
-        <a href="{{ route('admin.list') }}"
-          class="{{ request()->routeIs('admin.list') ? 'before:opacity-100 before:-rotate-6' : 'before:opacity-0 before:rotate-6' }} relative z-10 flex w-full items-center gap-4 before:absolute before:-top-[14px] before:-left-3 before:-z-10 before:block before:h-12 before:w-full before:rounded-lg before:bg-gray-3 before:transition-all before:duration-200 hover:before:-rotate-6 hover:before:opacity-100">
-          <div class="w-6"><img class="w-full" src="{{ asset('assets/icons/admin.svg') }}" alt=""></div>
-          <span>Admin</span>
-        </a>
-      </li>
-      <li>
-        <a href="{{ route('user.list') }}"
-          class="{{ request()->routeIs('user.list') ? 'before:opacity-100 before:-rotate-6' : 'before:opacity-0 before:rotate-6' }} relative z-10 flex w-full items-center gap-4 before:absolute before:-top-[14px] before:-left-3 before:-z-10 before:block before:h-12 before:w-full before:rounded-lg before:bg-gray-3 before:transition-all before:duration-200 hover:before:-rotate-6 hover:before:opacity-100">
-          <div class="w-6"><img class="w-full" src="{{ asset('assets/icons/user.svg') }}" alt=""></div>
-          <span>User</span>
-        </a>
-      </li>
-      <li>
-        <a href="{{ route('submission.list') }}"
-          class="{{ request()->routeIs('submission.list') ? 'before:opacity-100 before:-rotate-6' : 'before:opacity-0 before:rotate-6' }} relative z-10 flex w-full items-center gap-4 before:absolute before:-top-[14px] before:-left-3 before:-z-10 before:block before:h-12 before:w-[115%] before:rounded-lg before:bg-gray-3 before:transition-all before:duration-200 hover:before:-rotate-6 hover:before:opacity-100">
-          <div class="w-6"><img class="w-full" src="{{ asset('assets/icons/processor.svg') }}" alt="">
-          </div>
-          <span>Submission</span>
-        </a>
-      </li>
+
+      <template x-if="roleId == 1">
+        <div class="flex flex-col gap-8">
+          <li>
+            <a href="#"
+              class="{{ request()->routeIs('admin.list') ? 'before:opacity-100 before:-rotate-6' : 'before:opacity-0 before:rotate-6' }} relative z-10 flex w-full items-center gap-4 before:absolute before:-top-[14px] before:-left-3 before:-z-10 before:block before:h-12 before:w-full before:rounded-lg before:bg-gray-3 before:transition-all before:duration-200 hover:before:-rotate-6 hover:before:opacity-100">
+              <div class="w-6"><img class="w-full" src="{{ asset('assets/icons/user.svg') }}" alt=""></div>
+              <span>Profile</span>
+            </a>
+          </li>
+          <li>
+            <a href="#"
+              class="{{ request()->routeIs('admin.list') ? 'before:opacity-100 before:-rotate-6' : 'before:opacity-0 before:rotate-6' }} relative z-10 flex w-full items-center gap-4 before:absolute before:-top-[14px] before:-left-3 before:-z-10 before:block before:h-12 before:w-[120%] before:rounded-lg before:bg-gray-3 before:transition-all before:duration-200 hover:before:-rotate-6 hover:before:opacity-100">
+              <div class="w-6"><img class="w-full" src="{{ asset('assets/icons/submission.svg') }}" alt="">
+              </div>
+              <span>Submission</span>
+            </a>
+          </li>
+        </div>
+      </template>
+
+      <template x-if="roleId == 2">
+        <div class="flex flex-col gap-8">
+          <li>
+            <a href="{{ route('admin.list') }}"
+              class="{{ request()->routeIs('admin.list') ? 'before:opacity-100 before:-rotate-6' : 'before:opacity-0 before:rotate-6' }} relative z-10 flex w-full items-center gap-4 before:absolute before:-top-[14px] before:-left-3 before:-z-10 before:block before:h-12 before:w-full before:rounded-lg before:bg-gray-3 before:transition-all before:duration-200 hover:before:-rotate-6 hover:before:opacity-100">
+              <div class="w-6"><img class="w-full" src="{{ asset('assets/icons/admin.svg') }}" alt=""></div>
+              <span>Admin</span>
+            </a>
+          </li>
+          <li>
+            <a href="{{ route('user.list') }}"
+              class="{{ request()->routeIs('user.list') ? 'before:opacity-100 before:-rotate-6' : 'before:opacity-0 before:rotate-6' }} relative z-10 flex w-full items-center gap-4 before:absolute before:-top-[14px] before:-left-3 before:-z-10 before:block before:h-12 before:w-full before:rounded-lg before:bg-gray-3 before:transition-all before:duration-200 hover:before:-rotate-6 hover:before:opacity-100">
+              <div class="w-6"><img class="w-full" src="{{ asset('assets/icons/user.svg') }}" alt=""></div>
+              <span>User</span>
+            </a>
+          </li>
+          <li>
+            <a href="{{ route('submission.list') }}"
+              class="{{ request()->routeIs('submission.list') ? 'before:opacity-100 before:-rotate-6' : 'before:opacity-0 before:rotate-6' }} relative z-10 flex w-full items-center gap-4 before:absolute before:-top-[14px] before:-left-3 before:-z-10 before:block before:h-12 before:w-[115%] before:rounded-lg before:bg-gray-3 before:transition-all before:duration-200 hover:before:-rotate-6 hover:before:opacity-100">
+              <div class="w-6"><img class="w-full" src="{{ asset('assets/icons/submission.svg') }}" alt="">
+              </div>
+              <span>Submission</span>
+            </a>
+          </li>
+        </div>
+      </template>
     </ul>
 
     <div class="mb-10 px-8">

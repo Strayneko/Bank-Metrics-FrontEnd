@@ -1,22 +1,23 @@
-<script>
-  Alpine.data('usersDashboard', () => ({
-    users: [],
-    getUsers() {
-      fetch(`{{ env('API_URL') }}/api/user`, {
-        method: 'GET',
-        headers: {
-          'Content-type': 'application/json;charset=UTF-8',
-          'Authorization': localStorage.getItem('token')
-        }
-      }).then(async res => {
-        data = await res.json()
-        this.users = data.data
-        console.log(this.users)
-      })
-    }
-  }))
-</script>
 <section class="mt-20 w-full py-10 lg:mt-0 lg:w-[80%]">
+  <script>
+    Alpine.data('usersDashboard', () => ({
+      users: [],
+      getUsers() {
+        fetch(`{{ env('API_URL') }}/api/user`, {
+          method: 'GET',
+          headers: {
+            'Content-type': 'application/json;charset=UTF-8',
+            'Authorization': localStorage.getItem('token')
+          }
+        }).then(async res => {
+          data = await res.json()
+          this.users = data.data
+          console.log(this.users)
+        })
+      }
+    }))
+  </script>
+
   <div class="mx-auto w-11/12 rounded-xl pb-6 lg:mx-0 lg:w-full lg:bg-gray-1 lg:p-6">
     <div
       class="mb-10 flex w-full flex-wrap items-center justify-center gap-8 gap-y-12 rounded-xl bg-navy py-12 px-1 text-lg text-gray-2 md:gap-12 md:px-5 lg:gap-6 lg:text-xl">
