@@ -21,9 +21,9 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', HomeDashboard::class)->name('admin.home');
 
-Route::get('/Login', Login::class);
+Route::get('/login', Login::class)->name('login');
 
-Route::get('/Register', Register::class);
+Route::get('/register', Register::class);
 
 Route::get('/dashboard/list-admin', ListAdmins::class)->name('admin.list');
 Route::get('/dashboard/list-user', ListUsers::class)->name('user.list');

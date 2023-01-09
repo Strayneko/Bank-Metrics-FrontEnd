@@ -1,4 +1,15 @@
 <script>
+  Alpine.data('logged', () => ({
+    token: localStorage.getItem('token'),
+    checkLogin() {
+      if (!this.token) {
+        window.location.href = `{{ route('login') }}`
+        // console.log('hello')
+      }
+    },
+    showSidebar: false
+  }))
+
   Alpine.data('listAdmin', () => ({
     admins: [],
     getAdmins() {
@@ -16,7 +27,7 @@
     }
   }))
 </script>
-<main class="container relative flex justify-end font-poppins" x-data="{ showSidebar: false }">
+<main class="container relative flex justify-end font-poppins" x-data="logged" x-init="checkLogin()">
   @livewire('partials.nav-mobile')
 
   @livewire('partials.sidebar')

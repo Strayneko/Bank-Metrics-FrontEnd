@@ -10,7 +10,7 @@
       data.append('email', this.user.email)
       data.append('password', this.user.password)
 
-      fetch(`{{ env('API_URL') }}/api/user/login`, {
+      fetch(`{{ env('API_URL') }}/api/auth/login`, {
           method: "POST",
           body: data
         })
