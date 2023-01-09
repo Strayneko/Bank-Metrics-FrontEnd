@@ -22,7 +22,7 @@
     resSubmissionData: [],
     submissionStatus: '',
     getSubData() {
-      fetch(`{{ env('API_URL') }}/api/loan/all/${this.submissionStatus}`, {
+      fetch(`http://192.168.18.176:8000/api/loan/all`, {
         method: 'GET',
         headers: {
           'Content-type': 'application/json;charset=UTF-8',
@@ -99,7 +99,9 @@
           <li class="w-24">Action</li>
         </ul>
 
-        @livewire('components.list-user-action')
+        <template x-for="(loan, i) of resSubmissionData.data">
+          @livewire('components.list-loan')
+        </template>
       </div>
     </div>
   </section>
