@@ -1,3 +1,4 @@
+{{-- untuk list user di home dashboard admin --}}
 <ul class="flex flex-col gap-3 px-3 py-4 font-medium text-navy lg:flex-row lg:items-center" x-data="{
     showUser: false,
     width: (window.innerWidth > 0) ? window.innerWidth : screen.width

@@ -39,6 +39,23 @@
       }
     }
   }))
+
+  Alpine.data('listUser', () => ({
+    users: [],
+    getUsers() {
+      fetch(`{{ env('API_URL') }}/api/user`, {
+          method: 'GET',
+          headers: {
+            'Content-type': 'application/json;charset=UTF-8',
+            'Authorization': localStorage.getItem('token')
+          }
+        })
+        .then(async res => {
+          data = await res.json()
+          this.users = data.data
+        })
+    }
+  }))
 </script>
 <main class="container relative flex justify-end font-poppins" x-data="listUserDashboard" x-init="getProfile()">
   @livewire('partials.nav-mobile')
@@ -54,14 +71,14 @@
         </div>
       </div>
 
-      <div class="overflow-hidden rounded-xl bg-white">
+      <div class="overflow-hidden rounded-xl bg-white" x-data="listUser" x-init="getUsers()">
         <ul class="flex gap-3 bg-orange-1 px-3 py-4 font-semibold text-navy">
           <li class="w-10 text-center">No</li>
           <li class="w-80">Nama</li>
           <li class="w-80">Email</li>
         </ul>
-
-        @livewire('components.list-user-action')
+        <template x-for="(user, i) of users">
+          @livewire('components.list-user-action')
       </div>
 
     </div>
