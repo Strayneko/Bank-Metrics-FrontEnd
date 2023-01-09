@@ -32,8 +32,8 @@
         </a>
       </li>
       <li>
-        <a href="#"
-          class="relative z-10 flex w-full items-center gap-4 before:absolute before:-top-[14px] before:-left-3 before:-z-10 before:block before:h-12 before:w-full before:rotate-6 before:rounded-lg before:bg-gray-3 before:opacity-0 before:transition-all before:duration-200 hover:before:-rotate-6 hover:before:opacity-100">
+        <a href="{{ route('user.list') }}"
+          class="{{ request()->routeIs('user.list') ? 'before:opacity-100 before:-rotate-6' : 'before:opacity-0 before:rotate-6' }} relative z-10 flex w-full items-center gap-4 before:absolute before:-top-[14px] before:-left-3 before:-z-10 before:block before:h-12 before:w-full before:rounded-lg before:bg-gray-3 before:transition-all before:duration-200 hover:before:-rotate-6 hover:before:opacity-100">
           <div class="w-6"><img class="w-full" src="{{ asset('assets/icons/user.svg') }}" alt=""></div>
           <span>User</span>
         </a>
