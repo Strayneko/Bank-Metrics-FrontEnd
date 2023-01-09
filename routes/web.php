@@ -28,3 +28,4 @@ Route::get('/register', Register::class);
 Route::get('/dashboard/list-admin', ListAdmins::class)->name('admin.list');
 Route::get('/dashboard/list-user', ListUsers::class)->name('user.list');
 Route::get('/dashboard/submission', Submission::class)->name('submission.list');
+// Route::get('/dashboard/bank', Bank::class)->name('bank.list');
