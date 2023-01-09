@@ -3,7 +3,11 @@
     users: [],
     getUsers() {
       fetch(`{{ env('API_URL') }}/api/user`, {
-        method: 'GET'
+        method: 'GET',
+        headers: {
+          'Content-type': 'application/json;charset=UTF-8',
+          'Authorization': localStorage.getItem('token')
+        }
       }).then(async res => {
         data = await res.json()
         this.users = data.data

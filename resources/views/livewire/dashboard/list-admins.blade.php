@@ -1,8 +1,25 @@
 <script>
+  Alpine.data('logged', () => ({
+    token: localStorage.getItem('token'),
+    checkLogin() {
+      if (!this.token) {
+        window.location.href = `{{ route('login') }}`
+        // console.log('hello')
+      }
+    },
+    showSidebar: false
+  }))
+
   Alpine.data('listAdmin', () => ({
     admins: [],
     getAdmins() {
-      fetch(`{{ env('API_URL') }}/api/admin`)
+      fetch(`{{ env('API_URL') }}/api/admin`, {
+          method: 'GET',
+          headers: {
+            'Content-type': 'application/json;charset=UTF-8',
+            'Authorization': localStorage.getItem('token')
+          }
+        })
         .then(async res => {
           data = await res.json()
           this.admins = data.data
@@ -10,7 +27,7 @@
     }
   }))
 </script>
-<main class="container relative flex justify-end font-poppins" x-data="{ showSidebar: false }">
+<main class="container relative flex justify-end font-poppins" x-data="logged" x-init="checkLogin()">
   @livewire('partials.nav-mobile')
 
   @livewire('partials.sidebar')

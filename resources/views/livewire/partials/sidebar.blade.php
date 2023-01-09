@@ -19,7 +19,7 @@
     <ul class="mb-14 flex flex-col gap-8 px-8">
       <li>
         <a href="{{ route('admin.home') }}"
-          class="{{ request()->routeIs('admin.home') ? 'before:opacity-100 before:-rotate-6' : 'before:opacity-0 before:rotate-6' }} relative z-10 flex w-full items-center gap-4 before:absolute before:-top-[14px] before:-left-3 before:-z-10 before:block before:h-12 before:w-[105%] before:rounded-lg before:bg-gray-3 before:transition-all before:duration-200 hover:before:-rotate-6 hover:before:opacity-100">
+          class="{{ request()->routeIs('admin.home') ? 'before:opacity-100 before:-rotate-6' : 'before:opacity-0 before:rotate-6' }} relative z-10 flex w-full items-center gap-4 before:absolute before:-top-[14px] before:-left-3 before:-z-10 before:block before:h-12 before:w-[120%] before:rounded-lg before:bg-gray-3 before:transition-all before:duration-200 hover:before:-rotate-6 hover:before:opacity-100">
           <div class="w-6"><img class="w-full" src="{{ asset('assets/icons/home.svg') }}" alt=""></div>
           <span>Dashboard</span>
         </a>
@@ -32,40 +32,25 @@
         </a>
       </li>
       <li>
-        <a href="#"
-          class="relative z-10 flex w-full items-center gap-4 before:absolute before:-top-[14px] before:-left-3 before:-z-10 before:block before:h-12 before:w-full before:rotate-6 before:rounded-lg before:bg-gray-3 before:opacity-0 before:transition-all before:duration-200 hover:before:-rotate-6 hover:before:opacity-100">
+        <a href="{{ route('user.list') }}"
+          class="{{ request()->routeIs('user.list') ? 'before:opacity-100 before:-rotate-6' : 'before:opacity-0 before:rotate-6' }} relative z-10 flex w-full items-center gap-4 before:absolute before:-top-[14px] before:-left-3 before:-z-10 before:block before:h-12 before:w-full before:rounded-lg before:bg-gray-3 before:transition-all before:duration-200 hover:before:-rotate-6 hover:before:opacity-100">
           <div class="w-6"><img class="w-full" src="{{ asset('assets/icons/user.svg') }}" alt=""></div>
           <span>User</span>
         </a>
       </li>
       <li>
-        <a href="#"
-          class="relative z-10 flex w-full items-center gap-4 before:absolute before:-top-[14px] before:-left-3 before:-z-10 before:block before:h-12 before:w-[105%] before:rotate-6 before:rounded-lg before:bg-gray-3 before:opacity-0 before:transition-all before:duration-200 hover:before:-rotate-6 hover:before:opacity-100">
+        <a href="{{ route('submission.list') }}"
+          class="{{ request()->routeIs('submission.list') ? 'before:opacity-100 before:-rotate-6' : 'before:opacity-0 before:rotate-6' }} relative z-10 flex w-full items-center gap-4 before:absolute before:-top-[14px] before:-left-3 before:-z-10 before:block before:h-12 before:w-[115%] before:rounded-lg before:bg-gray-3 before:transition-all before:duration-200 hover:before:-rotate-6 hover:before:opacity-100">
           <div class="w-6"><img class="w-full" src="{{ asset('assets/icons/processor.svg') }}" alt="">
           </div>
           <span>Submission</span>
-        </a>
-      </li>
-      <li>
-        <a href="#"
-          class="relative z-10 flex w-full items-center gap-4 before:absolute before:-top-[14px] before:-left-3 before:-z-10 before:block before:h-12 before:w-[105%] before:rotate-6 before:rounded-lg before:bg-gray-3 before:opacity-0 before:transition-all before:duration-200 hover:before:-rotate-6 hover:before:opacity-100">
-          <div class="w-6"><img class="w-full" src="{{ asset('assets/icons/approve.svg') }}" alt=""></div>
-          <span>Approved</span>
-        </a>
-      </li>
-      <li>
-        <a href="#"
-          class="relative z-10 flex w-full items-center gap-4 before:absolute before:-top-[14px] before:-left-3 before:-z-10 before:block before:h-12 before:w-[115%] before:rotate-6 before:rounded-lg before:bg-gray-3 before:opacity-0 before:transition-all before:duration-200 hover:before:-rotate-6 hover:before:opacity-100">
-          <div class="w-6"><img class="w-full" src="{{ asset('assets/icons/not-approved.svg') }}" alt="">
-          </div>
-          <span>Not Approved</span>
         </a>
       </li>
     </ul>
 
     <div class="mb-10 px-8">
       <a href="#"
-        class="relative z-10 flex w-full items-center gap-4 before:absolute before:-top-[14px] before:-left-3 before:-z-10 before:block before:h-12 before:w-[90%] before:rotate-6 before:rounded-lg before:bg-gray-3 before:opacity-0 before:transition-all before:duration-200 hover:before:-rotate-6 hover:before:opacity-100">
+        class="relative z-10 flex w-full items-center gap-4 before:absolute before:-top-[14px] before:-left-3 before:-z-10 before:block before:h-12 before:w-full before:rotate-6 before:rounded-lg before:bg-gray-3 before:opacity-0 before:transition-all before:duration-200 hover:before:-rotate-6 hover:before:opacity-100">
         <div class="w-6"><img class="w-full" src="{{ asset('assets/icons/logout.svg') }}" alt=""></div>
         <span>Sign Out</span>
       </a>
