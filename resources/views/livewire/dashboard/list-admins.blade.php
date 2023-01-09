@@ -91,8 +91,8 @@ getProfile()">
       <div class="overflow-hidden rounded-xl bg-white" x-data="listAdmin" x-init="getAdmins()">
         <ul class="flex gap-3 bg-orange-1 px-3 py-4 font-semibold text-navy">
           <li class="w-10 text-center">No</li>
-          <li class="w-80">Nama</li>
-          <li class="w-80">Email</li>
+          <li class="w-64 lg:w-80">Nama</li>
+          <li class="hidden w-80 lg:block">Email</li>
         </ul>
 
         <template x-for="(admin, i) of admins">
