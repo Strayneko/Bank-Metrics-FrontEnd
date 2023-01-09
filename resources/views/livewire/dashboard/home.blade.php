@@ -13,10 +13,10 @@
         }
 
       }).then(async res => {
-        data = await res.json()
-        this.resData = data.data
-        this.roleId = this.resData.role_id
-        console.log(this.roleId)
+        this.resData = await res.json()
+        // this.resData = data.data
+        this.roleId = this.resData.data.role_id
+        console.log(this.resData)
       })
     }
   }))
