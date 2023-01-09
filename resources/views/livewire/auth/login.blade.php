@@ -9,17 +9,17 @@
             data.append('email', this.user.email)
             data.append('password', this.user.password)
 
-            fetch(`{{ env('API_URL') }}/api/user/register`, {
+            fetch(`{{ env('API_URL') }}/api/user/login`, {
                 method : "POST",
                 body : data
             })
             .then(async(response) => {
                 this.dataResponse = await response.json()
-                console.log(this.dataResponse.message)
+                // console.log(this.dataResponse.message)
 
                 if (this.dataResponse.status == false){
                     alert(this.dataResponse.message)
-                    // window.location.replace('')
+                    window.location.replace('')
                 }
                 else{
                 window.location.replace(`{{ env('APP_URL') }}`)
