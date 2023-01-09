@@ -24,6 +24,7 @@
           if (status == false) {
             alert(this.msg.password[0])
             window.location.replace('')
+            return
           }
           window.location.replace(`{{ env('APP_URL') }}/login`)
 
