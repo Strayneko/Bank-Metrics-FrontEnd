@@ -83,7 +83,7 @@
             <button type="submit"
               class="mt-5 w-full rounded-lg border border-[#FCC997] p-2.5 px-5 text-center font-poppins font-bold text-[#0F0742] hover:bg-[#ff972f] hover:text-white lg:mt-5 lg:w-[175px]">Sign
               Up</button>
-            <a href="{{ url('/Login') }}"
+            <a href="{{ url('/login') }}"
               class="mt-5 w-full rounded-lg bg-[#FCC997] px-5 py-2.5 text-center font-poppins font-bold text-white hover:border hover:border-[#FCC997] hover:bg-[#f4f4f4] hover:text-[#0F0742] lg:mt-5 lg:w-[175px]">Sign
               In</a>
 
