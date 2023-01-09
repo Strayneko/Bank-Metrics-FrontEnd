@@ -12,7 +12,7 @@
         </div>
       </div>
 
-      <div class="bg-white">
+      <div class="bg-white rounded-xl overflow-hidden">
         <ul class="flex gap-3 bg-orange-1 px-3 py-4 font-semibold text-navy">
           <li class="w-10 text-center">No</li>
           <li class="w-80">Nama</li>
