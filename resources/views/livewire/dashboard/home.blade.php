@@ -1,7 +1,7 @@
 <script>
   Alpine.data('homeDashboard', () => ({
-    token: localStorage.getItem('token'),
     showSidebar: false,
+    token: localStorage.getItem('token'),
     resData: [],
     roleId: 0,
     getProfile() {
@@ -11,12 +11,11 @@
           'Content-type': 'application/json;charset=UTF-8',
           'Authorization': this.token
         }
-
       }).then(async res => {
         this.resData = await res.json()
         // this.resData = data.data
         this.roleId = this.resData.data.role_id
-        console.log(this.resData)
+        // console.log(this.resData)
       })
     },
 
