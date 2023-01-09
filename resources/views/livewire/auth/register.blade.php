@@ -12,7 +12,7 @@
             data.append('email', this.user.email)
             data.append('password', this.user.password)
 
-            fetch(`{{ env('API_URL') }}/api/user/register`, {
+            fetch(`{{ env('API_URL') }}/api/auth/register`, {
                 method: "POST",
                 body: data
             })
@@ -25,7 +25,7 @@
                     alert(this.msg.password[0])
                     window.location.replace('')
                 }
-                window.location.replace(`{{ env('APP_URL') }}/Login`)
+                window.location.replace(`{{ env('APP_URL') }}/login`)
 
 
             });
