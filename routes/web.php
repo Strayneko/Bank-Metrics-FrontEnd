@@ -5,6 +5,7 @@ use App\Http\Livewire\Auth\Login;
 use App\Http\Livewire\Auth\Register;
 use App\Http\Livewire\Dashboard\ListAdmins;
 use App\Http\Livewire\Dashboard\ListUsers;
+use App\Http\Livewire\Dashboard\ListBank;
 use App\Http\Livewire\Dashboard\Submission;
 use Illuminate\Support\Facades\Route;
 
@@ -28,4 +29,4 @@ Route::get('/register', Register::class);
 Route::get('/dashboard/listadmin', ListAdmins::class)->name('admin.list');
 Route::get('/dashboard/list-user', ListUsers::class)->name('user.list');
 Route::get('/dashboard/submission', Submission::class)->name('submission.list');
-// Route::get('/dashboard/bank', Bank::class)->name('bank.list');
+Route::get('/dashboard/bank', ListBank::class)->name('bank.list');
