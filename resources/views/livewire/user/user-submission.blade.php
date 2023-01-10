@@ -85,5 +85,4 @@
     </div>
   </section>
   {{-- End User Profile  --}}
-
 </main>
