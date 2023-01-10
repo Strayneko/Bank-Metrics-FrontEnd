@@ -22,7 +22,7 @@
         this.resData = await res.json()
         // this.resData = data.data
         this.roleId = this.resData.data.role_id
-        // console.log(this.resData)
+        console.log(this.resData)
       })
     },
 
