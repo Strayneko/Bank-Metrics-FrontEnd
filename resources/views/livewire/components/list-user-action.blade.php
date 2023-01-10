@@ -10,7 +10,7 @@
   </div>
   <div class="flex flex-col gap-3 pl-12 lg:flex-row lg:items-center lg:pl-0" x-show="width > 768 ? true : showUser"
     x-transition.duration.700ms>
-    <li class="w-56 lg:w-80" x-text="'Email : ' + user.email"></li>
+    <li class="w-56 lg:w-80" x-html="`<span class='lg:hidden'>Email : </span>${user.email}`"></li>
     <li class="w-24"><a href="#" class="rounded-md bg-orange-1 px-3 py-1 text-white">Detail</a></li>
   </div>
 </ul>

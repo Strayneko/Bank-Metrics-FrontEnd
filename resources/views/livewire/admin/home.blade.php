@@ -12,7 +12,7 @@
         }).then(async res => {
           data = await res.json()
           this.users = data.data
-          console.log(this.users)
+          // console.log(this.users)
         })
       }
     }))
