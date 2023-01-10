@@ -41,6 +41,54 @@
       })
     }
   }))
+
+  Alpine.data('createBank', () => ({
+    newBank: {
+        name: "",
+        loaning_percentage: "",
+        max_age: "",
+        min_age: "",
+        marital_status: 0,
+        nationality: 0,
+        employment: 0
+    },
+    message: "",
+    createNewBank() {
+        const data = new FormData()
+        data.append('name', this.newBank.name)
+        data.append('loaning_percentage', this.newBank.loaning_percentage)
+        data.append('max_age', this.newBank.max_age)
+        data.append('min_age', this.newBank.min_age)
+        data.append('marital_status', this.newBank.marital_status)
+        data.append('nationality', this.newBank.nationality)
+        data.append('employment', this.newBank.employment)
+
+        fetch(`{{ env('API_URL') }}/api/bank/create`, {
+            method: "POST",
+            body: data,
+            headers: {
+                'Authorization': localStorage.getItem('token')
+            }
+        })
+        .then(async (response) => {
+            let data = await response.json()
+            let status = data.status
+            this.message = data.message
+
+            if(status == false){
+                alert(this.message)
+                window.location.replace('')
+                return
+            }
+            window.location.replace(`{{ env('APP_URL') }}/dashboard/bank`)
+        });
+    },
+    checkLogged() {
+      if (!this.token) {
+        window.location.href(`{{ route('home') }}`)
+      }
+    }
+  }))
 </script>
 <main class="container relative flex justify-end font-poppins" x-data="listBankDashboard" x-init="checkLogin();
 getProfile()">
@@ -56,7 +104,7 @@ getProfile()">
           class="relative h-2 w-40 rounded-lg bg-orange-1 after:absolute after:inset-0 after:m-auto after:h-5 after:w-16 after:rounded-xl after:bg-navy">
         </div>
       </div>
-      <div x-show="isAddActive" x-transition.duration.500ms>
+      <div x-show="isAddActive" x-transition.duration.500ms x-data="createBank" x-init="checkLogged()">
         @livewire('components.modal.add-bank')
       </div>
 
