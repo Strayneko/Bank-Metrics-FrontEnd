@@ -40,6 +40,11 @@
                         </div>
                     </div>
                 </label>
+                <label for="photo" class="relative pb-3 w-full">
+                    <p class="font-bold text-navy">Photo</p>
+                    <input type="file" name="photo" id="photo" class="peer outline-orange-1 mt-2 w-full">
+                    <div class="absolute inset-x-0 bottom-0 mx-auto block h-1 w-0 bg-navy peer-hover:w-full rounded-lg transition-all duration-500"></div>
+                </label>
                 <label for="nationality" class="relative pb-3 w-full">
                     <p class="font-bold text-navy">Nationality</p>
                     <select name="nationality" id="nationality" class="w-full bg-orange-1 p-2 border border-orange-2">
@@ -67,6 +72,7 @@
                         <option value="2" class="text-white font-medium">Both</option>
                     </select>
                 </label>
+                
 
                 <div class="flex mt-5  justify-between pb-12">
                     <button type="submit" class="text-navy font-bold bg-[#f1f0f0] outline outline-orange-1 hover:bg-orange-1 hover:text-white px-14 py-3 rounded-lg">Update Profile</button>
