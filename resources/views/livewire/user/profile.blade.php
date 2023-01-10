@@ -114,13 +114,16 @@ getProfile()">
 
     {{-- Start User Profile --}}
     <section class="relative mx-auto w-11/12 rounded-xl pb-6 lg:mx-0 lg:w-[80%] lg:bg-gray-1 lg:p-6 lg:pt-12">
-        <div class="w-full">
+        <div class="w-full"  x-data="{isUpdate: false}">
             <div class="w-[575px] mb-10 mx-auto relative inset-x-0 z-40">
                 <div class="relative bg-white py-8  rounded-xl">
                     <div class="relative mx-auto mb-20 flex w-max flex-col items-center justify-center gap-3">
                         <h1 class="text-3xl font-bold text-navy">User <span class="text-orange-2">Profile</span></h1>
                         <div class="relative h-2 w-[190px] rounded-lg bg-orange-1 after:absolute after:inset-0 after:m-auto after:h-5 after:w-16 after:rounded-xl after:bg-navy">
                         </div>
+                    </div>
+                    <div class="w-full" x-show="isUpdate" x-transition.duration.500ms x-init="checkLogged()">
+                        @livewire('components.modal.user-modal')
                     </div>
                     <div class="mb-3 flex flex-col items-center justify-center text-gray-2">
                         <div class="mb-3 h-24 w-24 overflow-hidden rounded-full">
@@ -164,7 +167,7 @@ getProfile()">
                         </ul>
                     </div>
                     <div class="flex mt-5  justify-between pb-12 mx-10">
-                        <button type="submit" class="text-navy font-bold bg-[#f1f0f0] outline outline-orange-1 hover:bg-orange-1 hover:text-white px-14 py-3 rounded-lg">Update Profile</button>
+                        <button x-on:click="isUpdate = !isUpdate" type="submit" class="text-navy font-bold bg-[#f1f0f0] outline outline-orange-1 hover:bg-orange-1 hover:text-white px-14 py-3 rounded-lg">Update Profile</button>
                         <a x-on:click="isAddActive = false" class="text-navy font-bold bg-[#f1f0f0] outline outline-orange-1 hover:bg-orange-1 hover:text-white px-24 py-3 rounded-lg">Back</a>
                     </div>
                 </div>
