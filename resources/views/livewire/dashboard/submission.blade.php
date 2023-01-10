@@ -2,6 +2,13 @@
   Alpine.data('submissionAdminDashboard', () => ({
     showSidebar: false,
     token: localStorage.getItem('token'),
+    checkLogin() {
+      if (!this.token) {
+        window.location.href = `{{ route('login') }}`
+        // console.log('hello')
+      }
+    },
+
     resData: [],
     roleId: 0,
     getProfile() {
@@ -56,7 +63,8 @@
     }
   }))
 </script>
-<main class="container relative flex justify-end font-poppins" x-data="submissionAdminDashboard" x-init="getProfile()">
+<main class="container relative flex justify-end font-poppins" x-data="submissionAdminDashboard" x-init="checkLogin();
+getProfile()">
   @livewire('partials.nav-mobile')
 
   @livewire('partials.sidebar')
