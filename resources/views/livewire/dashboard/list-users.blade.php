@@ -1,5 +1,46 @@
 <script>
-    Alpine.data('logged', () => ({
+  Alpine.data('listUserDashboard', () => ({
+    showSidebar: false,
+    token: localStorage.getItem('token'),
+    resData: [],
+    roleId: 0,
+    getProfile() {
+      fetch(`{{ env('API_URL') }}/api/user/me`, {
+        method: 'GET',
+        headers: {
+          'Content-type': 'application/json;charset=UTF-8',
+          'Authorization': this.token
+        }
+      }).then(async res => {
+        this.resData = await res.json()
+        // this.resData = data.data
+        this.roleId = this.resData.data.role_id
+        // console.log(this.resData)
+      })
+    },
+
+    logout() {
+      const confirmLogout = confirm('Yakin?')
+
+      if (confirmLogout) {
+        fetch(`{{ env('API_URL') }}/api/auth/logout`, {
+          method: 'POST',
+          headers: {
+            'Authorization': this.token
+          }
+        }).then(async res => {
+          const data = await res.json()
+
+          if (data.status) {
+            localStorage.removeItem('token')
+            window.location.replace(`{{ route('login') }}`)
+          }
+        })
+      }
+    }
+  }))
+
+  Alpine.data('logged', () => ({
       token: localStorage.getItem('token'),
       checkLogin() {
         if (!this.token) {
@@ -26,8 +67,7 @@
           })
       }
     }))
-  </script>
-
+</script>
 <main class="container relative flex justify-end font-poppins" x-data="logged" x-init="checkLogin()">
   @livewire('partials.nav-mobile')
 
@@ -42,7 +82,7 @@
         </div>
       </div>
 
-      <div class="bg-white" x-data="listUser" x-init="getUsers()">
+      <div class="bg-white">
         <ul class="flex gap-3 bg-orange-1 px-3 py-4 font-semibold text-navy">
           <li class="w-10 text-center">No</li>
           <li class="w-80">Nama</li>

@@ -19,7 +19,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', HomeDashboard::class)->name('admin.home');
+Route::get('/', HomeDashboard::class)->name('home');
 
 Route::get('/login', Login::class)->name('login');
 
