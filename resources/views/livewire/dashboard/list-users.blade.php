@@ -25,26 +25,6 @@
         // console.log(this.resData)
       })
     },
-
-    logout() {
-      const confirmLogout = confirm('Yakin?')
-
-      if (confirmLogout) {
-        fetch(`{{ env('API_URL') }}/api/auth/logout`, {
-          method: 'POST',
-          headers: {
-            'Authorization': this.token
-          }
-        }).then(async res => {
-          const data = await res.json()
-
-          if (data.status) {
-            localStorage.removeItem('token')
-            window.location.replace(`{{ route('login') }}`)
-          }
-        })
-      }
-    }
   }))
 
   Alpine.data('listUser', () => ({
@@ -60,6 +40,7 @@
         .then(async res => {
           data = await res.json()
           this.users = data.data
+          // console.log(this.users)
         })
     }
   }))

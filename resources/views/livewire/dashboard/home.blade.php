@@ -25,26 +25,6 @@
         console.log(this.resData)
       })
     },
-
-    logout() {
-      const confirmLogout = confirm('Yakin?')
-
-      if (confirmLogout) {
-        fetch(`{{ env('API_URL') }}/api/auth/logout`, {
-          method: 'POST',
-          headers: {
-            'Authorization': this.token
-          }
-        }).then(async res => {
-          const data = await res.json()
-
-          if (data.status) {
-            localStorage.removeItem('token')
-            window.location.replace(`{{ route('login') }}`)
-          }
-        })
-      }
-    }
   }))
 </script>
 <main class="container relative flex justify-end font-poppins" x-data="homeDashboard" x-init="checkLogin();

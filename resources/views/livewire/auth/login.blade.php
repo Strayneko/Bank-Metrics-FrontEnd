@@ -1,4 +1,14 @@
 <script>
+  if (localStorage.getItem('logout')) {
+    Swal.fire(
+      'Sign Out Success!',
+      '',
+      'success'
+    )
+
+    localStorage.removeItem('logout')
+  }
+
   Alpine.data("Login", () => ({
     user: {
       email: "",
@@ -19,8 +29,14 @@
           // console.log(this.dataResponse.message)
 
           if (this.dataResponse.status == false) {
-            alert(this.dataResponse.message)
-            window.location.replace('')
+            // alert(this.dataResponse.message)
+            Swal.fire({
+              icon: 'error',
+              title: 'Oops...',
+              text: this.dataResponse.message
+            })
+
+            // window.location.replace('')
           } else {
             localStorage.setItem('token', this.dataResponse.data.auth.token)
             window.location.replace(`{{ env('APP_URL') }}`)
