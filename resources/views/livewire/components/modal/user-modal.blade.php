@@ -42,12 +42,11 @@
                 </label>
                 <label for="photo" class="relative pb-3 w-full">
                     <p class="font-bold text-navy">Photo</p>
-                    <input type="file" name="photo" id="photo" class="peer outline-orange-1 mt-2 w-full">
-                    <div class="absolute inset-x-0 bottom-0 mx-auto block h-1 w-0 bg-navy peer-hover:w-full rounded-lg transition-all duration-500"></div>
+                    <input type="file" name="photo" id="photo" class="peer outline-orange-1 mt-2 w-full bg-orange-1 p-2 rounded-md">
                 </label>
                 <label for="nationality" class="relative pb-3 w-full">
                     <p class="font-bold text-navy">Nationality</p>
-                    <select name="nationality" id="nationality" class="w-full bg-orange-1 p-2 border border-orange-2">
+                    <select name="nationality" id="nationality" class="w-full bg-orange-1 p-2 border border-orange-2 rounded-md">
                         <option selected disabled class="text-white font-semibold">Choose your nationality</option>
                         <option value="0" class="text-white font-medium">Indonesia</option>
                         <option value="1" class="text-white font-medium">America</option>
@@ -56,7 +55,7 @@
                 </label>
                 <label for="marital_status" class="relative pb-3 w-full">
                     <p class="font-bold text-navy">Marital Status</p>
-                    <select name="marital_status" id="marital_status" class="w-full bg-orange-1 p-2 border border-orange-2">
+                    <select name="marital_status" id="marital_status" class="w-full bg-orange-1 p-2 border border-orange-2 rounded-md">
                         <option selected disabled class="text-white font-semibold">Choose your marital status</option>
                         <option value="0" class="text-white font-medium ">Single Only</option>
                         <option value="1" class="text-white font-medium">Married Only</option>
@@ -65,7 +64,7 @@
                 </label>
                 <label for="employment" class="relative pb-3 w-full">
                     <p class="font-bold text-navy">Employment</p>
-                    <select name="employment" id="employment" class="w-full bg-orange-1 p-2 border border-orange-2">
+                    <select name="employment" id="employment" class="w-full bg-orange-1 p-2 border border-orange-2 rounded-md">
                         <option selected disabled class="text-white font-semibold">Choose your employment</option>
                         <option value="0" class="text-white font-medium ">Full-Time</option>
                         <option value="1" class="text-white font-medium">Half-Time</option>
