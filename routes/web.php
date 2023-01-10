@@ -6,7 +6,10 @@ use App\Http\Livewire\Auth\Register;
 use App\Http\Livewire\Dashboard\ListAdmins;
 use App\Http\Livewire\Dashboard\ListUsers;
 use App\Http\Livewire\Dashboard\ListBank;
+
+// User
 use App\Http\Livewire\User\Profile;
+use App\Http\Livewire\User\UserSubmission;
 use App\Http\Livewire\Dashboard\Submission;
 use Illuminate\Support\Facades\Route;
 
@@ -35,3 +38,4 @@ Route::get('/dashboard/bank', ListBank::class)->name('bank.list');
 
 // Route User
 Route::get('/user/profile', Profile::class)->name('user.profile');
+Route::get('/user/user-submission', UserSubmission::class)->name('user.user-submission');
