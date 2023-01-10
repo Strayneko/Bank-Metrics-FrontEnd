@@ -39,36 +39,9 @@
       }
     }
   }))
-
-  Alpine.data('logged', () => ({
-      token: localStorage.getItem('token'),
-      checkLogin() {
-        if (!this.token) {
-          window.location.href = `{{ route('login') }}`
-          // console.log('hello')
-        }
-      },
-      showSidebar: false
-    }))
-
-    Alpine.data('listUser', () => ({
-      users: [],
-      getUsers() {
-        fetch(`{{ env('API_URL') }}/api/user`, {
-            method: 'GET',
-            headers: {
-              'Content-type': 'application/json;charset=UTF-8',
-              'Authorization': localStorage.getItem('token')
-            }
-          })
-          .then(async res => {
-            data = await res.json()
-            this.users = data.data
-          })
-      }
-    }))
 </script>
-<main class="container relative flex justify-end font-poppins" x-data="logged" x-init="checkLogin()">
+<main class="container relative flex justify-end font-poppins" x-data="listUserDashboard" x-init="getProfile()">
+>>>>>>>>> Temporary merge branch 2
   @livewire('partials.nav-mobile')
 
   @livewire('partials.sidebar')
@@ -82,14 +55,18 @@
         </div>
       </div>
 
-      <div class="bg-white">
+<<<<<<<<< Temporary merge branch 1
+      <div class="bg-white" x-data="listUser" x-init="getUsers()">
+=========
+      <div class="overflow-hidden rounded-xl bg-white">
+>>>>>>>>> Temporary merge branch 2
         <ul class="flex gap-3 bg-orange-1 px-3 py-4 font-semibold text-navy">
           <li class="w-10 text-center">No</li>
           <li class="w-80">Nama</li>
           <li class="w-80">Email</li>
         </ul>
         <template x-for="(user, i) of users">
-        @livewire('components.list-user-action')
+          @livewire('components.list-user-action')
       </div>
 
     </div>
