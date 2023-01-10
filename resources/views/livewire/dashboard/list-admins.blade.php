@@ -69,13 +69,28 @@
           let status = data.status
           this.message = data.message
 
+          // console.log(this.message)
+
+          let msg = ``
+          for (m of this.message) {
+            msg += `<p>${m}</p>`
+          }
           if (status == false) {
-            console.log(this.message)
-            alert(this.message)
-            window.location.replace('')
+            Swal.fire({
+              icon: 'error',
+              title: 'Oops...',
+              html: msg
+            })
+            // window.location.replace('')
             return
           }
-          window.location.replace(`{{ env('APP_URL') }}/dashboard/listadmin`)
+          Swal.fire({
+            icon: 'success',
+            title: 'Success!',
+            text: 'Add Admin Success!'
+          }).then(res => {
+            window.location.replace(`{{ env('APP_URL') }}/dashboard/listadmin`)
+          })
         });
     },
     checkLogged() {
