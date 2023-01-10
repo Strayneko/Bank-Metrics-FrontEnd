@@ -40,9 +40,9 @@
                     <p class="font-bold text-navy">Nationality</p>
                     <select name="nationality" id="nationality" class="w-full bg-orange-1 p-2 border border-orange-2">
                         <option selected disabled class="text-white font-semibold">Choose your nationality</option>
-                        <option value="0" class="text-white font-medium">Single Only</option>
-                        <option value="1" class="text-white font-medium">Married Only</option>
-                        <option value="2" class="text-white font-medium">Both</option>
+                        <option value="0" class="text-white font-medium">Indonesia</option>
+                        <option value="1" class="text-white font-medium">America</option>
+                        <option value="2" class="text-white font-medium">Other</option>
                     </select>
                 </label>
                 <label for="employment" class="relative pb-3 w-full">
@@ -54,7 +54,7 @@
                         <option value="2" class="text-white font-medium">Both</option>
                     </select>
                 </label>
-                
+
                 <div class="flex mt-5  justify-between pb-12">
                     <button type="submit" class="text-navy font-bold bg-[#f1f0f0] outline outline-orange-1 hover:bg-orange-1 hover:text-white px-20 py-3 rounded-lg">Create</button>
                     <a x-on:click="isAddActive = false" class="text-navy font-bold bg-[#f1f0f0] outline outline-orange-1 hover:bg-orange-1 hover:text-white px-20 py-3 rounded-lg">Back</a>
