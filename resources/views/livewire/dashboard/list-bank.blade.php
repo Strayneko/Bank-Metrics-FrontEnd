@@ -23,6 +23,10 @@
         // this.resData = data.data
         this.roleId = this.resData.data.role_id
         // console.log(this.resData)
+
+        if (this.roleId != 2) {
+          window.location.replace(`{{ route('home') }}`)
+        }
       })
     },
   }))
@@ -39,10 +43,6 @@
         this.banks = await res.json()
         // console.log(this.banks)
       })
-
-      if (this.roleId != 2) {
-        window.location.replace(`{{ route('home') }}`)
-      }
     }
   }))
 </script>
