@@ -39,6 +39,10 @@
         this.banks = await res.json()
         // console.log(this.banks)
       })
+
+      if (this.roleId != 2) {
+        window.location.replace(`{{ route('home') }}`)
+      }
     }
   }))
 </script>

@@ -24,6 +24,10 @@
         this.roleId = this.resData.data.role_id
         // console.log(this.resData)
       })
+
+      if (this.roleId != 2) {
+        window.location.replace(`{{ route('home') }}`)
+      }
     },
   }))
 
