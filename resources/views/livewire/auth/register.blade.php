@@ -20,15 +20,21 @@
           let data = await response.json()
           let status = data.status
           this.msg = data.message
-          // console.log(this.msg.password[0])
+          // console.log(data)
           if (status == false) {
-            alert(this.msg.password[0])
-            window.location.replace('')
+            let msg = ``
+            for (m of this.msg) {
+              msg += `<p>${m}</p>`
+            }
+            Swal.fire({
+              icon: 'error',
+              title: 'Oops...',
+              html: msg
+            })
+            // window.location.replace('')
             return
           }
           window.location.replace(`{{ env('APP_URL') }}/login`)
-
-
         });
     },
     token: localStorage.getItem('token'),
