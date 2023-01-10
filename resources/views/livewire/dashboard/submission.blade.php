@@ -2,6 +2,13 @@
   Alpine.data('submissionAdminDashboard', () => ({
     showSidebar: false,
     token: localStorage.getItem('token'),
+    checkLogin() {
+      if (!this.token) {
+        window.location.href = `{{ route('login') }}`
+        // console.log('hello')
+      }
+    },
+
     resData: [],
     roleId: 0,
     getProfile() {
@@ -22,7 +29,7 @@
     resSubmissionData: [],
     submissionStatus: '',
     getSubData() {
-      fetch(`{{ env('API_URL') }}/api/loan/all/${this.submissionStatus}`, {
+      fetch(`http://192.168.18.176:8000/api/loan/all`, {
         method: 'GET',
         headers: {
           'Content-type': 'application/json;charset=UTF-8',
@@ -56,7 +63,8 @@
     }
   }))
 </script>
-<main class="container relative flex justify-end font-poppins" x-data="submissionAdminDashboard" x-init="getProfile()">
+<main class="container relative flex justify-end font-poppins" x-data="submissionAdminDashboard" x-init="checkLogin();
+getProfile()">
   @livewire('partials.nav-mobile')
 
   @livewire('partials.sidebar')
@@ -99,7 +107,9 @@
           <li class="w-24">Action</li>
         </ul>
 
-        @livewire('components.list-user-action')
+        <template x-for="(loan, i) of resSubmissionData.data">
+          @livewire('components.list-loan')
+        </template>
       </div>
     </div>
   </section>

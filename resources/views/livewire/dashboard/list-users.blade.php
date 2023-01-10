@@ -2,6 +2,13 @@
   Alpine.data('listUserDashboard', () => ({
     showSidebar: false,
     token: localStorage.getItem('token'),
+    checkLogin() {
+      if (!this.token) {
+        window.location.href = `{{ route('login') }}`
+        // console.log('hello')
+      }
+    },
+
     resData: [],
     roleId: 0,
     getProfile() {
@@ -40,7 +47,8 @@
     }
   }))
 </script>
-<main class="container relative flex justify-end font-poppins" x-data="listUserDashboard" x-init="getProfile()">
+<main class="container relative flex justify-end font-poppins" x-data="listUserDashboard" x-init="checkLogin();
+getProfile()">
 >>>>>>>>> Temporary merge branch 2
   @livewire('partials.nav-mobile')
 
@@ -62,8 +70,9 @@
 >>>>>>>>> Temporary merge branch 2
         <ul class="flex gap-3 bg-orange-1 px-3 py-4 font-semibold text-navy">
           <li class="w-10 text-center">No</li>
-          <li class="w-80">Nama</li>
-          <li class="w-80">Email</li>
+          <li class="w-56 lg:w-80">Name</li>
+          <li class="hidden w-80 lg:block">Email</li>
+          <li class="hidden w-24 lg:block">Action</li>
         </ul>
         <template x-for="(user, i) of users">
           @livewire('components.list-user-action')

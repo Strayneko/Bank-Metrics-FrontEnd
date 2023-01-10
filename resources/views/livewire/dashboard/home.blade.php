@@ -2,6 +2,13 @@
   Alpine.data('homeDashboard', () => ({
     showSidebar: false,
     token: localStorage.getItem('token'),
+    checkLogin() {
+      if (!this.token) {
+        window.location.href = `{{ route('login') }}`
+        // console.log('hello')
+      }
+    },
+
     resData: [],
     roleId: 0,
     getProfile() {
@@ -40,7 +47,8 @@
     }
   }))
 </script>
-<main class="container relative flex justify-end font-poppins" x-data="homeDashboard" x-init="getProfile()">
+<main class="container relative flex justify-end font-poppins" x-data="homeDashboard" x-init="checkLogin();
+getProfile()">
   @livewire('partials.nav-mobile')
 
   @livewire('partials.sidebar')
