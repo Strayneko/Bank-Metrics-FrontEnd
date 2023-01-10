@@ -1,6 +1,7 @@
 <script>
   Alpine.data('listBankDashboard', () => ({
     showSidebar: false,
+    isShow: false,
     token: localStorage.getItem('token'),
     checkLogin() {
       if (!this.token) {
