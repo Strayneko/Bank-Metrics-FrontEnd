@@ -49,49 +49,65 @@
 
   Alpine.data('createBank', () => ({
     newBank: {
-        name: "",
-        loaning_percentage: "",
-        max_age: "",
-        min_age: "",
-        marital_status: 0,
-        nationality: 0,
-        employment: 0
+      name: "",
+      loaning_percentage: "",
+      max_age: "",
+      min_age: "",
+      marital_status: 0,
+      nationality: 0,
+      employment: 0
     },
     message: "",
     createNewBank() {
-        const data = new FormData()
-        data.append('name', this.newBank.name)
-        data.append('loaning_percentage', this.newBank.loaning_percentage)
-        data.append('max_age', this.newBank.max_age)
-        data.append('min_age', this.newBank.min_age)
-        data.append('marital_status', this.newBank.marital_status)
-        data.append('nationality', this.newBank.nationality)
-        data.append('employment', this.newBank.employment)
+      const data = new FormData()
+      data.append('name', this.newBank.name)
+      data.append('loaning_percentage', this.newBank.loaning_percentage)
+      data.append('max_age', this.newBank.max_age)
+      data.append('min_age', this.newBank.min_age)
+      data.append('marital_status', this.newBank.marital_status)
+      data.append('nationality', this.newBank.nationality)
+      data.append('employment', this.newBank.employment)
 
-        fetch(`{{ env('API_URL') }}/api/bank/create`, {
-            method: "POST",
-            body: data,
-            headers: {
-                'Authorization': localStorage.getItem('token')
-            }
+      fetch(`{{ env('API_URL') }}/api/bank/create`, {
+          method: "POST",
+          body: data,
+          headers: {
+            'Authorization': localStorage.getItem('token')
+          }
         })
         .then(async (response) => {
-            let data = await response.json()
-            let status = data.status
-            this.message = data.message
+          let data = await response.json()
+          let status = data.status
+          this.message = data.message
 
-            if(status == false){
-                alert(this.message)
-                window.location.replace('')
-                return
-            }
-            window.location.replace(`{{ env('APP_URL') }}/dashboard/bank`)
+          if (status == false) {
+            alert(this.message)
+            window.location.replace('')
+            return
+          }
+          window.location.replace(`{{ env('APP_URL') }}/dashboard/bank`)
         });
     },
     checkLogged() {
       if (!this.token) {
         window.location.href(`{{ route('home') }}`)
       }
+    }
+  }))
+
+  Alpine.data("detailBank", () => ({
+    banks: [],
+    getBank() {
+      fatch(`{{ 'API_URL' }}/api/bank/show/{id}`, {
+          method: "GET",
+          headers: {
+            "Authorization": localStorage.getItem("token")
+          }
+        })
+        .then(async res => {
+          data = await res.json()
+          this.banks = data.data
+        })
     }
   }))
 </script>
