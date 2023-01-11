@@ -37,7 +37,7 @@
         method: 'GET'
       }).then(async res => {
         const data = await res.json()
-        console.log(data)
+        // console.log(data)
         this.dataCountry = data.data
       })
     },
@@ -54,7 +54,27 @@
         body: body
       }).then(async res => {
         const data = await res.json()
-        // console.log(data.message)
+        // console.log(data)
+
+        let msg = ``
+        for (m of data.message) {
+          msg += `<p>${m}</p>`
+        }
+        if (data.status == false) {
+          Swal.fire({
+            icon: 'error',
+            title: 'Oops...',
+            html: msg
+          })
+          return
+        }
+        Swal.fire({
+          icon: 'success',
+          title: 'Success!',
+          text: data.message
+        }).then(res => {
+          window.location.replace(`{{ env('APP_URL') }}/user/profile`)
+        })
       })
     }
   }))

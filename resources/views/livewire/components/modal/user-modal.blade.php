@@ -30,7 +30,7 @@
         <label for="address" class="relative w-full pb-0.5">
           <p class="font-bold text-navy">Address</p>
           <textarea type="text" name="address" id="address" class="peer mt-2 min-h-[50px] w-full outline-none"
-            placeholder="Insert your address" required></textarea>
+            placeholder="Insert your address" :value="userData.profile ? userData.profile.address : ''" required></textarea>
           <div
             class="absolute inset-x-0 bottom-0 mx-auto block h-0.5 w-0 rounded-lg bg-navy transition-all duration-300 peer-hover:w-full">
           </div>
@@ -39,7 +39,7 @@
         <label for="dob" class="relative w-full pb-3">
           <p class="font-bold text-navy">Date of Birth</p>
           <input type="date" name="dob" id="dob" class="peer mt-2 w-full text-navy outline-none"
-            placeholder="Insert your date of birth" x-model="dob" required>
+            placeholder="Insert your date of birth" :value="userData.profile ? userData.profile.dob : ''" required>
           <div
             class="absolute inset-x-0 bottom-0 mx-auto block h-0.5 w-0 rounded-lg bg-navy transition-all duration-300 peer-hover:w-full">
           </div>
@@ -49,11 +49,13 @@
           <p class="font-bold text-navy">Gender</p>
           <div class="flex gap-5 pt-2">
             <div class="mb-4 flex items-center gap-5">
-              <input type="radio" name="gender" id="female" value="0" class="h-5 w-5">
+              <input type="radio" name="gender" id="female" value="0" class="h-5 w-5"
+                :checked="userData.profile ? (userData.profile.gender == 0 ? true : false) : false">
               <label for="female" class="font-semibold text-navy">Female</label>
             </div>
             <div class="mb-4 flex items-center gap-5">
-              <input type="radio" name="gender" id="male" value="1" class="h-5 w-5">
+              <input type="radio" name="gender" id="male" value="1" class="h-5 w-5"
+                :checked="userData.profile ? (userData.profile.gender == 1 ? true : false) : false">
               <label for="male" class="font-semibold text-navy">Male</label>
             </div>
           </div>
@@ -61,7 +63,7 @@
 
         <label for="photo" class="relative w-full pb-3">
           <p class="font-bold text-navy">Photo</p>
-          <input type="file" name="photo" id="photo" required
+          <input type="file" name="photo" id="photo"
             class="peer relative z-10 w-full cursor-pointer rounded-md border-2 border-orange-1 bg-white font-semibold text-gray-3 transition-all duration-150 file:mr-3 file:cursor-pointer file:border-none file:bg-orange-1 file:px-4 file:py-2 file:font-medium file:text-navy file:outline-none before:absolute before:left-0 before:top-0 before:-z-10 before:block before:h-full before:w-0 before:bg-orange-1 before:transition-all before:duration-300 hover:text-navy/60 hover:before:w-full">
         </label>
 
@@ -69,7 +71,11 @@
           <p class="font-bold text-navy">Nationality</p>
           <select name="country_id" id="country_id" required
             class="w-full cursor-pointer rounded-md border-2 border-orange-1 bg-white p-2 font-medium text-navy outline-none transition-all duration-300 hover:bg-orange-1">
-            <option selected disabled class="bg-white font-semibold">Choose your nationality</option>
+            <option selected disabled value="0" class="bg-white font-semibold">Choose your nationality</option>
+            <template x-if="userData.profile">
+              <option :value="userData.profile.country_id" x-text="userData.profile.country.country_name" selected>
+              </option>
+            </template>
             <template x-for="country of dataCountry">
               <option :value="country.id" class="bg-white font-medium" x-text="country.name"></option>
             </template>
@@ -81,9 +87,11 @@
           <select name="marital_status" id="marital_status"
             class="w-full cursor-pointer rounded-md border-2 border-orange-1 bg-white p-2 font-medium text-navy outline-none transition-all duration-300 hover:bg-orange-1"
             required>
-            <option selected disabled class="bg-white font-semibold">Choose your marital status</option>
-            <option value="0" class="bg-white font-medium">Single</option>
-            <option value="1" class="bg-white font-medium">Married</option>
+            <option disabled value="0" selected class="bg-white font-semibold">Choose your marital status</option>
+            <option :selected="userData.profile ? (userData.profile.marital_status == 0 ? true : false) : false"
+              value="0" class="bg-white font-medium">Single</option>
+            <option :selected="userData.profile ? (userData.profile.marital_status == 1 ? true : false) : false"
+              value="1" class="bg-white font-medium">Married</option>
           </select>
         </label>
 
@@ -92,9 +100,11 @@
           <select name="employement" id="employement"
             class="w-full cursor-pointer rounded-md border-2 border-orange-1 bg-white p-2 font-medium text-navy outline-none transition-all duration-300 hover:bg-orange-1"
             required>
-            <option selected disabled class="bg-white font-semibold">Choose your employement</option>
-            <option value="0" class="bg-white font-medium">Full-Time</option>
-            <option value="1" class="bg-white font-medium">Half-Time</option>
+            <option value="0" selected disabled class="bg-white font-semibold">Choose your employement</option>
+            <option :selected="userData.profile ? (userData.profile.employement == 0 ? true : false) : false"
+              value="0" class="bg-white font-medium">Full-Time</option>
+            <option :selected="userData.profile ? (userData.profile.employement == 1 ? true : false) : false"
+              value="1" class="bg-white font-medium">Half-Time</option>
           </select>
         </label>
 
