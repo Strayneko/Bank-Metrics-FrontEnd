@@ -45,7 +45,7 @@
       <img class="w-full" src="{{ asset('assets/profile.svg') }}" :alt="resData.data ? resData.data.name : 'Profile'" />
     </div>
     <p class="text-xl font-bold" x-text="resData.data ? resData.data.name : 'User'"></p>
-    <p class="text-sm" x-text="resData.data.role.role_name"></p>
+    <p class="text-sm" x-text="resData.data ? resData.data.role.role_name : 'User'"></p>
   </div>
 
   <div class="my-3 w-full overflow-auto pt-8 text-base font-semibold text-navy">

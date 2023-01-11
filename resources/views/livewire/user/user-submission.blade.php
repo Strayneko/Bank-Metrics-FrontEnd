@@ -22,7 +22,23 @@
         this.resData = await res.json()
         // this.resData = data.data
         this.roleId = this.resData.data.role_id
-        // console.log(this.resData)
+        console.log(this.resData)
+      })
+    },
+
+    createSubmission() {
+      const body = new FormData(this.$refs.subForm)
+      // console.log(this.$refs.subForm)
+
+      fetch(`{{ env('API_URL') }}/api/loan/get_loan`, {
+        method: 'POST',
+        headers: {
+          'Authorization': this.token
+        },
+        body
+      }).then(async res => {
+        const data = await res.json()
+        console.log(data)
       })
     }
   }))
@@ -45,10 +61,10 @@
               class="relative h-2 w-[285px] rounded-lg bg-orange-1 after:absolute after:inset-0 after:m-auto after:h-5 after:w-16 after:rounded-xl after:bg-navy">
             </div>
           </div>
-          <form class="flex cursor-pointer flex-col px-10">
-            <label for="submission" class="relative mb-3 w-full pb-3">
+          <form class="flex cursor-pointer flex-col px-10" x-ref="subForm" x-on:submit.prevent="createSubmission()">
+            <label for="loan_amount" class="relative mb-3 w-full pb-3">
               <p class="font-bold text-navy">Submission</p>
-              <input type="number" name="submission" id="submission" class="peer mt-2 w-full outline-none"
+              <input type="number" name="loan_amount" id="loan_amount" class="peer mt-2 w-full outline-none"
                 placeholder="Insert your loaning amount">
               <div
                 class="absolute inset-x-0 bottom-0 mx-auto block h-0.5 w-0 rounded-lg bg-navy transition-all duration-300 peer-hover:w-full">
