@@ -9,6 +9,7 @@
       }
     },
 
+    userData: [],
     resData: [],
     roleId: 0,
     getProfile() {
@@ -20,13 +21,29 @@
         }
       }).then(async res => {
         this.resData = await res.json()
-        // this.resData = data.data
         this.roleId = this.resData.data.role_id
-        // console.log(this.resData)
+        this.userData = this.resData.data
+        console.log(this.userData)
 
         if (this.roleId != 1) {
           window.location.replace(`{{ route('home') }}`)
         }
+      })
+    },
+
+    updateProfile() {
+      const body = new FormData(this.$refs.userForm)
+      // console.log(this.$refs.userForm)
+
+      fetch(`{{ env('API_URL') }}/api/user/me`, {
+        method: 'POST',
+        headers: {
+          'Authorization': this.token
+        },
+        body: body
+      }).then(async res => {
+        const data = await res.json()
+        // console.log(data.message)
       })
     }
   }))
@@ -49,7 +66,7 @@ getProfile()">
                 class="relative h-2 w-[190px] rounded-lg bg-orange-1 after:absolute after:inset-0 after:m-auto after:h-5 after:w-16 after:rounded-xl after:bg-navy">
               </div>
             </div>
-            <div class="w-full" x-show="isUpdate" x-transition.duration.500ms x-init="checkLogged()">
+            <div class="w-full" x-show="isUpdate" x-transition.duration.500ms>
               @livewire('components.modal.user-modal')
             </div>
             <div class="mb-3 flex flex-col items-center justify-center text-gray-2">
@@ -61,36 +78,47 @@ getProfile()">
               <ul class="p-10">
                 <li class="flex gap-10">
                   <span class="w-48">Name</span>
-                  <h1 class="w-full">Firman Sufirman</h1>
+                  <span class="w-full" x-text="userData.name"></span>
                 </li>
                 <li class="flex gap-10">
                   <span class="w-48">Email</span>
-                  <h1 class="w-full">ciman@gmail.com</h1>
+                  <span class="w-full" x-text="userData.email"></span>
                 </li>
-                <li class="flex gap-10">
-                  <span class="w-48">Address</span>
-                  <h1 class="w-full">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Voluptate, totam.</h1>
-                </li>
-                <li class="flex gap-10">
-                  <span class="w-48">Date of Birth</span>
-                  <h1 class="w-full">2002-05-22</h1>
-                </li>
-                <li class="flex gap-10">
-                  <span class="w-48">Gender</span>
-                  <h1 class="w-full">Female</h1>
-                </li>
-                <li class="flex gap-10">
-                  <span class="w-48">Nationality</span>
-                  <h1 class="w-full">America</h1>
-                </li>
-                <li class="flex gap-10">
-                  <span class="w-48">Marital Status</span>
-                  <h1 class="w-full">Married Only</h1>
-                </li>
-                <li class="flex gap-10">
-                  <span class="w-48">Employment</span>
-                  <h1 class="w-full">Full-Time</h1>
-                </li>
+
+                <template x-if="!userData.profile">
+                  <li class="mt-6 text-center">ajsfagsfjhsafj</li>
+                </template>
+
+                <template x-if="userData.profile">
+                  <div>
+                    <li class="flex gap-10">
+                      <span class="w-48">Address</span>
+                      <h1 class="w-full">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Voluptate, totam.
+                      </h1>
+                    </li>
+                    <li class="flex gap-10">
+                      <span class="w-48">Date of Birth</span>
+                      <h1 class="w-full">2002-05-22</h1>
+                    </li>
+                    <li class="flex gap-10">
+                      <span class="w-48">Gender</span>
+                      <h1 class="w-full">Female</h1>
+                    </li>
+                    <li class="flex gap-10">
+                      <span class="w-48">Nationality</span>
+                      <h1 class="w-full">America</h1>
+                    </li>
+                    <li class="flex gap-10">
+                      <span class="w-48">Marital Status</span>
+                      <h1 class="w-full">Married Only</h1>
+                    </li>
+                    <li class="flex gap-10">
+                      <span class="w-48">Employment</span>
+                      <h1 class="w-full">Full-Time</h1>
+                    </li>
+                  </div>
+                </template>
+
               </ul>
             </div>
             <div class="mx-10 mt-5 flex justify-between pb-12">
