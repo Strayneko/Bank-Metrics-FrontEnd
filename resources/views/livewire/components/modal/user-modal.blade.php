@@ -41,7 +41,7 @@
           </div>
         </label>
         <label for="gander" class="relative w-full pb-3">
-          <p class="font-bold text-navy">Gander</p>
+          <p class="font-bold text-navy">Gnder</p>
           <div class="flex gap-5 pt-2">
             <div class="mb-4 flex items-center gap-5">
               <input type="radio" name="gander" id="gander" value="0" class="h-5 w-5">

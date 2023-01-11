@@ -26,10 +26,10 @@
             <li class="flex justify-between">
                 <span class="inline-block w-48">Marital Status</span>
                 <template x-if="bank.marital_status == 0 ">
-                    <span class="flex-1 w-full">Single Only</span>
+                    <span class="flex-1 w-full">Single</span>
                 </template>
                 <template x-if="bank.marital_status == 1 ">
-                    <span class="flex-1 w-full">Married Only</span>
+                    <span class="flex-1 w-full">Married</span>
                 </template>
                 <template x-if="bank.marital_status == 2 ">
                     <span class="flex-1 w-full">Both</span>
