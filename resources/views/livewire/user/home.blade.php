@@ -27,7 +27,7 @@
           <li class="w-64">Date</li>
           <div class="hidden gap-3 lg:flex">
             <li class="w-56">Loan Amount</li>
-            <li class="w-40">Accepted</li>
+            <li class="w-40">Approved</li>
             <li class="w-40">Rejected</li>
           </div>
         </ul>
