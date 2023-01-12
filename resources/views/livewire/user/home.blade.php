@@ -26,7 +26,7 @@
           }
         }).then(async res => {
           this.resReject = await res.json()
-          console.log(this.resReject)
+          // console.log(this.resReject)
         })
       },
 
