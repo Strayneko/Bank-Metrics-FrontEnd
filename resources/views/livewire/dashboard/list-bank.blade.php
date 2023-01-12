@@ -118,7 +118,8 @@ getProfile()">
   @livewire('partials.sidebar')
 
   <section class="mt-20 w-full py-10 lg:mt-0 lg:w-[80%]">
-    <div class="relative mx-auto w-11/12 rounded-xl pb-6 lg:mx-0 lg:w-full lg:bg-gray-1 lg:p-6" x-data="{ isAddActive: false }">
+    <div class="relative mx-auto w-11/12 rounded-xl pb-6 lg:mx-0 lg:w-full lg:bg-gray-1 lg:p-6 lg:pt-12"
+      x-data="{ isAddActive: false }">
       <div class="relative mx-auto mb-12 flex w-max flex-col items-center justify-center gap-3">
         <h1 class="text-3xl font-bold text-orange-2">List <span class="text-navy">Bank</span></h1>
         <div
@@ -135,12 +136,12 @@ getProfile()">
           Bank</a>
       </div>
 
-      <div class="overflow-hidden rounded-xl bg-white" x-data="listBank" x-init="getBanks()">
+      <div class="overflow-hidden rounded-xl bg-gray-1/30 lg:bg-white" x-data="listBank" x-init="getBanks()">
         <ul class="flex gap-3 bg-orange-1 px-3 py-4 font-semibold text-navy">
           <li class="w-10 text-center">No</li>
-          <li class="w-80">Name Bank</li>
-          <li class="w-80">Max Loan</li>
-          <li class="w-80 text-center">Action</li>
+          <li class="w-96">Name Bank</li>
+          <li class="hidden w-64 lg:block">Max Loan</li>
+          <li class="hidden w-48 lg:block">Action</li>
         </ul>
 
         <template x-for="(bank, i) of banks.data">

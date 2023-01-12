@@ -57,7 +57,7 @@ getProfile()">
   @livewire('partials.sidebar')
 
   <section class="mt-20 w-full py-10 lg:mt-0 lg:w-[80%]">
-    <div class="mx-auto w-11/12 rounded-xl pb-6 lg:mx-0 lg:w-full lg:bg-gray-1 lg:p-6">
+    <div class="mx-auto w-11/12 rounded-xl pb-6 lg:mx-0 lg:w-full lg:bg-gray-1 lg:p-6 lg:pt-12">
       <div class="relative mx-auto mb-12 flex w-max flex-col items-center justify-center gap-3">
         <h1 class="text-3xl font-bold text-orange-2">List <span class="text-navy">User</span></h1>
         <div
