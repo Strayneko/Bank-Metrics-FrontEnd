@@ -4,14 +4,14 @@
     Alpine.data('submission', () => ({
       submissionData: [],
       getSubmission(id) {
-        fetch(`{{ env('API_URL') }}/api/loan/list/${id}`, {
+        fetch(`{{ env('API_URL') }}/api/loan/list?user_id=${id}`, {
           method: 'GET',
           headers: {
             'Authorization': localStorage.getItem('token')
           }
         }).then(async res => {
           this.submissionData = await res.json()
-          console.log(this.submissionData)
+          // console.log(this.submissionData)
         })
       }
     }))
@@ -82,13 +82,21 @@
         <li class="w-56">Status</li>
       </ul>
 
-      {{-- <template x-for="(accept, i) of item.accepted_bank"> --}}
-      <ul class="flex flex-col gap-3 px-3 py-4 font-medium text-navy lg:flex-row lg:items-center">
-        <li class="w-10 text-center">1</li>
-        <li class="w-64">2023-01-01</li>
-        <li class="w-56">Approved</li>
-      </ul>
-      {{-- </template> --}}
+      <template x-if="submissionData.data">
+        <template x-for="(loan, i) of submissionData.data.loans">
+          <ul class="flex flex-col gap-3 px-3 py-4 font-medium text-navy lg:flex-row lg:items-center">
+            <li class="w-10 text-center" x-text="i + 1"></li>
+            <li class="flex w-64 flex-col">
+              <span x-text="(new Date(loan.created_at)).toDateString()"></span>
+              <span x-text="(new Date(loan.created_at)).toLocaleTimeString()"></span>
+            </li>
+            <li class="w-56">
+              <span class="text-green-700" x-show="loan.status">Approved</span>
+              <span class="text-red-700" x-show="!loan.status">Rejected</span>
+            </li>
+          </ul>
+        </template>
+      </template>
     </div>
   </div>
 
