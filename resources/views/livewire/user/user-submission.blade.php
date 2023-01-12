@@ -38,17 +38,14 @@
         body
       }).then(async res => {
         const data = await res.json()
-        console.log(data)
+        // console.log(data)
 
-        let msg = ``
-        for (m of data.message) {
-          msg += `<p>${m}</p>`
-        }
+
         if (data.status == false) {
           Swal.fire({
             icon: 'error',
             title: 'Oops...',
-            html: msg
+            html: data.message
           })
           return
         }
