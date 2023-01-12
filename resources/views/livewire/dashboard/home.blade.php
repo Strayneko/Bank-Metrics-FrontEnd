@@ -22,25 +22,10 @@
         this.resData = await res.json()
         // this.resData = data.data
         this.roleId = this.resData.data.role_id
-        console.log(this.resData)
+        // console.log(this.resData)
       })
     },
   }))
-  // Alpine.data("detailSubmission", () => ({
-  //   submissions: [],
-  //   getsubmission() {
-  //     fatch(`{{ 'API_URL' }}/api/submission/show/{id}`, {
-  //         method: "GET",
-  //         headers: {
-  //           "Authorization": localStorage.getItem("token")
-  //         }
-  //       })
-  //       .then(async res => {
-  //         data = await res.json()
-  //         this.submissions = data.data
-  //       })
-  //   }
-  // }))
 </script>
 <main class="container relative flex justify-end font-poppins" x-data="homeDashboard" x-init="checkLogin();
 getProfile()">
