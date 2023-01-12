@@ -1,9 +1,4 @@
-<ul class="flex flex-col gap-3 px-3 py-4 font-medium text-navy lg:flex-row lg:items-center" x-data="{
-    width: (window.innerWidth > 0) ? window.innerWidth : screen.width,
-    showDetail: false,
-    showApproved: false,
-    showRejected: false
-}"
+<ul class="flex flex-col gap-3 px-3 py-4 font-medium text-navy lg:flex-row lg:items-center" x-data="rejected"
   x-on:click="showDetail = !showDetail">
   <div class="flex items-center gap-3">
     <li class="w-10 text-center" x-text="i + 1"></li>
@@ -22,7 +17,7 @@
     </li>
     <li class="lg:w-40">
       <span class="lg:hidden">Rejected : </span>
-      <button :hidden="item.accepted_bank.length > 0" x-on:click="showRejected = true"
+      <button :hidden="item.accepted_bank.length > 0" x-on:click="showRejected = true; getRejected(item.id)"
         class="cursor-pointer rounded-md bg-orange-1 px-3 py-1 text-white">Detail</button>
     </li>
   </div>
@@ -32,6 +27,6 @@
   </div>
 
   <div class="absolute inset-x-0 top-0 w-full" x-show="showRejected" x-transition.duration.300ms>
-    @livewire('components.modal.detail-submission')
+    @livewire('components.modal.list-rejected')
   </div>
 </ul>

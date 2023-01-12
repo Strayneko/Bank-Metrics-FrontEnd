@@ -11,9 +11,29 @@
           }
         }).then(async res => {
           this.submissionData = await res.json()
-          console.log(this.submissionData)
+          // console.log(this.submissionData)
         })
       }
+    }))
+
+    Alpine.data('rejected', () => ({
+      resReject: [],
+      getRejected(id) {
+        fetch(`{{ env('API_URL') }}/api/loan/rejection_reason/${id}`, {
+          method: 'GET',
+          headers: {
+            'Authorization': localStorage.getItem('token')
+          }
+        }).then(async res => {
+          this.resReject = await res.json()
+          console.log(this.resReject)
+        })
+      },
+
+      width: (window.innerWidth > 0) ? window.innerWidth : screen.width,
+      showDetail: false,
+      showApproved: false,
+      showRejected: false
     }))
   </script>
 
