@@ -10,7 +10,7 @@ use App\Http\Livewire\Dashboard\ListBank;
 // User
 use App\Http\Livewire\User\Profile;
 use App\Http\Livewire\User\UserSubmission;
-use App\Http\Livewire\Dashboard\Submission;
+// use App\Http\Livewire\Dashboard\Submission;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -27,12 +27,11 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', HomeDashboard::class)->name('home');
 
 Route::get('/login', Login::class)->name('login');
-
 Route::get('/register', Register::class);
 
 Route::get('/dashboard/listadmin', ListAdmins::class)->name('admin.list');
 Route::get('/dashboard/listuser', ListUsers::class)->name('user.list');
-Route::get('/dashboard/submission', Submission::class)->name('submission.list');
+// Route::get('/dashboard/submission', Submission::class)->name('submission.list');
 Route::get('/dashboard/bank', ListBank::class)->name('bank.list');
 
 
