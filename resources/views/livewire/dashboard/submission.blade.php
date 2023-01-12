@@ -29,7 +29,7 @@
     resSubmissionData: [],
     submissionStatus: '',
     getSubData() {
-      fetch(`http://192.168.18.176:8000/api/loan/all`, {
+      fetch(`{{ env('API_URL') }}/api/loan/all`, {
         method: 'GET',
         headers: {
           'Content-type': 'application/json;charset=UTF-8',
