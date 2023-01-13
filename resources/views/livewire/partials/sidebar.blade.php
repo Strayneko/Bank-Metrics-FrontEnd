@@ -33,13 +33,13 @@
       }
     }))
   </script>
-
+  
   <div class="relative mb-16">
     <h1
       class="relative z-10 w-full text-4xl font-bold text-orange-2 before:absolute before:-left-4 before:-top-1 before:-z-10 before:block before:h-[110%] before:w-[125%] before:-rotate-6 before:bg-gray-1">
       Met<span class="text-navy">rics</span></h1>
   </div>
-
+  
   <div class="mb-3 flex flex-col items-center justify-center text-gray-2">
     <div class="mb-3 flex h-24 w-24 items-center justify-center overflow-hidden rounded-full bg-gray-1">
       <img class="w-full"
