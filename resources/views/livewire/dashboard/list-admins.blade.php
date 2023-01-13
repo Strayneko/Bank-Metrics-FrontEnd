@@ -60,11 +60,14 @@
       password: ""
     },
     message: '',
+    isSubmit: false,
     create() {
       const data = new FormData()
       data.append('name', this.newAdmin.name)
       data.append('email', this.newAdmin.email)
       data.append('password', this.newAdmin.password)
+
+      this.isSubmit = true
 
       fetch(`{{ env('API_URL') }}/api/admin`, {
           method: "POST",
@@ -74,6 +77,8 @@
           }
         })
         .then(async (response) => {
+          this.isSubmit = false
+
           let data = await response.json()
           let status = data.status
           this.message = data.message

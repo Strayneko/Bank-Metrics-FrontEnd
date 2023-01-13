@@ -82,10 +82,10 @@
         </label>
 
         <div class="mt-5 flex flex-col justify-between gap-3 pb-4 lg:flex-row lg:gap-0">
-          <button type="submit"
-            class="relative z-10 inline-block w-full rounded-lg border-2 border-orange-1 bg-transparent py-3 text-center font-bold text-navy outline-none transition-all duration-300 before:absolute before:left-0 before:top-0 before:-z-10 before:block before:h-full before:w-0 before:bg-orange-1 before:transition-all before:duration-300 hover:text-white hover:before:w-full lg:w-max lg:px-20">Create</button>
-          <a x-on:click="isAddActive = false"
-            class="relative z-10 inline-block w-full rounded-lg border-2 border-orange-1 bg-transparent py-3 text-center font-bold text-navy outline-none transition-all duration-300 before:absolute before:left-0 before:top-0 before:-z-10 before:block before:h-full before:w-0 before:bg-orange-1 before:transition-all before:duration-300 hover:text-white hover:before:w-full lg:w-max lg:px-20">Back</a>
+          <button type="submit" :disabled="isSubmit"
+            class="relative z-10 inline-block w-full rounded-lg border-2 border-orange-1 bg-transparent py-3 text-center font-bold text-navy outline-none transition-all duration-300 before:absolute before:left-0 before:top-0 before:-z-10 before:block before:h-full before:w-0 before:bg-orange-1 before:transition-all before:duration-300 hover:text-white hover:before:w-full disabled:bg-orange-1 disabled:text-white lg:w-max lg:px-20">Create</button>
+          <button type="button" x-on:click="isAddActive = false" :disabled="isSubmit"
+            class="relative z-10 inline-block w-full rounded-lg border-2 border-orange-1 bg-transparent py-3 text-center font-bold text-navy outline-none transition-all duration-300 before:absolute before:left-0 before:top-0 before:-z-10 before:block before:h-full before:w-0 before:bg-orange-1 before:transition-all before:duration-300 hover:text-white hover:before:w-full disabled:bg-orange-1 disabled:text-white lg:w-max lg:px-20">Back</button>
         </div>
       </form>
 
