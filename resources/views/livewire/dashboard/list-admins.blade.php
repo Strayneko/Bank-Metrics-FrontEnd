@@ -37,6 +37,7 @@
   }))
 
   Alpine.data('listAdmin', () => ({
+    showMessage: 'Please wait...',
     admins: [],
     getAdmins() {
       fetch(`{{ env('API_URL') }}/api/admin`, {
@@ -49,6 +50,7 @@
         .then(async res => {
           data = await res.json()
           this.admins = data.data
+          this.showMessage = 'No data Admin found!'
         })
     }
   }))
@@ -146,6 +148,12 @@
           <li class="w-64 lg:w-80">Nama</li>
           <li class="hidden w-80 lg:block">Email</li>
         </ul>
+
+        <template x-if="admins.length == 0">
+        <div class="my-10 text-center text-2xl font-bold text-navy">
+          <h1 x-text="showMessage"></h1>
+        </div>
+      </template>
 
         <template x-for="(admin, i) of admins">
           @livewire('components.list-admin')

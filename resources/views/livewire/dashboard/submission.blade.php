@@ -34,7 +34,7 @@
         }
       })
     },
-
+    showMessage: 'Please wait...',
     resSubmissionData: [],
     submissionStatus: '',
     getSubData() {
@@ -46,8 +46,9 @@
         }
       }).then(async res => {
         this.resSubmissionData = await res.json()
-        console.log(this.resSubmissionData)
-        console.log('aaaa')
+        this.showMessage = 'No data Submissions found!'
+        // console.log(this.resSubmissionData)
+        // console.log('aaaa')
       })
     },
   }))
@@ -94,6 +95,12 @@
           <li class="w-32">Status</li>
           <li class="w-24">Action</li>
         </ul>
+
+        <template x-if="resSubmissionData.data.length == 0">
+          <div class="my-10 text-center text-2xl font-bold text-navy">
+            <h1 x-text="showMessage"></h1>
+          </div>
+        </template>
 
         <template x-for="(loan, i) of resSubmissionData.data">
           @livewire('components.list-loan')

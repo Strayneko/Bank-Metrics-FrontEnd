@@ -37,6 +37,7 @@
   }))
 
   Alpine.data('listUser', () => ({
+    showMessage: 'Please wait...',
     users: [],
     getUsers() {
       fetch(`{{ env('API_URL') }}/api/user`, {
@@ -50,6 +51,7 @@
           data = await res.json()
           this.users = data.data
           // console.log(this.users)
+          this.showMessage = 'No data user found!'
         })
     }
   }))
@@ -68,6 +70,8 @@
         </div>
       </div>
 
+
+
       <div class="relative rounded-xl bg-white" x-data="listUser" x-init="getUsers()">
         <ul class="flex gap-3 rounded-t-xl bg-orange-1 px-3 py-4 font-semibold text-navy">
           <li class="w-10 text-center">No</li>
@@ -75,6 +79,13 @@
           <li class="hidden w-80 lg:block">Email</li>
           <li class="hidden w-24 lg:block">Action</li>
         </ul>
+
+        <template x-if="users.length == 0">
+          <div class="my-10 text-center text-2xl font-bold text-navy">
+            <h1 x-text="showMessage"></h1>
+          </div>
+        </template>
+
         <template x-for="(user, i) of users">
           @livewire('components.list-user-action')
         </template>

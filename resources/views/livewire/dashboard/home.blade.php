@@ -37,6 +37,7 @@
   }))
 </script>
 <main class="container relative flex justify-end font-poppins" x-data="homeDashboard" x-init="checkLogin()">
+
   @livewire('partials.nav-mobile')
 
   @livewire('partials.sidebar')
