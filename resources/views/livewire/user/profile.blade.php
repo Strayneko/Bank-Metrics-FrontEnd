@@ -48,9 +48,12 @@
       })
     },
 
+    isSubmit: false,
     updateProfile() {
       const body = new FormData(this.$refs.userForm)
       // console.log(this.$refs.userForm)
+
+      this.isSubmit = true
 
       fetch(`{{ env('API_URL') }}/api/user/me`, {
         method: 'POST',
@@ -82,6 +85,8 @@
           window.location.replace(`{{ env('APP_URL') }}/user/profile`)
         })
       })
+
+      this.isSubmit = false
     }
   }))
 </script>

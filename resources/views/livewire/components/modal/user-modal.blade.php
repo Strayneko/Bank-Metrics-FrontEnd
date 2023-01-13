@@ -63,7 +63,7 @@
 
         <label for="photo" class="relative w-full pb-3">
           <p class="font-bold text-navy">Photo</p>
-          <input type="file" name="photo" id="photo"
+          <input type="file" name="photo" id="photo" :required="!userData.profile"
             class="peer relative z-10 w-full cursor-pointer rounded-md border-2 border-orange-1 bg-white font-semibold text-gray-3 transition-all duration-150 file:mr-3 file:cursor-pointer file:border-none file:bg-orange-1 file:px-4 file:py-2 file:font-medium file:text-navy file:outline-none before:absolute before:left-0 before:top-0 before:-z-10 before:block before:h-full before:w-0 before:bg-orange-1 before:transition-all before:duration-300 hover:text-navy/60 hover:before:w-full">
         </label>
 
@@ -71,7 +71,7 @@
           <p class="font-bold text-navy">Nationality</p>
           <select name="country_id" id="country_id" required
             class="w-full cursor-pointer rounded-md border-2 border-orange-1 bg-white p-2 font-medium text-navy outline-none transition-all duration-300 hover:bg-orange-1">
-            <option selected disabled value="0" class="bg-white font-semibold">Choose your nationality</option>
+            <option selected disabled value="null" class="bg-white font-semibold">Choose your nationality</option>
             <template x-if="userData.profile">
               <option :value="userData.profile.country_id" x-text="userData.profile.country.country_name" selected>
               </option>
@@ -87,7 +87,7 @@
           <select name="marital_status" id="marital_status"
             class="w-full cursor-pointer rounded-md border-2 border-orange-1 bg-white p-2 font-medium text-navy outline-none transition-all duration-300 hover:bg-orange-1"
             required>
-            <option disabled value="0" selected class="bg-white font-semibold">Choose your marital status</option>
+            <option disabled value="null" selected class="bg-white font-semibold">Choose your marital status</option>
             <option :selected="userData.profile ? (userData.profile.marital_status == 0 ? true : false) : false"
               value="0" class="bg-white font-medium">Single</option>
             <option :selected="userData.profile ? (userData.profile.marital_status == 1 ? true : false) : false"
@@ -100,20 +100,20 @@
           <select name="employement" id="employement"
             class="w-full cursor-pointer rounded-md border-2 border-orange-1 bg-white p-2 font-medium text-navy outline-none transition-all duration-300 hover:bg-orange-1"
             required>
-            <option value="0" selected disabled class="bg-white font-semibold">Choose your employement</option>
-            <option :selected="userData.profile ? (userData.profile.employement == 0 ? true : false) : false"
-              value="0" class="bg-white font-medium">Full-Time</option>
+            <option value="null" selected disabled class="bg-white font-semibold">Choose your employement</option>
             <option :selected="userData.profile ? (userData.profile.employement == 1 ? true : false) : false"
+              value="0" class="bg-white font-medium">Full-Time</option>
+            <option :selected="userData.profile ? (userData.profile.employement == 0 ? true : false) : false"
               value="1" class="bg-white font-medium">Half-Time</option>
           </select>
         </label>
 
         <div class="mt-5 flex flex-col justify-between gap-3 pb-4 lg:flex-row lg:gap-0">
-          <button type="submit"
-            class="relative z-10 inline-block w-full rounded-lg border-2 border-orange-1 bg-transparent px-10 py-3 font-bold text-navy outline-none transition-all duration-300 before:absolute before:left-0 before:top-0 before:-z-10 before:block before:h-full before:w-0 before:bg-orange-1 before:transition-all before:duration-300 hover:text-white hover:before:w-full lg:w-max">Update
+          <button type="submit" :disabled="isSubmit"
+            class="relative z-10 inline-block w-full rounded-lg border-2 border-orange-1 bg-transparent px-10 py-3 font-bold text-navy outline-none transition-all duration-300 before:absolute before:left-0 before:top-0 before:-z-10 before:block before:h-full before:w-0 before:bg-orange-1 before:transition-all before:duration-300 hover:text-white hover:before:w-full disabled:bg-orange-1 disabled:text-white lg:w-max">Update
             Profile</button>
-          <a x-on:click="isUpdate = false"
-            class="relative z-10 inline-block w-full rounded-lg border-2 border-orange-1 bg-transparent py-3 px-20 text-center font-bold text-navy outline-none transition-all duration-300 before:absolute before:left-0 before:top-0 before:-z-10 before:block before:h-full before:w-0 before:bg-orange-1 before:transition-all before:duration-300 hover:text-white hover:before:w-full lg:w-max">Back</a>
+          <button type="button" x-on:click="isUpdate = false" :disabled="isSubmit"
+            class="relative z-10 inline-block w-full rounded-lg border-2 border-orange-1 bg-transparent py-3 px-20 text-center font-bold text-navy outline-none transition-all duration-300 before:absolute before:left-0 before:top-0 before:-z-10 before:block before:h-full before:w-0 before:bg-orange-1 before:transition-all before:duration-300 hover:text-white hover:before:w-full disabled:bg-orange-1 disabled:text-white lg:w-max">Back</button>
         </div>
       </form>
     </div>
