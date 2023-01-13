@@ -7,8 +7,8 @@
   <div class="flex items-center gap-3">
     <li class="w-10 text-center font-semibold" x-text="i + 1"></li>
     <li class="flex w-64 items-center gap-5">
-      <div class="h-14 w-14 rounded-lg bg-gray-3">
-        <img src="" alt="">
+      <div class="flex h-14 w-14 items-center justify-center rounded-lg bg-gray-3">
+        <img class="w-full" :src="user.user_profile ? user.user_profile.photo : ''" :alt="user.name">
       </div>
       <span x-text="user.name"></span>
     </li>

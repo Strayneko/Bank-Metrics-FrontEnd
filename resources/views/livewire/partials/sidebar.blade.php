@@ -41,8 +41,12 @@
   </div>
 
   <div class="mb-3 flex flex-col items-center justify-center text-gray-2">
-    <div class="mb-3 h-24 w-24 overflow-hidden rounded-full bg-gray-1">
-      <img class="w-full" src="{{ asset('assets/profile.svg') }}" :alt="resData.data ? resData.data.name : 'Profile'" />
+    <div class="mb-3 flex h-24 w-24 items-center justify-center overflow-hidden rounded-full bg-gray-1">
+      <img class="w-full"
+        :src="resData.data ?
+            (resData.data.profile ? resData.data.profile.photo : `{{ asset('assets/profile.svg') }}`) :
+            `{{ asset('assets/profile.svg') }}`"
+        :alt="resData.data ? resData.data.name : 'Profile'" />
     </div>
     <p class="text-xl font-bold" x-text="resData.data ? resData.data.name : 'User'"></p>
     <p class="text-sm" x-text="resData.data ? resData.data.role.role_name : 'User'"></p>
