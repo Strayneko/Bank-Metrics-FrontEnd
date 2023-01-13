@@ -101,10 +101,10 @@
             class="w-full cursor-pointer rounded-md border-2 border-orange-1 bg-white p-2 font-medium text-navy outline-none transition-all duration-300 hover:bg-orange-1"
             required>
             <option value="null" selected disabled class="bg-white font-semibold">Choose your employement</option>
-            <option :selected="userData.profile ? (userData.profile.employement == 1 ? true : false) : false"
-              value="0" class="bg-white font-medium">Full-Time</option>
             <option :selected="userData.profile ? (userData.profile.employement == 0 ? true : false) : false"
-              value="1" class="bg-white font-medium">Half-Time</option>
+              value="0" class="bg-white font-medium">Half-Time</option>
+            <option :selected="userData.profile ? (userData.profile.employement == 1 ? true : false) : false"
+              value="1" class="bg-white font-medium">Full-Time</option>
           </select>
         </label>
 
