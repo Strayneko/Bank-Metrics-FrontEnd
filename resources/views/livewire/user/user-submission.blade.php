@@ -2,16 +2,14 @@
   Alpine.data('userSubmissionDashboard', () => ({
     showSidebar: false,
     token: localStorage.getItem('token'),
+    resData: [],
+    roleId: 0,
     checkLogin() {
       if (!this.token) {
         window.location.href = `{{ route('login') }}`
         // console.log('hello')
       }
-    },
 
-    resData: [],
-    roleId: 0,
-    getProfile() {
       fetch(`{{ env('API_URL') }}/api/user/me`, {
         method: 'GET',
         headers: {
@@ -20,9 +18,16 @@
         }
       }).then(async res => {
         this.resData = await res.json()
-        // this.resData = data.data
-        this.roleId = this.resData.data.role_id
+        /**
+         * Redirect to login if user not found
+         */
+        if (this.resData.status == false) {
+          localStorage.removeItem('token')
+          window.location.href = `{{ route('login') }}`
+        }
         // console.log(this.resData)
+
+        this.roleId = this.resData.data.role_id
       })
     },
 
@@ -62,8 +67,7 @@
   }))
 </script>
 <main class="container relative flex h-screen items-center justify-end bg-gray-1 font-poppins lg:h-max lg:bg-transparent"
-  x-data="userSubmissionDashboard" x-init="checkLogin();
-  getProfile()">
+  x-data="userSubmissionDashboard" x-init="checkLogin()">
   @livewire('partials.nav-mobile')
 
   @livewire('partials.sidebar')

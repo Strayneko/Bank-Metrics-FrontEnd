@@ -2,16 +2,14 @@
   Alpine.data('submissionAdminDashboard', () => ({
     showSidebar: false,
     token: localStorage.getItem('token'),
+    resData: [],
+    roleId: 0,
     checkLogin() {
       if (!this.token) {
         window.location.href = `{{ route('login') }}`
         // console.log('hello')
       }
-    },
 
-    resData: [],
-    roleId: 0,
-    getProfile() {
       fetch(`{{ env('API_URL') }}/api/user/me`, {
         method: 'GET',
         headers: {
@@ -20,9 +18,20 @@
         }
       }).then(async res => {
         this.resData = await res.json()
-        // this.resData = data.data
-        this.roleId = this.resData.data.role_id
+        /**
+         * Redirect to login if user not found
+         */
+        if (this.resData.status == false) {
+          localStorage.removeItem('token')
+          window.location.href = `{{ route('login') }}`
+        }
         // console.log(this.resData)
+        this.roleId = this.resData.data.role_id
+
+        if (this.roleId != 2) {
+          window.location.replace(`{{ route('home') }}`)
+          // console.log(this.roleId)
+        }
       })
     },
 
@@ -43,8 +52,7 @@
     },
   }))
 </script>
-<main class="container relative flex justify-end font-poppins" x-data="submissionAdminDashboard" x-init="checkLogin();
-getProfile()">
+<main class="container relative flex justify-end font-poppins" x-data="submissionAdminDashboard" x-init="checkLogin()">
   @livewire('partials.nav-mobile')
 
   @livewire('partials.sidebar')

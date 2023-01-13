@@ -2,17 +2,15 @@
   Alpine.data('userProfile', () => ({
     showSidebar: false,
     token: localStorage.getItem('token'),
+    userData: [],
+    resData: [],
+    roleId: 0,
     checkLogin() {
       if (!this.token) {
         window.location.href = `{{ route('login') }}`
         // console.log('hello')
       }
-    },
 
-    userData: [],
-    resData: [],
-    roleId: 0,
-    getProfile() {
       fetch(`{{ env('API_URL') }}/api/user/me`, {
         method: 'GET',
         headers: {
@@ -21,9 +19,17 @@
         }
       }).then(async res => {
         this.resData = await res.json()
+        /**
+         * Redirect to login if user not found
+         */
+        if (this.resData.status == false) {
+          localStorage.removeItem('token')
+          window.location.href = `{{ route('login') }}`
+        }
+        // console.log(this.userData)
+
         this.roleId = this.resData.data.role_id
         this.userData = this.resData.data
-        // console.log(this.userData)
 
         if (this.roleId != 1) {
           window.location.replace(`{{ route('home') }}`)
@@ -79,8 +85,7 @@
     }
   }))
 </script>
-<main class="container relative flex justify-end font-poppins" x-data="userProfile" x-init="checkLogin();
-getProfile()">
+<main class="container relative flex justify-end font-poppins" x-data="userProfile" x-init="checkLogin()">
   @livewire('partials.nav-mobile')
 
   @livewire('partials.sidebar')
