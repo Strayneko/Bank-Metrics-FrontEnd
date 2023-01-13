@@ -1,5 +1,6 @@
 <script>
   Alpine.data('homeDashboard', () => ({
+    showMessage: 'Please wait...',
     showSidebar: false,
     token: localStorage.getItem('token'),
     resData: [],

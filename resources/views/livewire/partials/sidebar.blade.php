@@ -33,14 +33,21 @@
       }
     }))
   </script>
-  
+
   <div class="relative mb-16">
     <h1
       class="relative z-10 w-full text-4xl font-bold text-orange-2 before:absolute before:-left-4 before:-top-1 before:-z-10 before:block before:h-[110%] before:w-[125%] before:-rotate-6 before:bg-gray-1">
       Met<span class="text-navy">rics</span></h1>
   </div>
   
-  <div class="mb-3 flex flex-col items-center justify-center text-gray-2">
+  <!-- loading -->
+  <template x-if="resData.length == 0">
+    <div class="my-10 text-center text-2xl font-bold text-navy">
+      <h1 x-text="showMessage"></h1>
+    </div>
+  </template>
+  
+  <div :class="resData.length == 0 ? 'hidden' : ' '" class="mb-3 flex flex-col items-center justify-center text-gray-2">
     <div class="mb-3 flex h-24 w-24 items-center justify-center overflow-hidden rounded-full bg-gray-1">
       <img class="w-full"
         :src="resData.data ?
@@ -52,7 +59,7 @@
     <p class="text-sm" x-text="resData.data ? resData.data.role.role_name : 'User'"></p>
   </div>
 
-  <div class="my-3 w-full overflow-auto pt-8 text-base font-semibold text-navy">
+  <div :class="resData.length == 0 ? 'hidden' : ' '" class="my-3 w-full overflow-auto pt-8 text-base font-semibold text-navy">
     <ul class="mb-14 flex flex-col gap-8 px-8">
       <li>
         <a href="{{ route('home') }}"
@@ -63,7 +70,7 @@
       </li>
 
       <template x-if="roleId == 1">
-        <div class="flex flex-col gap-8">
+        <div :class="resData.length == 0 ? 'hidden' : ' '" class="flex flex-col gap-8">
           <li>
             <a href="{{ route('user.profile') }}"
               class="{{ request()->routeIs('user.profile') ? 'before:opacity-100 before:-rotate-6' : 'before:opacity-0 before:rotate-6' }} relative z-10 flex w-full items-center gap-4 before:absolute before:-top-[14px] before:-left-3 before:-z-10 before:block before:h-12 before:w-full before:rounded-lg before:bg-gray-3 before:transition-all before:duration-200 hover:before:-rotate-6 hover:before:opacity-100">
@@ -83,7 +90,7 @@
       </template>
 
       <template x-if="roleId == 2">
-        <div class="flex flex-col gap-8">
+        <div :class="resData.length == 0 ? 'hidden' : ' '" class="flex flex-col gap-8">
           <li>
             <a href="{{ route('admin.list') }}"
               class="{{ request()->routeIs('admin.list') ? 'before:opacity-100 before:-rotate-6' : 'before:opacity-0 before:rotate-6' }} relative z-10 flex w-full items-center gap-4 before:absolute before:-top-[14px] before:-left-3 before:-z-10 before:block before:h-12 before:w-full before:rounded-lg before:bg-gray-3 before:transition-all before:duration-200 hover:before:-rotate-6 hover:before:opacity-100">
@@ -118,7 +125,7 @@
       </template>
     </ul>
 
-    <div class="mb-10 px-8" x-data="logout">
+    <div :class="resData.length == 0 ? 'hidden' : ' '" class="mb-10 px-8" x-data="logout">
       <a x-on:click="logout()"
         class="relative z-10 flex w-full cursor-pointer items-center gap-4 before:absolute before:-top-[14px] before:-left-3 before:-z-10 before:block before:h-12 before:w-full before:rotate-6 before:rounded-lg before:bg-gray-3 before:opacity-0 before:transition-all before:duration-200 hover:before:-rotate-6 hover:before:opacity-100">
         <div class="w-6"><img class="w-full" src="{{ asset('assets/icons/logout.svg') }}" alt=""></div>
