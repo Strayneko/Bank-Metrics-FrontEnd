@@ -34,7 +34,14 @@
             // window.location.replace('')
             return
           }
-          window.location.replace(`{{ env('APP_URL') }}/login`)
+
+          Swal.fire(
+            'Success!',
+            'Registration Success!',
+            'success'
+          ).then(res => {
+            window.location.replace(`{{ env('APP_URL') }}/login`)
+          })
         });
     },
     token: localStorage.getItem('token'),
