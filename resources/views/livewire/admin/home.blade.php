@@ -1,6 +1,7 @@
 <section class="mt-20 w-full py-10 lg:mt-0 lg:w-[80%]">
   <script>
     Alpine.data('usersDashboard', () => ({
+      showMessage: 'Please wait...',
       users: [],
       getUsers() {
         fetch(`{{ env('API_URL') }}/api/user`, {
@@ -13,6 +14,7 @@
           data = await res.json()
           this.users = data.data
           // console.log(this.users)
+          this.showMessage = 'No data user found!'
         })
       }
     }))
@@ -95,6 +97,12 @@
           <li class="w-80">Alamat</li>
         </div>
       </ul>
+
+      <template x-if="users.length == 0">
+        <div class="my-10 text-center text-2xl font-bold text-navy">
+          <h1 x-text="showMessage"></h1>
+        </div>
+      </template>
 
       <template x-for="(user, i) of users">
         @livewire('components.list-user')

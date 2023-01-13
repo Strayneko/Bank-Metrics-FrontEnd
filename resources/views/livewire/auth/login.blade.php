@@ -1,8 +1,8 @@
 <script>
   if (localStorage.getItem('logout')) {
     Swal.fire(
+      'Success!',
       'Sign Out Success!',
-      '',
       'success'
     )
 
