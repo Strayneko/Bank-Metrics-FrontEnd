@@ -150,10 +150,10 @@
         </ul>
 
         <template x-if="admins.length == 0">
-        <div class="my-10 text-center text-2xl font-bold text-navy">
-          <h1 x-text="showMessage"></h1>
-        </div>
-      </template>
+          <div class="my-10 text-center text-2xl font-bold text-navy">
+            <h1 x-text="showMessage"></h1>
+          </div>
+        </template>
 
         <template x-for="(admin, i) of admins">
           @livewire('components.list-admin')

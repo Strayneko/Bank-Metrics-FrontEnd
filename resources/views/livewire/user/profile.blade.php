@@ -1,5 +1,6 @@
 <script>
   Alpine.data('userProfile', () => ({
+    showMessage: 'Please wait...',
     showSidebar: false,
     token: localStorage.getItem('token'),
     userData: [],
@@ -119,19 +120,30 @@
                   :alt="userData.name" />
               </div>
             </div>
+
+
             <div class="rounded-xl bg-orange-1 font-medium text-navy lg:mx-10">
               <ul class="flex flex-col justify-center gap-1 p-6 lg:p-10">
-                <li class="flex gap-10">
+
+                <!-- loading -->
+                <template x-if="userData.length == 0">
+                  <div class="my-10 text-center text-2xl font-bold text-navy">
+                    <h1 x-text="showMessage"></h1>
+                  </div>
+                </template>
+              
+                <li :class="userData.length == 0 ? 'hidden' : ' '" class="flex gap-10">
                   <span class="w-48">Name</span>
                   <span class="w-full" x-text="userData.name"></span>
                 </li>
-                <li class="flex gap-10">
+                <li :class="userData.length == 0 ? 'hidden' : ' '" class="flex gap-10">
                   <span class="w-48">Email</span>
                   <span class="w-full" x-text="userData.email"></span>
                 </li>
+                
 
                 <template x-if="!userData.profile">
-                  <li class="mt-6 text-center">Please Update Your Profile!</li>
+                  <li :class="userData.length == 0 ? 'hidden' : ' '" class="mt-6 text-center">Please Update Your Profile!</li>
                 </template>
 
                 <template x-if="userData.profile">

@@ -2,6 +2,7 @@
 
   <script>
     Alpine.data('submission', () => ({
+      showMessage: 'Please wait...',
       submissionData: [],
       getSubmission() {
         fetch(`{{ env('API_URL') }}/api/loan/list`, {
@@ -11,6 +12,7 @@
           }
         }).then(async res => {
           this.submissionData = await res.json()
+          this.showMessage = 'No data Submissions found!'
           // console.log(this.submissionData)
         })
       }
@@ -51,6 +53,12 @@
             <li class="w-40">Rejected</li>
           </div>
         </ul>
+
+        <template x-if="submissionData.length == 0">
+          <div class="my-10 text-center text-2xl font-bold text-navy">
+            <h1 x-text="showMessage"></h1>
+          </div>
+        </template>
 
         <template x-if="submissionData.data">
           <template x-for="(item, i) of submissionData.data.loans">
