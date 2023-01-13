@@ -31,9 +31,12 @@
       })
     },
 
+    isSubmit: false,
     createSubmission() {
       const body = new FormData(this.$refs.subForm)
       // console.log(this.$refs.subForm)
+
+      this.isSubmit = true
 
       fetch(`{{ env('API_URL') }}/api/loan/get_loan`, {
         method: 'POST',
@@ -42,9 +45,10 @@
         },
         body
       }).then(async res => {
+        this.isSubmit = false
+
         const data = await res.json()
         // console.log(data)
-
 
         if (data.status == false) {
           Swal.fire({
@@ -93,8 +97,8 @@
               </div>
             </label>
             <div class="mt-5 flex justify-between pb-12">
-              <button type="submit"
-                class="relative z-10 w-full rounded-lg border-2 border-orange-1 bg-transparent px-20 py-3 font-bold text-navy outline-none transition-all duration-300 before:absolute before:left-0 before:top-0 before:-z-10 before:block before:h-full before:w-0 before:bg-orange-1 before:transition-all before:duration-300 hover:text-white hover:before:w-full lg:w-max">Send</button>
+              <button type="submit" :disabled="isSubmit"
+                class="relative z-10 w-full rounded-lg border-2 border-orange-1 bg-transparent px-20 py-3 font-bold text-navy outline-none transition-all duration-300 before:absolute before:left-0 before:top-0 before:-z-10 before:block before:h-full before:w-0 before:bg-orange-1 before:transition-all before:duration-300 hover:text-white hover:before:w-full disabled:bg-orange-1 disabled:text-white lg:w-max">Send</button>
               {{-- <a x-on:click="isUpdate = false" class="text-navy font-bold bg-[#f1f0f0] outline outline-orange-1 hover:bg-orange-1 hover:text-white px-24 py-3 rounded-lg">Back</a> --}}
             </div>
           </form>

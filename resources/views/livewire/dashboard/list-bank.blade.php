@@ -63,6 +63,7 @@
       employment: 0
     },
     message: "",
+    isSubmit: false,
     createNewBank() {
       const data = new FormData()
       data.append('name', this.newBank.name)
@@ -73,6 +74,8 @@
       data.append('nationality', this.newBank.nationality)
       data.append('employment', this.newBank.employment)
 
+      this.isSubmit = true
+
       fetch(`{{ env('API_URL') }}/api/bank/create`, {
           method: "POST",
           body: data,
@@ -81,6 +84,8 @@
           }
         })
         .then(async (response) => {
+          this.isSubmit = false
+
           let data = await response.json()
           let status = data.status
           this.message = data.message
