@@ -62,6 +62,8 @@
         },
         body: body
       }).then(async res => {
+        this.isSubmit = false
+
         const data = await res.json()
         // console.log(data)
 
@@ -86,7 +88,6 @@
         })
       })
 
-      this.isSubmit = false
     }
   }))
 </script>
