@@ -19,7 +19,7 @@
           <ul class="flex flex-col gap-3 px-3 py-4 font-medium text-navy lg:flex-row lg:items-center">
             <li class="w-10 text-center" x-text="i + 1"></li>
             <li class="w-64" x-text="accept.bank.name"></li>
-            <li class="w-56" x-text="accept.loaned_amount"></li>
+            <li class="w-56" x-text="'$' + accept.loaned_amount.toLocaleString()"></li>
           </ul>
         </template>
       </div>
