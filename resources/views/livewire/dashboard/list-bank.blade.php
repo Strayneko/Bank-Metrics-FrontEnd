@@ -6,6 +6,7 @@
     isLoading: true,
     resData: [],
     roleId: 0,
+    // redirect to login page if user is not logged in
     checkLogin() {
       /**
        * Redirect to login page if there is no token in localstorage
@@ -51,6 +52,7 @@
 
   Alpine.data('listBank', () => ({
     banks: [],
+    // fetch api for get bank list from database
     getBanks() {
       /**
        * Get data banks
@@ -79,6 +81,7 @@
     },
     message: "",
     isSubmit: false,
+    // consume api for add new bank data to database
     createNewBank() {
       /**
        * Create form data
@@ -119,6 +122,8 @@
           window.location.replace(`{{ env('APP_URL') }}/dashboard/bank`)
         });
     },
+
+    // redirect to login page if user is not logged in for modal
     checkLogged() {
       if (!this.token) {
         window.location.href(`{{ route('home') }}`)
@@ -128,6 +133,7 @@
 
   Alpine.data("detailBank", () => ({
     banks: [],
+    // fetch api to get data bank with certain id
     getBank() {
       /**
        * Get detail bank
@@ -153,6 +159,7 @@
 
   @livewire('partials.sidebar')
 
+  <!-- list bank section -->
   <section class="mt-20 w-full py-10 lg:mt-0 lg:w-[80%]">
     <div class="relative mx-auto w-11/12 rounded-xl pb-6 lg:mx-0 lg:w-full lg:bg-gray-1 lg:p-6 lg:pt-12"
       x-data="{ isAddActive: false }">
@@ -179,7 +186,7 @@
           <li class="hidden w-64 lg:block">Max Loan</li>
           <li class="hidden w-48 lg:block">Action</li>
         </ul>
-
+        <!-- call table list template -->
         <template x-for="(bank, i) of banks.data">
           @livewire('components.list-bank')
         </template>

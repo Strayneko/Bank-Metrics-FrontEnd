@@ -5,6 +5,7 @@
     isLoading: true,
     resData: [],
     roleId: 0,
+    // redirect to login page if user is not logged in
     checkLogin() {
       /**
        * Redirect to login page if there is no token in localstorage
@@ -96,13 +97,13 @@
           <li class="hidden w-80 lg:block">Email</li>
           <li class="hidden w-24 lg:block">Action</li>
         </ul>
-
+        <!-- Loading -->
         <template x-if="users.length == 0">
           <div class="my-10 pb-10 text-center text-2xl font-bold text-navy">
             <h1 x-text="showMessage"></h1>
           </div>
         </template>
-
+          <!-- call table list from template -->
         <template x-for="(user, i) of users">
           @livewire('components.list-user-action')
         </template>

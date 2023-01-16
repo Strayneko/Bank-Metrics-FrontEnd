@@ -6,6 +6,7 @@
       password: ""
     },
     msg: '',
+    // register function
     register() {
       const data = new FormData()
       data.append('name', this.user.name)
@@ -26,6 +27,7 @@
             for (m of this.msg) {
               msg += `<p>${m}</p>`
             }
+            // alert if there is an error
             Swal.fire({
               icon: 'error',
               title: 'Oops...',
@@ -34,7 +36,7 @@
             // window.location.replace('')
             return
           }
-
+          // success alert
           Swal.fire(
             'Success!',
             'Registration Success!',
@@ -45,6 +47,7 @@
         });
     },
     token: localStorage.getItem('token'),
+    // check if user already login then redirected to dashboard based on their role
     checkLogged() {
       if (this.token) {
         window.location.replace(`{{ route('home') }}`)
