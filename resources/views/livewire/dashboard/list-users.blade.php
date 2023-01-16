@@ -4,6 +4,7 @@
     token: localStorage.getItem('token'),
     resData: [],
     roleId: 0,
+    // redirect to login page if user is not logged in
     checkLogin() {
       if (!this.token) {
         window.location.href = `{{ route('login') }}`
@@ -27,7 +28,8 @@
         }
         // console.log(this.resData)
         this.roleId = this.resData.data.role_id
-
+        
+        // redirect to dashboard user if logged in user has role_id != 2 
         if (this.roleId != 2) {
           window.location.replace(`{{ route('home') }}`)
           // console.log(this.roleId)
@@ -79,13 +81,13 @@
           <li class="hidden w-80 lg:block">Email</li>
           <li class="hidden w-24 lg:block">Action</li>
         </ul>
-
+        <!-- Loading -->
         <template x-if="users.length == 0">
           <div class="my-10 pb-10 text-center text-2xl font-bold text-navy">
             <h1 x-text="showMessage"></h1>
           </div>
         </template>
-
+          <!-- call table list from template -->
         <template x-for="(user, i) of users">
           @livewire('components.list-user-action')
         </template>

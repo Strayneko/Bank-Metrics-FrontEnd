@@ -42,10 +42,12 @@
   @livewire('partials.nav-mobile')
 
   @livewire('partials.sidebar')
-
+<!-- redirect to dashboard user if user's role_id = 1 -->
   <template x-if="roleId == 1">
     @livewire('user.home')
   </template>
+  
+<!-- redirect to dashboard admin if user's role_id = 2 -->
 
   <template x-if="roleId == 2">
     @livewire('admin.home')

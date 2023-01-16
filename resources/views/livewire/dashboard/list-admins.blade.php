@@ -4,6 +4,7 @@
     token: localStorage.getItem('token'),
     resData: [],
     roleId: 0,
+    // redirect to login page if user is not logged in
     checkLogin() {
       if (!this.token) {
         window.location.href = `{{ route('login') }}`
@@ -29,6 +30,8 @@
 
         this.roleId = this.resData.data.role_id
         // console.log(this.resData)
+
+        // redirect to dashboard user if logged in user has role_id != 2 
         if (this.roleId != 2) {
           window.location.replace(`{{ route('home') }}`)
         }
@@ -39,6 +42,7 @@
   Alpine.data('listAdmin', () => ({
     showMessage: 'Please wait...',
     admins: [],
+    // fetch admin list from admin api
     getAdmins() {
       fetch(`{{ env('API_URL') }}/api/admin`, {
           method: 'GET',
@@ -54,7 +58,7 @@
         })
     }
   }))
-
+  
   Alpine.data('createAdmin', () => ({
     newAdmin: {
       name: "",
@@ -63,6 +67,7 @@
     },
     message: '',
     isSubmit: false,
+    // create admin data 
     create() {
       const data = new FormData()
       data.append('name', this.newAdmin.name)
@@ -92,6 +97,7 @@
             msg += `<p>${m}</p>`
           }
           if (status == false) {
+            // alert for failed creating admin's data
             Swal.fire({
               icon: 'error',
               title: 'Oops...',
@@ -100,6 +106,7 @@
             // window.location.replace('')
             return
           }
+          // alert for success create admin's data
           Swal.fire({
             icon: 'success',
             title: 'Success!',
@@ -109,6 +116,7 @@
           })
         });
     },
+    // redirect to login page if user is not logged in for modal
     checkLogged() {
       if (!this.token) {
         window.location.href(`{{ route('home') }}`)
@@ -117,10 +125,12 @@
   }))
 </script>
 <main class="container relative flex justify-end font-poppins" x-data="listAdminDashboard" x-init="checkLogin()">
+  <!-- show navbar for mobile -->
   @livewire('partials.nav-mobile')
-
+  <!-- show sidebar -->
   @livewire('partials.sidebar')
 
+  <!-- list admin section -->
   <section class="mt-20 w-full py-10 lg:mt-0 lg:w-[80%]">
     <div class="relative mx-auto w-11/12 rounded-xl pb-6 lg:mx-0 lg:w-full lg:bg-gray-1 lg:p-6 lg:pt-12"
       x-data="{ isAddActive: false }">
@@ -154,7 +164,7 @@
             <h1 x-text="showMessage"></h1>
           </div>
         </template>
-
+        <!-- call table list template -->
         <template x-for="(admin, i) of admins">
           @livewire('components.list-admin')
         </template>

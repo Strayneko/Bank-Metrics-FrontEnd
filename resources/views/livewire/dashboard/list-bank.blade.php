@@ -5,6 +5,7 @@
     token: localStorage.getItem('token'),
     resData: [],
     roleId: 0,
+    // redirect to login page if user is not logged in
     checkLogin() {
       if (!this.token) {
         window.location.href = `{{ route('login') }}`
@@ -29,7 +30,7 @@
 
         // console.log(this.resData)
         this.roleId = this.resData.data.role_id
-
+        // redirect to dashboard user if logged in user has role_id != 2 
         if (this.roleId != 2) {
           window.location.replace(`{{ route('home') }}`)
         }
@@ -39,6 +40,7 @@
 
   Alpine.data('listBank', () => ({
     banks: [],
+    // fetch api for get bank list from database
     getBanks() {
       fetch(`{{ env('API_URL') }}/api/bank`, {
         method: 'GET',
@@ -64,6 +66,7 @@
     },
     message: "",
     isSubmit: false,
+    // consume api for add new bank data to database
     createNewBank() {
       const data = new FormData()
       data.append('name', this.newBank.name)
@@ -98,6 +101,8 @@
           window.location.replace(`{{ env('APP_URL') }}/dashboard/bank`)
         });
     },
+
+    // redirect to login page if user is not logged in for modal
     checkLogged() {
       if (!this.token) {
         window.location.href(`{{ route('home') }}`)
@@ -107,8 +112,9 @@
 
   Alpine.data("detailBank", () => ({
     banks: [],
+    // fetch api to get data bank with certain id
     getBank() {
-      fatch(`{{ 'API_URL' }}/api/bank/show/{id}`, {
+      fetch(`{{ 'API_URL' }}/api/bank/show/{id}`, {
           method: "GET",
           headers: {
             "Authorization": localStorage.getItem("token")
@@ -126,6 +132,7 @@
 
   @livewire('partials.sidebar')
 
+  <!-- list bank section -->
   <section class="mt-20 w-full py-10 lg:mt-0 lg:w-[80%]">
     <div class="relative mx-auto w-11/12 rounded-xl pb-6 lg:mx-0 lg:w-full lg:bg-gray-1 lg:p-6 lg:pt-12"
       x-data="{ isAddActive: false }">
@@ -152,7 +159,7 @@
           <li class="hidden w-64 lg:block">Max Loan</li>
           <li class="hidden w-48 lg:block">Action</li>
         </ul>
-
+        <!-- call table list template -->
         <template x-for="(bank, i) of banks.data">
           @livewire('components.list-bank')
         </template>
