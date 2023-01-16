@@ -3,6 +3,7 @@
 use App\Http\Livewire\Dashboard\Home as HomeDashboard;
 use App\Http\Livewire\Auth\Login;
 use App\Http\Livewire\Auth\Register;
+use App\Http\Livewire\Auth\ForgotPassword;
 use App\Http\Livewire\Dashboard\ListAdmins;
 use App\Http\Livewire\Dashboard\ListUsers;
 use App\Http\Livewire\Dashboard\ListBank;
@@ -28,6 +29,8 @@ Route::get('/', HomeDashboard::class)->name('home');
 
 Route::get('/login', Login::class)->name('login');
 Route::get('/register', Register::class);
+
+Route::get('/forgot-password', ForgotPassword::class);
 
 Route::get('/dashboard/listadmin', ListAdmins::class)->name('admin.list');
 Route::get('/dashboard/listuser', ListUsers::class)->name('user.list');
