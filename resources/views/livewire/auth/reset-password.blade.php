@@ -67,9 +67,9 @@
                 placeholder="Insert your password" required>
             </div>
             <div class="m-5 lg:m-0 lg:mb-6">
-              <label for="confirm_password"
+              <label for="password"
                 class="mb-2 block font-poppins text-sm font-medium text-[#0F0742] dark:text-white">Confirm Password</label>
-              <input x-model="user.confirm_password" type="confirm_password" id="confirm_password" name="confirm_password"
+              <input x-model="user.password" type="password" id="password" name="password"
                 class="w-full rounded-lg border border-[#FCC997] p-2.5 md:w-full lg:w-[380px]"
                 placeholder="Insert your confirm password" required>
             </div>
