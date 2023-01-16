@@ -121,10 +121,10 @@
     <div class="overflow-hidden rounded-xl bg-white">
       <ul class="flex gap-3 bg-orange-1 px-3 py-4 font-semibold text-navy">
         <li class="w-10 text-center">No</li>
-        <li class="w-64">Nama</li>
+        <li class="w-64">Name</li>
         <div class="hidden gap-3 lg:flex">
-          <li class="w-56">Tanggal Lahir</li>
-          <li class="w-80">Alamat</li>
+          <li class="w-56">Date Of Birth</li>
+          <li class="w-80">Address</li>
         </div>
       </ul>
 
