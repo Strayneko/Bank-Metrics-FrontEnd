@@ -6,6 +6,9 @@
     resData: [],
     roleId: 0,
     checkLogin() {
+      /**
+       * Redirect to login page if there is no token in localstorage
+       */
       if (!this.token) {
         window.location.href = `{{ route('login') }}`
         // console.log('hello')

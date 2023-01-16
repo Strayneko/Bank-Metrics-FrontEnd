@@ -15,15 +15,14 @@
           <li class="w-80">Reason</li>
         </ul>
 
-        <template x-for="(reject, i) of resReject.data">
+        <template x-for="(reject, j) in resReject.data">
           <ul class="flex flex-col gap-3 px-3 py-4 font-medium text-navy lg:flex-row lg:items-center">
-            <li class="w-10 text-center" x-text="i"></li>
+            <li class="w-10 text-center" x-text="j + 1"></li>
             <li class="w-64" x-text="reject.name"></li>
             <li class="w-80">
               <ul>
-                <template x-for="(reason, i) of reject.loan_reason">
+                <template x-for="reason of reject.loan_reason">
                   <li class="flex border-b border-b-navy/20 py-2">
-                    <span x-text="i + 1" class="w-10"></span>
                     <span x-text="reason"></span>
                   </li>
                 </template>

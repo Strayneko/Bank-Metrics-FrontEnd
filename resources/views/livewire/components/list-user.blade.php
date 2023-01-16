@@ -7,7 +7,7 @@
   <div class="flex items-center gap-3">
     <li class="w-10 text-center font-semibold" x-text="i + 1"></li>
     <li class="flex w-64 items-center gap-5">
-      <div class="flex h-14 w-14 items-center justify-center rounded-lg bg-gray-3">
+      <div class="flex h-14 w-14 items-center justify-center overflow-hidden rounded-lg bg-gray-3">
         <img class="w-full" :src="user.user_profile ? user.user_profile.photo : `{{ asset('assets/profile.svg') }}`"
           :alt="user.name">
       </div>

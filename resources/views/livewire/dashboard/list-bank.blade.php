@@ -7,11 +7,17 @@
     roleId: 0,
     // redirect to login page if user is not logged in
     checkLogin() {
+      /**
+       * Redirect to login page if there is no token in localstorage
+       */
       if (!this.token) {
         window.location.href = `{{ route('login') }}`
         // console.log('hello')
       }
 
+      /**
+       * Get profile
+       */
       fetch(`{{ env('API_URL') }}/api/user/me`, {
         method: 'GET',
         headers: {
@@ -30,7 +36,10 @@
 
         // console.log(this.resData)
         this.roleId = this.resData.data.role_id
-        // redirect to dashboard user if logged in user has role_id != 2 
+
+        /**
+         * Redirect to home if user role is not 2 (admin)
+         */
         if (this.roleId != 2) {
           window.location.replace(`{{ route('home') }}`)
         }
@@ -42,6 +51,9 @@
     banks: [],
     // fetch api for get bank list from database
     getBanks() {
+      /**
+       * Get data banks
+       */
       fetch(`{{ env('API_URL') }}/api/bank`, {
         method: 'GET',
         headers: {
@@ -68,6 +80,9 @@
     isSubmit: false,
     // consume api for add new bank data to database
     createNewBank() {
+      /**
+       * Create form data
+       */
       const data = new FormData()
       data.append('name', this.newBank.name)
       data.append('loaning_percentage', this.newBank.loaning_percentage)
@@ -79,6 +94,9 @@
 
       this.isSubmit = true
 
+      /**
+       * Fetch api to create new data bank
+       */
       fetch(`{{ env('API_URL') }}/api/bank/create`, {
           method: "POST",
           body: data,
@@ -114,6 +132,9 @@
     banks: [],
     // fetch api to get data bank with certain id
     getBank() {
+      /**
+       * Get detail bank
+       */
       fetch(`{{ 'API_URL' }}/api/bank/show/{id}`, {
           method: "GET",
           headers: {

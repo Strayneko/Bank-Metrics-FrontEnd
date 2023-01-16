@@ -6,11 +6,17 @@
     roleId: 0,
     // redirect to login page if user is not logged in
     checkLogin() {
+      /**
+       * Redirect to login page if there is no token in localstorage
+       */
       if (!this.token) {
         window.location.href = `{{ route('login') }}`
         // console.log('hello')
       }
 
+      /**
+       * Get profile
+       */
       fetch(`{{ env('API_URL') }}/api/user/me`, {
         method: 'GET',
         headers: {
@@ -28,8 +34,10 @@
         }
         // console.log(this.resData)
         this.roleId = this.resData.data.role_id
-        
-        // redirect to dashboard user if logged in user has role_id != 2 
+
+        /**
+         * Redirect to home if user role is not 2 (admin)
+         */
         if (this.roleId != 2) {
           window.location.replace(`{{ route('home') }}`)
           // console.log(this.roleId)
@@ -42,6 +50,9 @@
     showMessage: 'Please wait...',
     users: [],
     getUsers() {
+      /**
+       * Get list user
+       */
       fetch(`{{ env('API_URL') }}/api/user`, {
           method: 'GET',
           headers: {
@@ -71,8 +82,6 @@
           class="relative h-2 w-52 rounded-lg bg-orange-1 after:absolute after:inset-0 after:m-auto after:h-5 after:w-16 after:rounded-xl after:bg-navy">
         </div>
       </div>
-
-
 
       <div class="relative rounded-xl bg-white" x-data="listUser" x-init="getUsers()">
         <ul class="flex gap-3 rounded-t-xl bg-orange-1 px-3 py-4 font-semibold text-navy">

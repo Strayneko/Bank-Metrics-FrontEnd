@@ -17,7 +17,7 @@
     </li>
     <li class="lg:w-40">
       <span class="lg:hidden">Rejected : </span>
-      <button :hidden="item.accepted_bank.length > 0" x-on:click="showRejected = true; getRejected(item.id)"
+      <button x-on:click="showRejected = true; getRejected(item.id)"
         class="cursor-pointer rounded-md bg-orange-1 px-3 py-1 text-white">Detail</button>
     </li>
   </div>
