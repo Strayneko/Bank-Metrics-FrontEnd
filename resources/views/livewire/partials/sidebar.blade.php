@@ -42,7 +42,7 @@
   
   <!-- loading -->
   <template x-if="resData.length == 0">
-    <div class="my-10 text-center text-2xl font-bold text-navy">
+    <div class="my-10 ml-10 text-center text-2xl font-bold text-navy">
       <h1 x-text="showMessage"></h1>
     </div>
   </template>

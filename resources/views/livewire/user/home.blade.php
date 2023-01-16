@@ -13,7 +13,7 @@
         }).then(async res => {
           this.submissionData = await res.json()
           this.showMessage = 'No data Submissions found!'
-          // console.log(this.submissionData)
+          console.log(this.submissionData)
         })
       }
     }))
@@ -55,7 +55,13 @@
         </ul>
 
         <template x-if="submissionData.length == 0">
-          <div class="my-10 text-center text-2xl font-bold text-navy">
+          <div class="my-10 pb-10 text-center text-2xl font-bold text-navy">
+            <h1 x-text="showMessage"></h1>
+          </div>
+        </template>
+
+        <template x-if="submissionData.status == false">
+          <div class="my-10 pb-10 text-center text-2xl font-bold text-navy">
             <h1 x-text="showMessage"></h1>
           </div>
         </template>
