@@ -1,4 +1,4 @@
-{{-- <script>
+<script>
     Alpine.data("Forgot", () => ({
       user: {
         email: "",
@@ -8,7 +8,7 @@
         const data = new FormData()
         data.append('email', this.user.email)
   
-        fetch(`{{ env('API_URL') }}/api/auth/register`, {
+        fetch(`{{ env('API_URL') }}/api/passwordReset`, {
             method: "POST",
             body: data
           })
@@ -30,7 +30,7 @@
               // window.location.replace('')
               return
             }
-            window.location.replace(`{{ env('APP_URL') }}/login`)
+            // window.location.replace(`{{ env('APP_URL') }}/login`)
           });
       },
       token: localStorage.getItem('token'),
@@ -40,8 +40,8 @@
         }
       }
     }));
-  </script> --}}
-  <div class="container" x-data="Register" x-init="checkLogged()">
+  </script>
+  <div class="container" x-data="Forgot" x-init="checkLogged()">
     <div class="flex justify-between pt-[56px]">
       <div class="">
         <div class="">
@@ -58,7 +58,7 @@
           </h1>
         </div>
         <div class="mt-5 md:mx-5 md:mt-8 lg:mt-10">
-          <form x-on:submit.prevent="register()" method="" action="" enctype="multipart/form-data">
+          <form x-on:submit.prevent="forgot()" method="" action="" enctype="multipart/form-data">
             <div class="m-5 lg:m-0 lg:mb-6">
               <label for="email"
                 class="mb-2 block font-poppins text-sm font-medium text-[#0F0742] dark:text-white">Email</label>

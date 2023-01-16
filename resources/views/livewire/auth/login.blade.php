@@ -87,7 +87,7 @@
               required>
           </div>
           <div class="m-5 text-right">
-            <a href="" class="font-poppins text-[#0F0742] hover:text-[#4d36e4]">Forgot Password?</a>
+            <a href="{{ route ('ForgotPassword')}}" class="font-poppins text-[#0F0742] hover:text-[#4d36e4]">Forgot Password?</a>
           </div>
           <div class="m-5 mb-20 flex justify-between gap-5 lg:m-0 lg:mb-0 lg:gap-0">
             <button type="submit"
