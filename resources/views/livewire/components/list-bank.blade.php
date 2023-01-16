@@ -9,7 +9,7 @@
     <li class="w-96" x-text="bank.name"></li>
   </div>
   <div class="flex flex-col gap-3 pl-11 lg:flex-row lg:items-center lg:pl-0" x-show="width > 768 ? true : showBank"
-    x-transition.duration.700ms>
+    x-transition.duration.500ms>
     <li class="lg:w-64">
       <span class="lg:hidden">Max Loan : </span>
       <span x-text="bank.loaning_percentage + '%'"></span>
@@ -21,7 +21,7 @@
         class="rounded-lg bg-orange-2 px-3 py-1 text-center text-white transition-all duration-300 hover:bg-[#D73707]">Delete</a> --}}
     </li>
   </div>
-  <div class="absolute inset-x-0 top-0 z-20 w-full" x-show="isShow" x-transition.duration.300ms>
+  <div class="absolute inset-x-0 top-0 z-20 w-full" x-show="isShow" x-transition.duration.200ms>
     @livewire('components.modal.detail-bank')
   </div>
 </ul>

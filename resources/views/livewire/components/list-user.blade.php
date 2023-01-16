@@ -15,7 +15,7 @@
     </li>
   </div>
   <div class="flex flex-col gap-3 pl-11 lg:flex-row lg:items-center lg:pl-0" x-show="width > 768 ? true : showUser"
-    x-transition.duration.700ms>
+    x-transition.duration.500ms>
     <li class="lg:w-56"
       x-html="`<span class='lg:hidden'>Tanggal Lahir : </span>${ user.user_profile ? user.user_profile.dob : 'The user has not filled in the profile data' }`">
     </li>

@@ -148,7 +148,7 @@
         </div>
       </div>
 
-      <div class="w-full" x-show="isAddActive" x-transition.duration.500ms x-data="createAdmin"
+      <div class="w-full" x-show="isAddActive" x-transition.duration.200ms x-data="createAdmin"
         x-init="checkLogged()">
         @livewire('components.modal.add-admin')
       </div>

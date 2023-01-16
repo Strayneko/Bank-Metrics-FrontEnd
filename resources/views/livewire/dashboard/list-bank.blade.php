@@ -169,7 +169,7 @@
           class="relative h-2 w-40 rounded-lg bg-orange-1 after:absolute after:inset-0 after:m-auto after:h-5 after:w-16 after:rounded-xl after:bg-navy">
         </div>
       </div>
-      <div x-show="isAddActive" x-transition.duration.500ms x-data="createBank" x-init="checkLogged()">
+      <div x-show="isAddActive" x-transition.duration.200ms x-data="createBank" x-init="checkLogged()">
         @livewire('components.modal.add-bank')
       </div>
 

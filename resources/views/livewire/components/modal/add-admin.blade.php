@@ -14,7 +14,7 @@
           <input type="text" name="name" id="name" class="peer mt-2 outline-none"
             placeholder="Insert your name" x-model="newAdmin.name">
           <div
-            class="absolute inset-x-0 bottom-0 mx-auto block h-0.5 w-0 rounded-lg bg-navy transition-all duration-300 peer-hover:w-full">
+            class="absolute inset-x-0 bottom-0 mx-auto block h-0.5 w-0 rounded-lg bg-navy transition-all duration-200 peer-hover:w-full">
           </div>
         </label>
         <label for="email" class="relative w-full pb-3">
@@ -22,7 +22,7 @@
           <input type="text" name="email" id="email" class="peer mt-2 outline-none"
             placeholder="Insert your email address" x-model="newAdmin.email">
           <div
-            class="absolute inset-x-0 bottom-0 mx-auto block h-0.5 w-0 rounded-lg bg-navy transition-all duration-300 peer-hover:w-full">
+            class="absolute inset-x-0 bottom-0 mx-auto block h-0.5 w-0 rounded-lg bg-navy transition-all duration-200 peer-hover:w-full">
           </div>
         </label>
         <label for="password" class="relative w-full pb-3">
@@ -30,17 +30,17 @@
           <input type="password" name="password" id="password" class="peer mt-2 outline-none"
             placeholder="Insert your password" x-model="newAdmin.password">
           <div
-            class="absolute inset-x-0 bottom-0 mx-auto block h-0.5 w-0 rounded-lg bg-navy transition-all duration-300 peer-hover:w-full">
+            class="absolute inset-x-0 bottom-0 mx-auto block h-0.5 w-0 rounded-lg bg-navy transition-all duration-200 peer-hover:w-full">
           </div>
         </label>
         <div class="mt-5 flex w-full flex-col items-center justify-center gap-5 text-center lg:flex-row lg:gap-14">
           <button type="submit" :disabled="isSubmit"
-            class="relative z-10 w-full rounded-lg border-2 border-orange-1 bg-transparent px-20 py-3 font-bold text-navy outline-none transition-all duration-300 before:absolute before:left-0 before:top-0 before:-z-10 before:block before:h-full before:w-0 before:bg-orange-1 before:transition-all before:duration-300 hover:text-white hover:before:w-full disabled:bg-orange-1 disabled:text-white lg:w-max">Create</button>
+            class="relative z-10 w-full rounded-lg border-2 border-orange-1 bg-transparent px-20 py-3 font-bold text-navy outline-none transition-all duration-200 before:absolute before:left-0 before:top-0 before:-z-10 before:block before:h-full before:w-0 before:bg-orange-1 before:transition-all before:duration-200 hover:text-white hover:before:w-full disabled:bg-orange-1 disabled:text-white lg:w-max">Create</button>
           <button type="button" x-on:click="isAddActive = false" :disabled="isSubmit"
-            class="relative z-10 w-full rounded-lg border-2 border-orange-1 bg-transparent px-20 py-3 font-bold text-navy outline-none transition-all duration-300 before:absolute before:left-0 before:top-0 before:-z-10 before:block before:h-full before:w-0 before:bg-orange-1 before:transition-all before:duration-300 hover:text-white hover:before:w-full disabled:bg-orange-1 disabled:text-white lg:w-max">Back</button>
+            class="relative z-10 w-full rounded-lg border-2 border-orange-1 bg-transparent px-20 py-3 font-bold text-navy outline-none transition-all duration-200 before:absolute before:left-0 before:top-0 before:-z-10 before:block before:h-full before:w-0 before:bg-orange-1 before:transition-all before:duration-200 hover:text-white hover:before:w-full disabled:bg-orange-1 disabled:text-white lg:w-max">Back</button>
         </div>
       </form>
     </div>
   </div>
-  <div class="fixed inset-0 z-10 bg-gray-1/40 backdrop-blur-sm" x-on:click="isAddActive = false"></div>
+  <div class="fixed inset-0 z-10 bg-white/10 backdrop-blur-sm" x-on:click="isAddActive = false"></div>
 </div>

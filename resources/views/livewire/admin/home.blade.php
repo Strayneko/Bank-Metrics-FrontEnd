@@ -118,7 +118,7 @@
     {{-- End Section Navbar --}}
 
     {{-- Start Section Table --}}
-    <div class="overflow-hidden rounded-xl bg-white">
+    <div class="overflow-hidden rounded-xl bg-gray-1/30 lg:bg-white">
       <ul class="flex gap-3 bg-orange-1 px-3 py-4 font-semibold text-navy">
         <li class="w-10 text-center">No</li>
         <li class="w-64">Name</li>

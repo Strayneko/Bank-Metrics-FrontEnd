@@ -103,5 +103,5 @@
     </div>
   </div>
 
-  <div class="fixed inset-0 z-10 bg-gray-1/40 backdrop-blur-sm" x-on:click="showDetail = false"></div>
+  <div class="fixed inset-0 z-10 bg-white/10 backdrop-blur-sm" x-on:click="showDetail = false"></div>
 </section>
