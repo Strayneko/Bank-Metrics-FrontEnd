@@ -3,6 +3,7 @@
     showMessage: 'Please wait...',
     showSidebar: false,
     token: localStorage.getItem('token'),
+    isLoading: true,
     userData: [],
     resData: [],
     roleId: 0,
@@ -35,6 +36,8 @@
         if (this.roleId != 1) {
           window.location.replace(`{{ route('home') }}`)
         }
+
+        this.isLoading = false
       })
     },
 
@@ -93,6 +96,10 @@
   }))
 </script>
 <main class="container relative flex justify-end font-poppins" x-data="userProfile" x-init="checkLogin()">
+  <template x-if="isLoading">
+    @livewire('components.loading')
+  </template>
+
   @livewire('partials.nav-mobile')
 
   @livewire('partials.sidebar')
@@ -121,7 +128,6 @@
               </div>
             </div>
 
-
             <div class="rounded-xl bg-orange-1 font-medium text-navy lg:mx-10">
               <ul class="flex flex-col justify-center gap-1 p-6 lg:p-10">
 
@@ -131,7 +137,7 @@
                     <h1 x-text="showMessage"></h1>
                   </div>
                 </template>
-              
+
                 <li :class="userData.length == 0 ? 'hidden' : ' '" class="flex gap-10">
                   <span class="w-48">Name</span>
                   <span class="w-full" x-text="userData.name"></span>
@@ -140,10 +146,10 @@
                   <span class="w-48">Email</span>
                   <span class="w-full" x-text="userData.email"></span>
                 </li>
-                
 
                 <template x-if="!userData.profile">
-                  <li :class="userData.length == 0 ? 'hidden' : ' '" class="mt-6 text-center">Please Update Your Profile!</li>
+                  <li :class="userData.length == 0 ? 'hidden' : ' '" class="mt-6 text-center">Please Update Your
+                    Profile!</li>
                 </template>
 
                 <template x-if="userData.profile">

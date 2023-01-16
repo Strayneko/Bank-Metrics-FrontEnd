@@ -2,6 +2,7 @@
   Alpine.data('userSubmissionDashboard', () => ({
     showSidebar: false,
     token: localStorage.getItem('token'),
+    isLoading: true,
     resData: [],
     roleId: 0,
     checkLogin() {
@@ -28,6 +29,12 @@
         // console.log(this.resData)
 
         this.roleId = this.resData.data.role_id
+
+        if (this.roleId != 1) {
+          window.location.replace(`{{ route('home') }}`)
+        }
+
+        this.isLoading = false
       })
     },
 
@@ -72,6 +79,10 @@
 </script>
 <main class="container relative flex h-screen items-center justify-end bg-gray-1 font-poppins lg:h-max lg:bg-transparent"
   x-data="userSubmissionDashboard" x-init="checkLogin()">
+  <template x-if="isLoading">
+    @livewire('components.loading')
+  </template>
+
   @livewire('partials.nav-mobile')
 
   @livewire('partials.sidebar')
