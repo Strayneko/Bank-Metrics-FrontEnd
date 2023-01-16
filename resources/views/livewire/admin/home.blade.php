@@ -13,7 +13,7 @@
       'Content-type': 'application/json;charset=UTF-8',
       'Authorization': localStorage.getItem('token')
       },
-      countData(){
+      getData(){
         // fetch admin list
         fetch(`{{ env('API_URL') }}/api/admin`, {
           method: 'GET',
@@ -54,7 +54,7 @@
     
   </script>
 
-  <div x-data="usersDashboard" x-init="countData" class="mx-auto w-11/12 rounded-xl pb-6 lg:mx-0 lg:w-full lg:bg-gray-1 lg:p-6">
+  <div x-data="usersDashboard" x-init="getData" class="mx-auto w-11/12 rounded-xl pb-6 lg:mx-0 lg:w-full lg:bg-gray-1 lg:p-6">
     {{-- Start Section Navbar --}}
     <div
       class="mb-10 flex w-full flex-wrap items-center justify-center gap-8 gap-y-12 rounded-xl bg-navy py-12 px-1 text-lg text-gray-2 md:gap-12 md:px-5 lg:gap-6 lg:text-xl">
