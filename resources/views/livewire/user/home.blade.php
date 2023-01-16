@@ -55,7 +55,7 @@
         </ul>
 
         <template x-if="submissionData.length == 0">
-          <div class="my-10 pb-10e text-center text-2xl font-bold text-navy">
+          <div class="my-10 pb-10 text-center text-2xl font-bold text-navy">
             <h1 x-text="showMessage"></h1>
           </div>
         </template>
@@ -81,8 +81,7 @@
         <p class="text-xl font-semibold">Please fill in your personal data first!</p>
         <a href="{{ route('user.profile') }}"
           class="rounded-lg bg-orange-1 px-4 py-2 font-bold text-white transition-all duration-150 hover:-translate-y-1 hover:bg-orange-2/30 hover:shadow-sm hover:shadow-orange-1">Go
-          to
-          Profile!</a>
+          to Profile!</a>
       </div>
     </template>
   </div>

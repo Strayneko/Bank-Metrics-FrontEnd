@@ -116,7 +116,7 @@
                 class="relative h-2 w-[190px] rounded-lg bg-orange-1 after:absolute after:inset-0 after:m-auto after:h-5 after:w-16 after:rounded-xl after:bg-navy">
               </div>
             </div>
-            <div class="w-full" x-show="isUpdate" x-transition.duration.500ms x-init="getCountry()">
+            <div class="w-full" x-show="isUpdate" x-transition.duration.200ms x-init="getCountry()">
               @livewire('components.modal.user-modal')
             </div>
             <div class="mb-3 flex flex-col items-center justify-center text-gray-2">

@@ -39,14 +39,14 @@
       class="relative z-10 w-full text-4xl font-bold text-orange-2 before:absolute before:-left-4 before:-top-1 before:-z-10 before:block before:h-[110%] before:w-[125%] before:-rotate-6 before:bg-gray-1">
       Met<span class="text-navy">rics</span></h1>
   </div>
-  
+
   <!-- loading -->
   <template x-if="resData.length == 0">
     <div class="my-10 ml-10 text-center text-2xl font-bold text-navy">
       <h1 x-text="showMessage"></h1>
     </div>
   </template>
-  
+
   <div :class="resData.length == 0 ? 'hidden' : ' '" class="mb-3 flex flex-col items-center justify-center text-gray-2">
     <div class="mb-3 flex h-24 w-24 items-center justify-center overflow-hidden rounded-full bg-gray-1">
       <img class="w-full"
@@ -59,7 +59,8 @@
     <p class="text-sm" x-text="resData.data ? resData.data.role.role_name : 'User'"></p>
   </div>
 
-  <div :class="resData.length == 0 ? 'hidden' : ' '" class="my-3 w-full overflow-auto pt-8 text-base font-semibold text-navy">
+  <div :class="resData.length == 0 ? 'hidden' : ' '"
+    class="show-scroll my-3 w-full overflow-auto pt-8 text-base font-semibold text-navy">
     <ul class="mb-14 flex flex-col gap-8 px-8">
       <li>
         <a href="{{ route('home') }}"

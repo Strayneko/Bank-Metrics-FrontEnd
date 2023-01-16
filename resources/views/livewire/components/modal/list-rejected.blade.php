@@ -1,5 +1,5 @@
 <div class="relative w-full">
-  <div class="absolute inset-x-0 -top-28 z-20 mx-auto w-full lg:w-10/12">
+  <div class="absolute inset-x-0 -top-20 z-20 mx-auto w-full lg:w-10/12">
     <div class="relative mb-10 rounded-xl bg-white pb-10 pt-8 shadow-lg shadow-navy/50">
       <div class="relative mx-auto mb-12 flex w-max flex-col items-center justify-center gap-3">
         <h1 class="mb-2 text-2xl font-bold text-navy lg:text-3xl">Detail <span class="text-orange-2">Rejected</span></h1>
