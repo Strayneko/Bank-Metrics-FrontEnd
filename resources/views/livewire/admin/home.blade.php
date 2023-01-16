@@ -3,24 +3,58 @@
     Alpine.data('usersDashboard', () => ({
       showMessage: 'Please wait...',
       users: [],
-      getUsers() {
-        fetch(`{{ env('API_URL') }}/api/user`, {
+      admins: [],
+      submissions: [],
+      approved: [],
+      rejected: [],
+      acceptedSubmission: [],
+      rejectedSubmission: [],
+      headers: {
+      'Content-type': 'application/json;charset=UTF-8',
+      'Authorization': localStorage.getItem('token')
+      },
+      countData(){
+        // fetch admin list
+        fetch(`{{ env('API_URL') }}/api/admin`, {
           method: 'GET',
-          headers: {
-            'Content-type': 'application/json;charset=UTF-8',
-            'Authorization': localStorage.getItem('token')
-          }
-        }).then(async res => {
-          data = await res.json()
-          this.users = data.data
-          // console.log(this.users)
-          this.showMessage = 'No data user found!'
+          headers: this.headers,
+        }).then(res => res.json())
+        
+        .then(res => this.admins = res.data);
+
+        // get submissions
+        fetch(`{{ env('API_URL') }}/api/loan/all`, {
+          method: 'GET',
+          headers: this.headers,
+        }).then(res => res.json())
+        .then(res => {
+          this.submissions = res.data
+          // filter accepted submission
+          this.acceptedSubmission = this.submissions.filter((submission) => submission.status === 1)
+          // filter rejected submission
+          this.rejectedSubmission = this.submissions.filter((submission) => submission.status === 0)
         })
+        
+
+        // get users
+      fetch(`{{ env('API_URL') }}/api/user`, {
+      method: 'GET',
+      headers: this.headers,
+      }).then(async res => {
+      data = await res.json()
+      this.users = data.data
+      // console.log(this.users)
+      this.showMessage = 'No data user found!'
+      })
+      
+
       }
+     
     }))
+    
   </script>
 
-  <div class="mx-auto w-11/12 rounded-xl pb-6 lg:mx-0 lg:w-full lg:bg-gray-1 lg:p-6">
+  <div x-data="usersDashboard" x-init="countData" class="mx-auto w-11/12 rounded-xl pb-6 lg:mx-0 lg:w-full lg:bg-gray-1 lg:p-6">
     {{-- Start Section Navbar --}}
     <div
       class="mb-10 flex w-full flex-wrap items-center justify-center gap-8 gap-y-12 rounded-xl bg-navy py-12 px-1 text-lg text-gray-2 md:gap-12 md:px-5 lg:gap-6 lg:text-xl">
@@ -32,19 +66,19 @@
           </div>
         </div>
         <p>Admins</p>
-        <p class="text-3xl">70</p>
+        <p class="text-3xl" x-text="admins.length"></p>
         <p>Person</p>
       </div>
 
-      <div
+      <div  
         class="group relative h-28 w-32 rounded-xl bg-white px-1 py-3 text-center font-bold transition-all duration-300 hover:rotate-6 md:h-32 md:w-40 md:py-5">
-        <div
+        <div 
           class="absolute right-1 -top-5 flex h-10 w-10 items-center justify-center rounded-lg bg-orange-2 group-hover:animate-bounce">
           <div class="w-6"><img class="w-full" src="{{ asset('assets/icons/user-white.svg') }}" alt="">
           </div>
         </div>
         <p>Users</p>
-        <p class="text-3xl">75</p>
+        <p class="text-3xl" x-text="users.length"></p>
         <p>Person</p>
       </div>
 
@@ -56,8 +90,8 @@
           </div>
         </div>
         <p>Submission</p>
-        <p class="text-3xl">125</p>
-        <p>Person</p>
+        <p class="text-3xl"  x-text="submissions.length">Please wait...</p>
+        <p>Data</p>
       </div>
 
       <div
@@ -68,7 +102,7 @@
           </div>
         </div>
         <p>Approved</p>
-        <p class="text-3xl">70</p>
+        <p class="text-3xl" x-text="acceptedSubmission.length">70</p>
         <p>Person</p>
       </div>
 
@@ -80,15 +114,15 @@
               alt="">
           </div>
         </div>
-        <p class="leading-none">Not Approved</p>
-        <p class="text-3xl">70</p>
+        <p class="leading-none">Rejected</p>
+        <p class="text-3xl" x-text="rejectedSubmission.length">70</p>
         <p>Person</p>
       </div>
     </div>
     {{-- End Section Navbar --}}
 
     {{-- Start Section Table --}}
-    <div class="overflow-hidden rounded-xl bg-white" x-data="usersDashboard" x-init="getUsers()">
+    <div class="overflow-hidden rounded-xl bg-white">
       <ul class="flex gap-3 bg-orange-1 px-3 py-4 font-semibold text-navy">
         <li class="w-10 text-center">No</li>
         <li class="w-64">Nama</li>
