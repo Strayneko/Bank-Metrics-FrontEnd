@@ -3,6 +3,7 @@
     showMessage: 'Please wait...',
     showSidebar: false,
     token: localStorage.getItem('token'),
+    isLoading: true,
     resData: [],
     roleId: 0,
     checkLogin() {
@@ -36,11 +37,15 @@
         // console.log(this.resData)
 
         this.roleId = this.resData.data.role_id
+        this.isLoading = false
       })
     },
   }))
 </script>
 <main class="container relative flex justify-end font-poppins" x-data="homeDashboard" x-init="checkLogin()">
+  <template x-if="isLoading">
+    @livewire('components.loading')
+  </template>
 
   @livewire('partials.nav-mobile')
 

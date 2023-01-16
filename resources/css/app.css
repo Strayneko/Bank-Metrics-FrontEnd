@@ -25,4 +25,32 @@
     .container {
         @apply py-5;
     }
+
+    .loading {
+        @apply h-10 w-10 animate-loading text-orange-2;
+        background: conic-gradient(
+                from -45deg at top 20px left 50%,
+                #0000,
+                currentColor 1deg 90deg,
+                #0000 91deg
+            ),
+            conic-gradient(
+                from 45deg at right 20px top 50%,
+                #0000,
+                currentColor 1deg 90deg,
+                #0000 91deg
+            ),
+            conic-gradient(
+                from 135deg at bottom 20px left 50%,
+                #0000,
+                currentColor 1deg 90deg,
+                #0000 91deg
+            ),
+            conic-gradient(
+                from -135deg at left 20px top 50%,
+                #0000,
+                currentColor 1deg 90deg,
+                #0000 91deg
+            );
+    }
 }

@@ -2,6 +2,7 @@
   Alpine.data('listAdminDashboard', () => ({
     showSidebar: false,
     token: localStorage.getItem('token'),
+    isLoading: true,
     resData: [],
     roleId: 0,
     checkLogin() {
@@ -32,6 +33,8 @@
         if (this.roleId != 2) {
           window.location.replace(`{{ route('home') }}`)
         }
+
+        this.isLoading = false
       })
     }
   }))
@@ -117,6 +120,9 @@
   }))
 </script>
 <main class="container relative flex justify-end font-poppins" x-data="listAdminDashboard" x-init="checkLogin()">
+  <template x-if="isLoading">
+    @livewire('components.loading')
+  </template>
   @livewire('partials.nav-mobile')
 
   @livewire('partials.sidebar')
