@@ -4,6 +4,9 @@
     Alpine.data('submission', () => ({
       submissionData: [],
       getSubmission(id) {
+        /** 
+         * Get loan list by user id
+         */
         fetch(`{{ env('API_URL') }}/api/loan/list?user_id=${id}`, {
           method: 'GET',
           headers: {
@@ -17,7 +20,7 @@
     }))
   </script>
 
-  <div class="relative z-20 mx-auto w-full rounded-xl bg-white p-10 shadow-md shadow-navy/60 lg:w-3/5">
+  <div class="relative z-20 mx-auto w-full rounded-xl bg-white py-10 px-6 shadow-md shadow-navy/60 lg:w-3/5 lg:p-10">
     <div class="relative mx-auto mb-6 flex w-max flex-col items-center justify-center gap-3">
       <h1 class="text-3xl font-bold text-orange-2">Detail <span class="text-navy">User</span></h1>
       <div
@@ -31,13 +34,13 @@
         :alt="user.name" />
     </div>
 
-    <ul class="mx-auto mb-6 flex flex-col rounded-lg bg-[#FFE1C5] p-6 text-lg font-semibold text-navy">
-      <li class="flex justify-between">
-        <span class="inline-block w-40">Name</span>
+    <ul class="mx-auto mb-6 flex flex-col gap-3 rounded-lg bg-[#FFE1C5] p-6 text-lg font-semibold text-navy lg:gap-0">
+      <li class="flex flex-col justify-between lg:flex-row">
+        <span class="inline-block w-40 text-base font-normal lg:text-lg lg:font-semibold">Name</span>
         <span class="flex-1" x-text="user.name"></span>
       </li>
-      <li class="flex justify-between">
-        <span class="inline-block w-40">Email</span>
+      <li class="flex flex-col justify-between lg:flex-row">
+        <span class="inline-block w-40 text-base font-normal lg:text-lg lg:font-semibold">Email</span>
         <span class="flex-1" x-text="user.email"></span>
       </li>
 
@@ -46,51 +49,51 @@
       </template>
 
       <template x-if="user.user_profile">
-        <div>
-          <li>
-            <span class="inline-block w-40">Date Of Birth</span>
-            <span x-text="user.user_profile.dob"></span>
+        <div class="flex flex-col gap-3 lg:gap-0">
+          <li class="flex flex-col justify-between lg:flex-row">
+            <span class="inline-block w-40 text-base font-normal lg:text-lg lg:font-semibold">Date Of Birth</span>
+            <span class="flex-1" x-text="user.user_profile.dob"></span>
           </li>
-          <li>
-            <span class="inline-block w-40">Gender</span>
-            <span x-text="user.user_profile.gender ? 'Male' : 'Female'"></span>
+          <li class="flex flex-col justify-between lg:flex-row">
+            <span class="inline-block w-40 text-base font-normal lg:text-lg lg:font-semibold">Gender</span>
+            <span class="flex-1" x-text="user.user_profile.gender ? 'Male' : 'Female'"></span>
           </li>
-          <li class="flex justify-between">
-            <span class="inline-block w-40">Address </span>
+          <li class="flex flex-col justify-between lg:flex-row">
+            <span class="inline-block w-40 text-base font-normal lg:text-lg lg:font-semibold">Address </span>
             <span class="flex-1" x-text="user.user_profile.address"></span>
           </li>
-          <li>
-            <span class="inline-block w-40">Status</span>
-            <span x-text="user.user_profile.status ? 'Married' : 'Single'"></span>
+          <li class="flex flex-col justify-between lg:flex-row">
+            <span class="inline-block w-40 text-base font-normal lg:text-lg lg:font-semibold">Status</span>
+            <span class="flex-1" x-text="user.user_profile.status ? 'Married' : 'Single'"></span>
           </li>
-          <li>
-            <span class="inline-block w-40">Employement</span>
-            <span x-text="user.user_profile.employement ? 'Full-Time' : 'Half-Time'"></span>
+          <li class="flex flex-col justify-between lg:flex-row">
+            <span class="inline-block w-40 text-base font-normal lg:text-lg lg:font-semibold">Employement</span>
+            <span class="flex-1" x-text="user.user_profile.employement ? 'Full-Time' : 'Half-Time'"></span>
           </li>
-          <li>
-            <span class="inline-block w-40">Nationality</span>
-            <span x-text="user.user_profile.country.country_name"></span>
+          <li class="flex flex-col justify-between lg:flex-row">
+            <span class="inline-block w-40 text-base font-normal lg:text-lg lg:font-semibold">Nationality</span>
+            <span class="flex-1" x-text="user.user_profile.country.country_name"></span>
           </li>
         </div>
       </template>
     </ul>
 
-    <div class="relative mx-auto w-full rounded-xl bg-white" x-data="submission" x-init="getSubmission(user.id)">
+    <div class="relative mx-auto w-full rounded-xl bg-gray-1/30" x-data="submission" x-init="getSubmission(user.id)">
       <ul class="flex gap-3 rounded-t-xl bg-orange-1 px-3 py-4 font-semibold text-navy">
         <li class="w-10 text-center">No</li>
-        <li class="w-64">Date</li>
-        <li class="w-56">Status</li>
+        <li class="w-32 lg:w-64">Date</li>
+        <li class="w-24 lg:w-56">Status</li>
       </ul>
 
       <template x-if="submissionData.data">
         <template x-for="(loan, i) of submissionData.data.loans">
-          <ul class="flex flex-col gap-3 px-3 py-4 font-medium text-navy lg:flex-row lg:items-center">
+          <ul class="flex items-center gap-3 px-3 py-4 font-medium text-navy">
             <li class="w-10 text-center" x-text="i + 1"></li>
-            <li class="flex w-64 flex-col">
+            <li class="flex w-32 flex-col lg:w-64">
               <span x-text="(new Date(loan.created_at)).toDateString()"></span>
               <span x-text="(new Date(loan.created_at)).toLocaleTimeString()"></span>
             </li>
-            <li class="w-56">
+            <li class="w-24 lg:w-56">
               <span class="text-green-700" x-show="loan.status">Approved</span>
               <span class="text-red-700" x-show="!loan.status">Rejected</span>
             </li>

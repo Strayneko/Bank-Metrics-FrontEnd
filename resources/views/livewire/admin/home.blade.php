@@ -4,6 +4,9 @@
       showMessage: 'Please wait...',
       users: [],
       getUsers() {
+        /**
+         * Get list users
+         */
         fetch(`{{ env('API_URL') }}/api/user`, {
           method: 'GET',
           headers: {

@@ -6,11 +6,17 @@
     resData: [],
     roleId: 0,
     checkLogin() {
+      /**
+       * Redirect to login page if there is no token in localstorage
+       */
       if (!this.token) {
         window.location.href = `{{ route('login') }}`
         // console.log('hello')
       }
 
+      /**
+       * Get profile
+       */
       fetch(`{{ env('API_URL') }}/api/user/me`, {
         method: 'GET',
         headers: {
@@ -30,6 +36,9 @@
         // console.log(this.resData)
         this.roleId = this.resData.data.role_id
 
+        /**
+         * Redirect to home if user role is not 2 (admin)
+         */
         if (this.roleId != 2) {
           window.location.replace(`{{ route('home') }}`)
         }
@@ -40,6 +49,9 @@
   Alpine.data('listBank', () => ({
     banks: [],
     getBanks() {
+      /**
+       * Get data banks
+       */
       fetch(`{{ env('API_URL') }}/api/bank`, {
         method: 'GET',
         headers: {
@@ -65,6 +77,9 @@
     message: "",
     isSubmit: false,
     createNewBank() {
+      /**
+       * Create form data
+       */
       const data = new FormData()
       data.append('name', this.newBank.name)
       data.append('loaning_percentage', this.newBank.loaning_percentage)
@@ -76,6 +91,9 @@
 
       this.isSubmit = true
 
+      /**
+       * Fetch api to create new data bank
+       */
       fetch(`{{ env('API_URL') }}/api/bank/create`, {
           method: "POST",
           body: data,
@@ -108,7 +126,10 @@
   Alpine.data("detailBank", () => ({
     banks: [],
     getBank() {
-      fatch(`{{ 'API_URL' }}/api/bank/show/{id}`, {
+      /**
+       * Get detail bank
+       */
+      fetch(`{{ 'API_URL' }}/api/bank/show/{id}`, {
           method: "GET",
           headers: {
             "Authorization": localStorage.getItem("token")
