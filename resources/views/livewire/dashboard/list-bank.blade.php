@@ -110,13 +110,27 @@
         let status = responsdata.status
         this.message = responsdata.message
 
+        let msg = ``
+        for (m of this.message) {
+          msg += `<p>${m}</p>`
+        }
+
         if (status == false) {
-          alert(this.message)
-          window.location.replace('')
+          Swal.fire({
+            icon: 'error',
+            title: 'Oops...',
+            html: msg
+          })
+          // window.location.replace('')
           return
         }
-        alert(this.message)
-        // window.location.replace(`{{ env('APP_URL') }}/dashboard/bank`)
+        Swal.fire({
+          icon: 'success',
+          title: 'Success!',
+          text: 'Update Bank Success!'
+        }).then(res => {
+          window.location.replace(`{{ env('APP_URL') }}/dashboard/bank`)
+        })
       }).catch(err => {
         Swal.fire({
           icon: 'error',
@@ -132,35 +146,62 @@
       const path = `/api/bank/delete/${id}`
       const apiKey = generateKey(path, reqTime)
 
-      /**
-       * Fetch api to delete data bank
-       */
-      fetch(`{{ env('API_URL') }}${path}`, {
-        method: "POST",
-        headers: {
-          'Content-type': 'application/json;charset=UTF-8',
-          'Authorization': localStorage.getItem('token'),
-          'Request-Time': reqTime,
-          'D-App-Key': apiKey
-        }
-      }).then(async (response) => {
+      Swal.fire({
+        title: 'Are you sure?',
+        text: "You won't be able to revert this!",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Yes, delete it!'
+      }).then((result) => {
+        if (result.isConfirmed) {
+          /**
+          * Fetch api to delete data bank
+          */
+          fetch(`{{ env('API_URL') }}${path}`, {
+            method: "POST",
+            headers: {
+              'Content-type': 'application/json;charset=UTF-8',
+              'Authorization': localStorage.getItem('token'),
+              'Request-Time': reqTime,
+              'D-App-Key': apiKey
+            }
+          })
+          .then(async (response) => {
+          let data = await response.json()
+          let status = data.status
+          this.message = data.message
 
-        let data = await response.json()
-        let status = data.status
-        this.message = data.message
+          let msg = ``
+          for (m of this.message) {
+            msg += `<p>${m}</p>`
+          }
 
-        if (status == false) {
-          alert(this.message)
-          window.location.replace('')
-          return
-        }
-        window.location.replace(`{{ env('APP_URL') }}/dashboard/bank`)
-      }).catch(err => {
-        Swal.fire({
-          icon: 'error',
-          title: 'Error!',
-          text: 'Internal Server Error! Please Try Again Later.',
+          if (status == false) {
+            Swal.fire({
+              icon: 'error',
+              title: 'Oops...',
+              html: msg
+            })
+            // window.location.replace('')
+            return
+          }
+          Swal.fire({
+            icon: 'success',
+            title: 'Success!',
+            text: 'Delete Bank Success!'
+          }).then(res => {
+            window.location.replace(`{{ env('APP_URL') }}/dashboard/bank`)
+          })
+        }).catch(err => {
+          Swal.fire({
+            icon: 'error',
+            title: 'Error!',
+            text: 'Internal Server Error! Please Try Again Later.',
+          })
         })
+        }
       })
     },
 
