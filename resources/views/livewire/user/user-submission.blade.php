@@ -1,5 +1,6 @@
 <script>
   Alpine.data('userSubmissionDashboard', () => ({
+    showMessage: 'Please wait...',
     showSidebar: false,
     token: localStorage.getItem('token'),
     isLoading: true,
@@ -11,11 +12,17 @@
         // console.log('hello')
       }
 
+      const reqTime = Date.now()
+      const path = '/api/user/me'
+      const apikey = generateKey(path, reqTime)
+
       fetch(`{{ env('API_URL') }}/api/user/me`, {
         method: 'GET',
         headers: {
           'Content-type': 'application/json;charset=UTF-8',
-          'Authorization': this.token
+          'Authorization': this.token,
+          'Request-Time': reqTime,
+          'D-App-Key': apikey
         }
       }).then(async res => {
         this.resData = await res.json()
@@ -42,15 +49,24 @@
     createSubmission() {
       const body = new FormData(this.$refs.subForm)
       // console.log(this.$refs.subForm)
+      const pyld = {}
+      body.forEach((val, key) => pyld[key] = val)
 
       this.isSubmit = true
 
-      fetch(`{{ env('API_URL') }}/api/loan/get_loan`, {
+      const reqTime = Date.now()
+      const path = '/api/loan/get_loan'
+      const apikey = generateKey(path, reqTime)
+
+      fetch(`{{ env('API_URL') }}${path}`, {
         method: 'POST',
         headers: {
-          'Authorization': this.token
+          'Content-type': 'application/json;charset=UTF-8',
+          'Authorization': this.token,
+          'Request-Time': reqTime,
+          'D-App-Key': apikey
         },
-        body
+        body: JSON.stringify(pyld)
       }).then(async res => {
         this.isSubmit = false
 
@@ -72,6 +88,12 @@
         }).then(res => {
           window.location.replace(`{{ env('APP_URL') }}`)
           // console.log(res)
+        })
+      }).catch(err => {
+        Swal.fire({
+          icon: 'error',
+          title: 'Error!',
+          text: 'Internal Server Error! Please Try Again Later.',
         })
       })
     }
