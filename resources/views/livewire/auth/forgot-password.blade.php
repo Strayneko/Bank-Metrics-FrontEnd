@@ -35,10 +35,7 @@
                         'Success!'
                         , 'Send Email Succes, Please Check Your!'
                         , 'success'
-                    ).then(res => {
-                        // window.location.replace(`{{ env('APP_URL') }}/login`)
-                    })
-                    // window.location.replace(`{{ env('APP_URL') }}/login`)
+                    )
                 });
         }
         , token: localStorage.getItem('token')
