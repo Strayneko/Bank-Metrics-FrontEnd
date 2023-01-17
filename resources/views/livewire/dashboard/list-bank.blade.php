@@ -84,15 +84,7 @@
       /**
        * Create form data
        */
-       const data = {
-        'name': this.bank.name,
-        'loaning_percentage': this.bank.loaning_percentage,
-        'max_age' : this.bank.max_age,
-        'min_age': this.bank.min_age,
-        'marital_status' : this.bank.marital_status,
-        'nationality': this.bank.nationality,
-        'employment': this.bank.employment
-      }
+      const data = new FormData(this.$refs.updateBankForm)
 
       this.isSubmit = true
 
@@ -107,7 +99,6 @@
         method: "POST",
         body: data,
         headers: {
-          'Content-type': 'application/json;charset=UTF-8',
           'Authorization': localStorage.getItem('token'),
           'Request-Time': reqTime,
           'D-App-Key': apiKey
@@ -227,22 +218,14 @@
       /**
        * Create form data
        */
-      const data = {
-        'name': this.newBank.name,
-        'loaning_percentage': this.newBank.loaning_percentage,
-        'max_age' : this.newBank.max_age,
-        'min_age': this.newBank.min_age,
-        'marital_status' : this.newBank.marital_status,
-        'nationality': this.newBank.nationality,
-        'employment': this.newBank.employment
-      }
-      // data.append('name', this.newBank.name)
-      // data.append('loaning_percentage', this.newBank.loaning_percentage)
-      // data.append('max_age', this.newBank.max_age)
-      // data.append('min_age', this.newBank.min_age)
-      // data.append('marital_status', this.newBank.marital_status)
-      // data.append('nationality', this.newBank.nationality)
-      // data.append('employment', this.newBank.employment)
+      const data = new FormData()
+      data.append('name', this.newBank.name)
+      data.append('loaning_percentage', this.newBank.loaning_percentage)
+      data.append('max_age', this.newBank.max_age)
+      data.append('min_age', this.newBank.min_age)
+      data.append('marital_status', this.newBank.marital_status)
+      data.append('nationality', this.newBank.nationality)
+      data.append('employment', this.newBank.employment)
 
       this.isSubmit = true
 
@@ -255,9 +238,8 @@
        */
       fetch(`{{ env('API_URL') }}${path}`, {
         method: "POST",
-        body: JSON.stringify(data),
+        body: data,
         headers: {
-          'Content-type': 'application/json;charset=UTF-8',
           'Authorization': localStorage.getItem('token'),
           'Request-Time': reqTime,
           'D-App-Key': apiKey
