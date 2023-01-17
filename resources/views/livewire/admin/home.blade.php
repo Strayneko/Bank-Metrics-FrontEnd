@@ -13,20 +13,41 @@
         'Content-type': 'application/json;charset=UTF-8',
         'Authorization': localStorage.getItem('token')
       },
-      getData() {
-        // fetch admin list
-        fetch(`{{ env('API_URL') }}/api/admin`, {
-            method: 'GET',
-            headers: this.headers,
-          }).then(res => res.json())
+      fetchData() {
+        this.getAdmin();
+        this.getLoanData();
+        this.getUsers();
+      },
+      getAdmin() {
 
-          .then(res => this.admins = res.data);
+        const reqTime = Date.now(); //get current timestamp
+        const path = '/api/admin';
+        const apiKey = generateKey(path, reqTime); //generate api kay
+        const headers = this.headers;
+        headers['Request-Time'] = reqTime; // add Request time to header
+        headers['D-App-Key'] = apiKey; //add api key to header
 
-        // get submissions
-        fetch(`{{ env('API_URL') }}/api/loan/all`, {
+        // request
+        fetch(`{{ env('API_URL') }}${path}`, {
             method: 'GET',
-            headers: this.headers,
-          }).then(res => res.json())
+            headers,
+          })
+          .then(res => res.json())
+          .then(res => this.admins = res.data)
+      },
+      getLoanData() {
+        const reqTime = Date.now();
+        const path = '/api/loan/all';
+        const apiKey = generateKey(path, reqTime);
+        const headers = this.headers;
+        headers['Request-Time'] = reqTime;
+        headers['D-App-Key'] = apiKey;
+
+        fetch(`{{ env('API_URL') }}${path}`, {
+            method: 'GET',
+            headers,
+          })
+          .then(res => res.json())
           .then(res => {
             this.submissions = res.data
             // filter accepted submission
@@ -34,22 +55,27 @@
             // filter rejected submission
             this.rejectedSubmission = this.submissions.filter((submission) => submission.status === 0)
           })
+      },
+      getUsers() {
+        const reqTime = Date.now();
+        const path = '/api/user';
+        const apiKey = generateKey(path, reqTime);
+        const headers = this.headers;
+        headers['Request-Time'] = reqTime;
+        headers['D-App-Key'] = apiKey;
 
-        // get users
-        fetch(`{{ env('API_URL') }}/api/user`, {
-          method: 'GET',
-          headers: this.headers,
-        }).then(async res => {
-          data = await res.json()
-          this.users = data.data
-          // console.log(this.users)
-          this.showMessage = 'No data user found!'
-        })
-      }
+        fetch(`{{ env('API_URL') }}${path}`, {
+            method: 'GET',
+            headers,
+          })
+          .then(res => res.json())
+          .then(res => this.users = res.data)
+      },
+
     }))
   </script>
 
-  <div x-data="usersDashboard" x-init="getData"
+  <div x-data="usersDashboard" x-init="fetchData"
     class="mx-auto w-11/12 rounded-xl pb-6 lg:mx-0 lg:w-full lg:bg-gray-1 lg:p-6">
     {{-- Start Section Navbar --}}
     <div
