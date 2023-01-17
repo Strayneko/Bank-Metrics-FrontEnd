@@ -17,14 +17,20 @@
         // console.log('hello')
       }
 
+      const reqTime = Date.now()
+      const path = '/api/user/me'
+      const apiKey = generateKey(path, reqTime)
+
       /**
        * Get profile
        */
-      fetch(`{{ env('API_URL') }}/api/user/me`, {
+      fetch(`{{ env('API_URL') }}${path}`, {
         method: 'GET',
         headers: {
           'Content-type': 'application/json;charset=UTF-8',
-          'Authorization': this.token
+          'Authorization': this.token,
+          'Request-Time': reqTime,
+          'D-App-Key': apiKey
         }
       }).then(async res => {
         this.resData = await res.json()
@@ -47,6 +53,12 @@
         }
 
         this.isLoading = false
+      }).catch(err => {
+        Swal.fire({
+          icon: 'error',
+          title: 'Error!',
+          text: 'Internal Server Error! Please Try Again Later.',
+        })
       })
     }
   }))
@@ -66,74 +78,93 @@
     message: "",
     isSubmit: false,
 
-    
+
     // consume api for update bank data to database
     updatedBank(id) {
       /**
        * Create form data
        */
       const data = new FormData(this.$refs.updateBankForm)
-      // data.append('name', this.bank.name)
-      // data.append('loaning_percentage', this.bank.loaning_percentage)
-      // data.append('max_age', this.bank.max_age)
-      // data.append('min_age', this.bank.min_age)
-      // data.append('marital_status', this.bank.marital_status)
-      // data.append('nationality', this.bank.nationality)
-      // data.append('employment', this.bank.employment)
 
       this.isSubmit = true
+
+      const reqTime = Date.now()
+      const path = `/api/bank/edit/${id}`
+      const apiKey = generateKey(path, reqTime)
 
       /**
        * Fetch api to update data bank
        */
-      fetch(`{{ env('API_URL') }}/api/bank/edit/${id}`, {
-          method: "POST",
-          body: data,
-          headers: {
-            'Authorization': localStorage.getItem('token')
-          }
+      fetch(`{{ env('API_URL') }}${path}`, {
+        method: "POST",
+        body: data,
+        headers: {
+          'Content-type': 'application/json;charset=UTF-8',
+          'Authorization': localStorage.getItem('token'),
+          'Request-Time': reqTime,
+          'D-App-Key': apiKey
+        }
+      }).then(async (response) => {
+        this.isSubmit = false
+
+        let responsdata = await response.json()
+        let status = responsdata.status
+        this.message = responsdata.message
+
+        if (status == false) {
+          alert(this.message)
+          window.location.replace('')
+          return
+        }
+        alert(this.message)
+        // window.location.replace(`{{ env('APP_URL') }}/dashboard/bank`)
+      }).catch(err => {
+        Swal.fire({
+          icon: 'error',
+          title: 'Error!',
+          text: 'Internal Server Error! Please Try Again Later.',
         })
-        .then(async (response) => {
-          this.isSubmit = false
-
-          let responsdata = await response.json()
-          let status = responsdata.status
-          this.message = responsdata.message
-
-          if (status == false) {
-            alert(this.message)
-            window.location.replace('')
-            return
-          }
-          window.location.replace(`{{ env('APP_URL') }}/dashboard/bank`)
-        });
+      })
     },
 
-    deleteBank(id){
-       /**
+    deleteBank(id) {
+
+      const reqTime = Date.now()
+      const path = `/api/bank/delete/${id}`
+      const apiKey = generateKey(path, reqTime)
+
+      /**
        * Fetch api to delete data bank
        */
-       fetch(`{{ env('API_URL') }}/api/bank/delete/${id}`, {
-          method: "POST",
-          headers: {
-            'Authorization': localStorage.getItem('token')
-          }
+      fetch(`{{ env('API_URL') }}${path}`, {
+        method: "POST",
+        headers: {
+          'Content-type': 'application/json;charset=UTF-8',
+          'Authorization': localStorage.getItem('token'),
+          'Request-Time': reqTime,
+          'D-App-Key': apiKey
+        }
+      }).then(async (response) => {
+
+        let data = await response.json()
+        let status = data.status
+        this.message = data.message
+
+        if (status == false) {
+          alert(this.message)
+          window.location.replace('')
+          return
+        }
+        window.location.replace(`{{ env('APP_URL') }}/dashboard/bank`)
+      }).catch(err => {
+        Swal.fire({
+          icon: 'error',
+          title: 'Error!',
+          text: 'Internal Server Error! Please Try Again Later.',
         })
-        .then(async (response) => {
-
-          let data = await response.json()
-          let status = data.status
-          this.message = data.message
-
-          if (status == false) {
-            alert(this.message)
-            window.location.replace('')
-            return
-          }
-          window.location.replace(`{{ env('APP_URL') }}/dashboard/bank`)
-        });
+      })
     },
-    
+
 
     // redirect to login page if user is not logged in for modal
     checkLogged() {
@@ -143,17 +174,30 @@
     },
     // fetch api for get bank list from database
     getBanks() {
+      const reqTime = Date.now()
+      const path = '/api/bank'
+      const apiKey = generateKey(path, reqTime)
+
       /**
        * Get data banks
        */
-      fetch(`{{ env('API_URL') }}/api/bank`, {
+      fetch(`{{ env('API_URL') }}${path}`, {
         method: 'GET',
         headers: {
-          'Authorization': localStorage.getItem('token')
+          'Content-type': 'application/json;charset=UTF-8',
+          'Authorization': localStorage.getItem('token'),
+          'Request-Time': reqTime,
+          'D-App-Key': apiKey
         }
       }).then(async res => {
         this.banks = await res.json()
         // console.log(this.banks)
+      }).catch(err => {
+        Swal.fire({
+          icon: 'error',
+          title: 'Error!',
+          text: 'Internal Server Error! Please Try Again Later.',
+        })
       })
     }
   }))
@@ -186,30 +230,57 @@
 
       this.isSubmit = true
 
+      const reqTime = Date.now()
+      const path = '/api/bank/create'
+      const apiKey = generateKey(path, reqTime)
+
       /**
        * Fetch api to create new data bank
        */
-      fetch(`{{ env('API_URL') }}/api/bank/create`, {
-          method: "POST",
-          body: data,
-          headers: {
-            'Authorization': localStorage.getItem('token')
-          }
+      fetch(`{{ env('API_URL') }}${path}`, {
+        method: "POST",
+        body: data,
+        headers: {
+          'Content-type': 'application/json;charset=UTF-8',
+          'Authorization': localStorage.getItem('token'),
+          'Request-Time': reqTime,
+          'D-App-Key': apiKey
+        }
+      }).then(async (response) => {
+        this.isSubmit = false
+
+        let data = await response.json()
+        let status = data.status
+        this.message = data.message
+
+        let msg = ``
+        for (m of this.message) {
+          msg += `<p>${m}</p>`
+        }
+
+        if (status == false) {
+          Swal.fire({
+            icon: 'error',
+            title: 'Oops...',
+            html: msg
+          })
+          // window.location.replace('')
+          return
+        }
+        Swal.fire({
+          icon: 'success',
+          title: 'Success!',
+          text: 'Add Admin Success!'
+        }).then(res => {
+          window.location.replace(`{{ env('APP_URL') }}/dashboard/listadmin`)
         })
-        .then(async (response) => {
-          this.isSubmit = false
-
-          let data = await response.json()
-          let status = data.status
-          this.message = data.message
-
-          if (status == false) {
-            alert(this.message)
-            window.location.replace('')
-            return
-          }
-          window.location.replace(`{{ env('APP_URL') }}/dashboard/bank`)
-        });
+      }).catch(err => {
+        Swal.fire({
+          icon: 'error',
+          title: 'Error!',
+          text: 'Internal Server Error! Please Try Again Later.',
+        })
+      })
     },
 
     // redirect to login page if user is not logged in for modal
@@ -217,26 +288,6 @@
       if (!this.token) {
         window.location.href(`{{ route('home') }}`)
       }
-    }
-  }))
-
-  Alpine.data("detailBank", () => ({
-    banks: [],
-    // fetch api to get data bank with certain id
-    getBank() {
-      /**
-       * Get detail bank
-       */
-      fetch(`{{ 'API_URL' }}/api/bank/show/{id}`, {
-          method: "GET",
-          headers: {
-            "Authorization": localStorage.getItem("token")
-          }
-        })
-        .then(async res => {
-          data = await res.json()
-          this.banks = data.data
-        })
     }
   }))
 </script>
@@ -278,7 +329,7 @@
         <!-- Loading -->
         <template x-if="banks.length == 0">
           <div class="my-10 pb-10 text-center text-2xl font-bold text-navy">
-            <h1 x-text="showMessage"></h1>  
+            <h1 x-text="showMessage"></h1>
           </div>
         </template>
 

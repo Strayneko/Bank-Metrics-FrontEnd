@@ -13,9 +13,9 @@
         // console.log('hello')
       }
 
-      const reqTime = Date.now()
+      const reqTime = Date.now() // get current timestamp
       const path = '/api/user/me'
-      const apiKey = generateKey(path, reqTime)
+      const apiKey = generateKey(path, reqTime) // generate api key
 
       fetch(`{{ env('API_URL') }}${path}`, {
         method: 'GET',
@@ -45,6 +45,12 @@
         }
 
         this.isLoading = false
+      }).catch(err => {
+        Swal.fire({
+          icon: 'error',
+          title: 'Error!',
+          text: 'Internal Server Error! Please Try Again Later.',
+        })
       })
     }
   }))
@@ -76,6 +82,12 @@
         }
 
         this.showMessage = 'No data Admin found!'
+      }).catch(err => {
+        Swal.fire({
+          icon: 'error',
+          title: 'Error!',
+          text: 'Internal Server Error! Please Try Again Later.',
+        })
       })
     }
   }))
@@ -90,52 +102,65 @@
     isSubmit: false,
     // create admin data 
     create() {
-      const data = new FormData()
-      data.append('name', this.newAdmin.name)
-      data.append('email', this.newAdmin.email)
-      data.append('password', this.newAdmin.password)
+      const data = new FormData(this.$refs.formAddAdmin)
+      console.log(this.$refs.formAddAdmin)
+      // data.append('name', this.newAdmin.name)
+      // data.append('email', this.newAdmin.email)
+      // data.append('password', this.newAdmin.password)
 
       this.isSubmit = true
 
-      fetch(`{{ env('API_URL') }}/api/admin`, {
-          method: "POST",
-          body: data,
-          headers: {
-            'Authorization': localStorage.getItem('token')
-          }
-        })
-        .then(async (response) => {
-          this.isSubmit = false
+      const reqTime = Date.now()
+      const path = '/api/admin'
+      const apiKey = generateKey(path, reqTime)
 
-          let data = await response.json()
-          let status = data.status
-          this.message = data.message
+      fetch(`{{ env('API_URL') }}${path}`, {
+        method: "POST",
+        body: data,
+        headers: {
+          'Content-type': 'application/json;charset=UTF-8',
+          'Authorization': localStorage.getItem('token'),
+          'Request-Time': reqTime,
+          'D-App-Key': apiKey
+        }
+      }).then(async (response) => {
+        this.isSubmit = false
 
-          // console.log(this.message)
+        let data = await response.json()
+        let status = data.status
+        this.message = data.message
 
-          let msg = ``
-          for (m of this.message) {
-            msg += `<p>${m}</p>`
-          }
-          if (status == false) {
-            // alert for failed creating admin's data
-            Swal.fire({
-              icon: 'error',
-              title: 'Oops...',
-              html: msg
-            })
-            // window.location.replace('')
-            return
-          }
-          // alert for success create admin's data
+        // console.log(this.message)
+
+        let msg = ``
+        for (m of this.message) {
+          msg += `<p>${m}</p>`
+        }
+        if (status == false) {
+          // alert for failed creating admin's data
           Swal.fire({
-            icon: 'success',
-            title: 'Success!',
-            text: 'Add Admin Success!'
-          }).then(res => {
-            window.location.replace(`{{ env('APP_URL') }}/dashboard/listadmin`)
+            icon: 'error',
+            title: 'Oops...',
+            html: msg
           })
-        });
+          // window.location.replace('')
+          return
+        }
+        // alert for success create admin's data
+        Swal.fire({
+          icon: 'success',
+          title: 'Success!',
+          text: 'Add Admin Success!'
+        }).then(res => {
+          window.location.replace(`{{ env('APP_URL') }}/dashboard/listadmin`)
+        })
+      }).catch(err => {
+        Swal.fire({
+          icon: 'error',
+          title: 'Error!',
+          text: 'Internal Server Error! Please Try Again Later.',
+        })
+      })
     },
     // redirect to login page if user is not logged in for modal
     checkLogged() {
