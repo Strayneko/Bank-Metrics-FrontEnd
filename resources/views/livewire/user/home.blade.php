@@ -72,13 +72,23 @@
         <template x-if="submissionData.length == 0">
           <div class="my-10 pb-10 text-center text-2xl font-bold text-navy">
             <h1 x-text="showMessage"></h1>
+
           </div>
+
         </template>
 
         <template x-if="submissionData.status == false">
-          <div class="my-10 pb-10 text-center text-2xl font-bold text-navy">
+          <div class="my-10 pb-10 text-center flex flex-col gap-5 text-2xl font-bold text-navy">
             <h1 x-text="showMessage"></h1>
+            <div>
+              <a href="{{ route('user.user-submission') }}"
+              class="rounded-lg bg-orange-1 px-4 py-2 font-bold text-white transition-all duration-150 hover:-translate-y-1 hover:bg-orange-2/30 hover:shadow-sm hover:shadow-orange-1">Go
+              to
+              Submission!
+              </a>
+            </div>
           </div>
+          
         </template>
 
         <template x-if="submissionData.data">

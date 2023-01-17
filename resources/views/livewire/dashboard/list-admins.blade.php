@@ -1,6 +1,7 @@
 <script>
   Alpine.data('listAdminDashboard', () => ({
     showSidebar: false,
+    showMessage: 'Please wait...',
     token: localStorage.getItem('token'),
     isLoading: true,
     resData: [],
