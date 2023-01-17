@@ -46,16 +46,14 @@ window.AOS = AOS;
 import sha256 from "crypto-js/sha256";
 window.sha256 = sha256;
 
-window.addEventListener("alpine:init", () => {
-    // api key generator
-    window.generateKey = (api_path, request_time) => {
-        // create payload
-        const payload =
-            window.localStorage.getItem("token") +
-            api_path +
-            navigator.userAgent +
-            request_time;
-        // hash payload to generate api key
-        return sha256(payload).toString();
-    };
-});
+// api key generator
+window.generateKey = (api_path, request_time) => {
+    // create payload
+    const payload =
+        window.localStorage.getItem("token") +
+        api_path +
+        navigator.userAgent +
+        request_time;
+    // hash payload to generate api key
+    return sha256(payload).toString();
+};

@@ -69,7 +69,10 @@
             headers,
           })
           .then(res => res.json())
-          .then(res => this.users = res.data)
+          .then(res => {
+            this.users = res.data
+            this.showMessage = 'No Data Found!'
+          })
       },
 
     }))

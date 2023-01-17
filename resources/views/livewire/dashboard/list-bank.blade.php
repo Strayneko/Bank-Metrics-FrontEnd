@@ -1,6 +1,7 @@
 <script>
   Alpine.data('listBankDashboard', () => ({
     showSidebar: false,
+    showMessage: 'Please wait...',
     isShow: false,
     token: localStorage.getItem('token'),
     isLoading: true,
@@ -52,6 +53,94 @@
 
   Alpine.data('listBank', () => ({
     banks: [],
+    updatedbank: {
+      name: "",
+      loaning_percentage: "",
+      max_age: "",
+      min_age: "",
+      marital_status: 0,
+      nationality: 0,
+      employment: 0
+    },
+    isupdate: false,
+    message: "",
+    isSubmit: false,
+
+    
+    // consume api for update bank data to database
+    updatedBank(id) {
+      /**
+       * Create form data
+       */
+      const data = new FormData(this.$refs.updateBankForm)
+      // data.append('name', this.bank.name)
+      // data.append('loaning_percentage', this.bank.loaning_percentage)
+      // data.append('max_age', this.bank.max_age)
+      // data.append('min_age', this.bank.min_age)
+      // data.append('marital_status', this.bank.marital_status)
+      // data.append('nationality', this.bank.nationality)
+      // data.append('employment', this.bank.employment)
+
+      this.isSubmit = true
+
+      /**
+       * Fetch api to update data bank
+       */
+      fetch(`{{ env('API_URL') }}/api/bank/edit/${id}`, {
+          method: "POST",
+          body: data,
+          headers: {
+            'Authorization': localStorage.getItem('token')
+          }
+        })
+        .then(async (response) => {
+          this.isSubmit = false
+
+          let responsdata = await response.json()
+          let status = responsdata.status
+          this.message = responsdata.message
+
+          if (status == false) {
+            alert(this.message)
+            window.location.replace('')
+            return
+          }
+          window.location.replace(`{{ env('APP_URL') }}/dashboard/bank`)
+        });
+    },
+
+    deleteBank(id){
+       /**
+       * Fetch api to delete data bank
+       */
+       fetch(`{{ env('API_URL') }}/api/bank/delete/${id}`, {
+          method: "POST",
+          headers: {
+            'Authorization': localStorage.getItem('token')
+          }
+        })
+        .then(async (response) => {
+
+          let data = await response.json()
+          let status = data.status
+          this.message = data.message
+
+          if (status == false) {
+            alert(this.message)
+            window.location.replace('')
+            return
+          }
+          window.location.replace(`{{ env('APP_URL') }}/dashboard/bank`)
+        });
+    },
+    
+
+    // redirect to login page if user is not logged in for modal
+    checkLogged() {
+      if (!this.token) {
+        window.location.href(`{{ route('home') }}`)
+      }
+    },
     // fetch api for get bank list from database
     getBanks() {
       /**
@@ -162,7 +251,7 @@
   <!-- list bank section -->
   <section class="mt-20 w-full py-10 lg:mt-0 lg:w-[80%]">
     <div class="relative mx-auto w-11/12 rounded-xl pb-6 lg:mx-0 lg:w-full lg:bg-gray-1 lg:p-6 lg:pt-12"
-      x-data="{ isAddActive: false }">
+      x-data="{ isAddActive: false, isUpdate: false }">
       <div class="relative mx-auto mb-12 flex w-max flex-col items-center justify-center gap-3">
         <h1 class="text-3xl font-bold text-orange-2">List <span class="text-navy">Bank</span></h1>
         <div
@@ -186,6 +275,13 @@
           <li class="hidden w-64 lg:block">Max Loan</li>
           <li class="hidden w-48 lg:block">Action</li>
         </ul>
+        <!-- Loading -->
+        <template x-if="banks.length == 0">
+          <div class="my-10 pb-10 text-center text-2xl font-bold text-navy">
+            <h1 x-text="showMessage"></h1>  
+          </div>
+        </template>
+
         <!-- call table list template -->
         <template x-for="(bank, i) of banks.data">
           @livewire('components.list-bank')
