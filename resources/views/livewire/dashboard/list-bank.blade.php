@@ -84,7 +84,15 @@
       /**
        * Create form data
        */
-      const data = new FormData(this.$refs.updateBankForm)
+       const data = {
+        'name': this.bank.name,
+        'loaning_percentage': this.bank.loaning_percentage,
+        'max_age' : this.bank.max_age,
+        'min_age': this.bank.min_age,
+        'marital_status' : this.bank.marital_status,
+        'nationality': this.bank.nationality,
+        'employment': this.bank.employment
+      }
 
       this.isSubmit = true
 
@@ -219,14 +227,22 @@
       /**
        * Create form data
        */
-      const data = new FormData()
-      data.append('name', this.newBank.name)
-      data.append('loaning_percentage', this.newBank.loaning_percentage)
-      data.append('max_age', this.newBank.max_age)
-      data.append('min_age', this.newBank.min_age)
-      data.append('marital_status', this.newBank.marital_status)
-      data.append('nationality', this.newBank.nationality)
-      data.append('employment', this.newBank.employment)
+      const data = {
+        'name': this.newBank.name,
+        'loaning_percentage': this.newBank.loaning_percentage,
+        'max_age' : this.newBank.max_age,
+        'min_age': this.newBank.min_age,
+        'marital_status' : this.newBank.marital_status,
+        'nationality': this.newBank.nationality,
+        'employment': this.newBank.employment
+      }
+      // data.append('name', this.newBank.name)
+      // data.append('loaning_percentage', this.newBank.loaning_percentage)
+      // data.append('max_age', this.newBank.max_age)
+      // data.append('min_age', this.newBank.min_age)
+      // data.append('marital_status', this.newBank.marital_status)
+      // data.append('nationality', this.newBank.nationality)
+      // data.append('employment', this.newBank.employment)
 
       this.isSubmit = true
 
@@ -239,7 +255,7 @@
        */
       fetch(`{{ env('API_URL') }}${path}`, {
         method: "POST",
-        body: data,
+        body: JSON.stringify(data),
         headers: {
           'Content-type': 'application/json;charset=UTF-8',
           'Authorization': localStorage.getItem('token'),
@@ -270,9 +286,9 @@
         Swal.fire({
           icon: 'success',
           title: 'Success!',
-          text: 'Add Admin Success!'
+          text: 'Add Bank Success!'
         }).then(res => {
-          window.location.replace(`{{ env('APP_URL') }}/dashboard/listadmin`)
+          window.location.replace(`{{ env('APP_URL') }}/dashboard/bank`)
         })
       }).catch(err => {
         Swal.fire({
