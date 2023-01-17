@@ -5,15 +5,22 @@
       showMessage: 'Please wait...',
       submissionData: [],
       getSubmission() {
-        fetch(`{{ env('API_URL') }}/api/loan/list`, {
+        const reqTime = Date.now()
+        const path = '/api/loan/list'
+        const apiKey = generateKey(path, reqTime)
+
+        fetch(`{{ env('API_URL') }}${path}`, {
           method: 'GET',
           headers: {
-            'Authorization': localStorage.getItem('token')
+            'Authorization': localStorage.getItem('token'),
+            'Request-Time': reqTime,
+            'D-App-Key': apiKey
           }
         }).then(async res => {
           this.submissionData = await res.json()
           this.showMessage = 'No data Submissions found!'
           // console.log(this.submissionData)
+          console.log(generateKey)
         })
       }
     }))
@@ -22,10 +29,16 @@
       resReject: [],
       showMessage: 'Please wait...',
       getRejected(id) {
-        fetch(`{{ env('API_URL') }}/api/loan/rejection_reason/${id}`, {
+        const reqTime = Date.now()
+        const path = `/api/loan/rejection_reason/${id}`
+        const apiKey = generateKey(path, reqTime)
+
+        fetch(`{{ env('API_URL') }}${path}`, {
           method: 'GET',
           headers: {
-            'Authorization': localStorage.getItem('token')
+            'Authorization': localStorage.getItem('token'),
+            'Request-Time': reqTime,
+            'D-App-Key': apiKey
           }
         }).then(async res => {
           this.resReject = await res.json()
