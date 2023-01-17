@@ -13,13 +13,14 @@
         }).then(async res => {
           this.submissionData = await res.json()
           this.showMessage = 'No data Submissions found!'
-          console.log(this.submissionData)
+          // console.log(this.submissionData)
         })
       }
     }))
 
     Alpine.data('rejected', () => ({
       resReject: [],
+      showMessage: 'Please wait...',
       getRejected(id) {
         fetch(`{{ env('API_URL') }}/api/loan/rejection_reason/${id}`, {
           method: 'GET',
@@ -28,6 +29,7 @@
           }
         }).then(async res => {
           this.resReject = await res.json()
+          this.showMessage = 'No data Submissions found!'
           // console.log(this.resReject)
         })
       },
@@ -43,7 +45,7 @@
     <h1 class="mx-auto mb-10 w-max text-3xl font-bold" x-text="'Welcome ' + resData.data.name"></h1>
 
     <template x-if="resData.data.profile">
-      <div class="relative rounded-xl bg-white" x-data="submission" x-init="getSubmission()">
+      <div class="relative rounded-xl bg-gray-1/30 lg:bg-white" x-data="submission" x-init="getSubmission()">
         <ul class="flex gap-3 rounded-t-xl bg-orange-1 px-3 py-4 font-semibold text-navy">
           <li class="w-10 text-center">No</li>
           <li class="w-64">Date</li>
