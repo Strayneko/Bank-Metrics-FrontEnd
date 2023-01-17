@@ -16,9 +16,9 @@
           // console.log('hello')
         }
 
-        // const reqTime = Date.now()
+        const reqTime = Date.now()
         const path = '/api/user/me'
-        // const apiKey = generateKey(path, reqTime)
+        const apiKey = generateKey(path, reqTime)
 
         /** 
          * Get profile user
@@ -28,8 +28,8 @@
           headers: {
             'Content-type': 'application/json;charset=UTF-8',
             'Authorization': this.token,
-            // 'Request-Time': reqTime,
-            // 'D-App-Key': apiKey
+            'Request-Time': reqTime,
+            'D-App-Key': apiKey
           }
         }).then(async res => {
           this.resData = await res.json()

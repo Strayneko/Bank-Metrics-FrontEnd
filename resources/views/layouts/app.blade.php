@@ -8,6 +8,7 @@
   <title>Metrics</title>
   <link rel="icon" href="{{ asset('favicon.ico') }}" type="image/x-icon">
   <script src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js"></script>
   <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -18,17 +19,19 @@
   @livewireStyles
 
   @vite(['resources/css/app.css', 'resources/js/app.js'])
-  <style>
-    [x-cloak] {
-      display: hidden
-    }
 
-    @media screen and (max-width: 768px) {
-      [x-cloak="mobile"] {
-        display: flex
-      }
-    }
-  </style>
+  <script>
+    function generateKey(api_path, request_time) {
+      // create payload
+      const payload =
+        window.localStorage.getItem("token") +
+        api_path +
+        navigator.userAgent +
+        request_time;
+      // hash payload to generate api key
+      return CryptoJS.SHA256(payload).toString();
+    };
+  </script>
 </head>
 
 <body>
