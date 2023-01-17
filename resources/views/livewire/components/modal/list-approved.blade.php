@@ -8,18 +8,18 @@
         </div>
       </div>
 
-      <div class="relative mx-auto rounded-xl bg-white lg:w-10/12">
-        <ul class="flex gap-3 rounded-t-xl bg-orange-1 px-3 py-4 font-semibold text-navy">
+      <div class="relative mx-auto w-11/12 rounded-xl bg-gray-1/30 lg:w-10/12">
+        <ul class="flex items-center gap-3 rounded-t-xl bg-orange-1 px-3 py-4 font-semibold text-navy">
           <li class="w-10 text-center">No</li>
-          <li class="w-64">Bank</li>
-          <li class="w-56">Loaned Amount</li>
+          <li class="w-36 lg:w-64">Bank</li>
+          <li class="w-32 lg:w-56">Loaned Amount</li>
         </ul>
 
         <template x-for="(accept, i) of item.accepted_bank">
-          <ul class="flex flex-col gap-3 px-3 py-4 font-medium text-navy lg:flex-row lg:items-center">
+          <ul class="flex items-center gap-3 px-3 py-4 font-medium text-navy">
             <li class="w-10 text-center" x-text="i + 1"></li>
-            <li class="w-64" x-text="accept.bank.name"></li>
-            <li class="w-56" x-text="'$' + accept.loaned_amount.toLocaleString()"></li>
+            <li class="w-36 lg:w-64" x-text="accept.bank.name"></li>
+            <li class="w-32 lg:w-56" x-text="'$' + accept.loaned_amount.toLocaleString()"></li>
           </ul>
         </template>
       </div>

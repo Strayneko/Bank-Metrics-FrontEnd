@@ -39,5 +39,21 @@ window.axios.defaults.headers.common["X-Requested-With"] = "XMLHttpRequest";
 // window.Alpine = Alpine;
 
 // Alpine.start();
-import AOS from 'aos';
+import AOS from "aos";
 window.AOS = AOS;
+
+// import crypto-js
+import sha256 from "crypto-js/sha256";
+window.sha256 = sha256;
+
+// api key generator
+window.generateKey = (api_path, request_time) => {
+    // create payload
+    const payload =
+        window.localStorage.getItem("token") +
+        api_path +
+        navigator.userAgent +
+        request_time;
+    // hash payload to generate api key
+    return sha256(payload).toString();
+};

@@ -1,6 +1,7 @@
 <script>
   Alpine.data('listAdminDashboard', () => ({
     showSidebar: false,
+    showMessage: 'Please wait...',
     token: localStorage.getItem('token'),
     isLoading: true,
     resData: [],
@@ -12,11 +13,17 @@
         // console.log('hello')
       }
 
-      fetch(`{{ env('API_URL') }}/api/user/me`, {
+      const reqTime = Date.now()
+      const path = '/api/user/me'
+      const apiKey = generateKey(path, reqTime)
+
+      fetch(`{{ env('API_URL') }}${path}`, {
         method: 'GET',
         headers: {
           'Content-type': 'application/json;charset=UTF-8',
-          'Authorization': this.token
+          'Authorization': this.token,
+          'Request-Time': reqTime,
+          'D-App-Key': apiKey
         }
       }).then(async res => {
         this.resData = await res.json()
@@ -47,18 +54,29 @@
     admins: [],
     // fetch admin list from admin api
     getAdmins() {
-      fetch(`{{ env('API_URL') }}/api/admin`, {
-          method: 'GET',
-          headers: {
-            'Content-type': 'application/json;charset=UTF-8',
-            'Authorization': localStorage.getItem('token')
-          }
-        })
-        .then(async res => {
-          data = await res.json()
+      // console.log(generateKey)
+
+      const reqTime = Date.now()
+      const path = '/api/admin'
+      const apiKey = generateKey(path, reqTime)
+
+      fetch(`{{ env('API_URL') }}${path}`, {
+        method: 'GET',
+        headers: {
+          'Content-type': 'application/json;charset=UTF-8',
+          'Authorization': localStorage.getItem('token'),
+          'Request-Time': reqTime,
+          'D-App-Key': apiKey
+        }
+      }).then(async res => {
+        data = await res.json()
+
+        if (data.status) {
           this.admins = data.data
-          this.showMessage = 'No data Admin found!'
-        })
+        }
+
+        this.showMessage = 'No data Admin found!'
+      })
     }
   }))
 
