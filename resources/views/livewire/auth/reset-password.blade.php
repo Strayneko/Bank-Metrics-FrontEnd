@@ -1,52 +1,10 @@
-{{-- <script>
-    Alpine.data("Reset", () => ({
-      user: {
-        password: "",
-      },
-      msg: '',
-      forgot() {
-        const data = new FormData()
-        data.append('email', this.user.email)
-  
-        fetch(`{{ env('API_URL') }}/api/passwordReset`, {
-            method: "POST",
-            body: data
-          })
-          .then(async (response) => {
-            let data = await response.json()
-            let status = data.status
-            this.msg = data.message
-            // console.log(data)
-            if (status == false) {
-              let msg = ``
-              for (m of this.msg) {
-                msg += `<p>${m}</p>`
-              }
-              Swal.fire({
-                icon: 'error',
-                title: 'Oops...',
-                html: msg
-              })
-              // window.location.replace('')
-              return
-            }
-            // window.location.replace(`{{ env('APP_URL') }}/login`)
-          });
-      },
-      token: localStorage.getItem('token'),
-      checkLogged() {
-        if (this.token) {
-          window.location.replace(`{{ route('home') }}`)
-        }
-      }
-    }));
-  </script> --}}
+
   <div class="container" x-data="Forgot" x-init="checkLogged()">
     <div class="flex justify-between pt-[56px]">
       <div class="">
         <div class="">
           <a href="">
-            <img src="{{ asset('./assets/Logo.png') }}" alt="" class="mx-auto mb-10 md:mx-auto lg:mx-0 lg:mb-0">
+            <img src="{{ asset('./assets/Logo.png') }}" alt="" class="mx-auto mb-10 md:mx-auto lg:mx-0 lg:mb-0 lg:ml-5">
           </a>
         </div>
         <div class="m-5 rounded-2xl bg-[#FCC997] md:m-0 md:mx-10 md:block md:w-[685px] lg:mx-0 lg:hidden lg:p-0">
@@ -84,9 +42,9 @@
         </div>
       </div>
       <div
-        class="hidden rounded-2xl bg-[#FCC997] md:mx-10 md:hidden md:h-[538px] md:w-[430px] lg:m-0 lg:block lg:h-[650px] lg:w-[793px] xl:h-[175px] xl:w-[693px]">
+        class="hidden rounded-2xl bg-[#FCC997] md:mx-10 md:hidden md:h-[538px] md:w-[430px] lg:m-0 lg:block lg:h-[513px] lg:w-[573px] xl:h-[515px] xl:w-[693px]">
         <img src="{{ asset('assets/register.png') }}" alt=""
-          class="mx-auto md:w-[620px] md:p-5 md:pt-32 lg:w-[880px] lg:pt-1 lg:p-5">
+          class="mx-auto md:w-[620px] md:p-5 md:pt-32 lg:w-[880px] lg:pt-10 lg:p-5 xl:pt-0">
       </div>
     </div>
   </div>
