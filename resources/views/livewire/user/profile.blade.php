@@ -88,7 +88,6 @@
       fetch(`{{ env('API_URL') }}${path}`, {
         method: 'POST',
         headers: {
-          'Content-type': 'application/json;charset=UTF-8',
           'Authorization': this.token,
           'Request-Time': reqTime,
           'D-App-Key': apikey
