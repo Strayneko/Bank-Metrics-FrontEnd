@@ -17,6 +17,7 @@
     },
     "dependencies": {
         "alpinejs": "^3.10.5",
-        "aos": "^2.3.4"
+        "aos": "^2.3.4",
+        "crypto-js": "^4.1.1"
     }
 }
