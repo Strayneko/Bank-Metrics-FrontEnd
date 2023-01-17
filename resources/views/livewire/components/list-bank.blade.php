@@ -20,8 +20,8 @@
         class="cursor-pointer rounded-lg bg-orange-1 px-3 py-1 text-center text-white transition-all duration-300 hover:bg-[#EAA765]">Detail</a>
       <a x-on:click="isShowUpdate = !isShowUpdate"
         class="cursor-pointer rounded-lg bg-orange-1 px-3 py-1 text-center text-white transition-all duration-300 hover:bg-[#EAA765]">Update</a>
-       
-        <a x-on:click="deleteBank(bank.id)"
+
+      <a x-on:click="deleteBank(bank.id)"
         class="cursor-pointer rounded-lg bg-red-500 px-3 py-1 text-center text-white transition-all duration-300 hover:bg-[#EAA765]">Delete</a>
     </li>
   </div>
@@ -31,9 +31,8 @@
   </div>
 
   {{-- modal untuk form update bank --}}
-  <div class="absolute inset-x-0 top-0 z-20 w-full" x-show="isShowUpdate" x-transition.duration.300ms>
+  <div class="absolute inset-x-0 top-0 z-20 w-full" x-show="isShowUpdate" x-transition.duration.200ms>
     @livewire('components.modal.update-bank')
   </div>
-
 
 </ul>
