@@ -25,7 +25,8 @@
         class="cursor-pointer rounded-lg bg-red-500 px-3 py-1 text-center text-white transition-all duration-300 hover:bg-[#EAA765]">Delete</a>
     </li>
   </div>
-  <div class="absolute inset-x-0 top-0 z-20 w-full" x-show="isShow" x-transition.duration.200ms>
+  {{-- modal untuk detail bank --}}
+  <div class="absolute inset-x-0 top-0 z-20 w-full" x-show="isShow" x-transition.duration.300ms>
     @livewire('components.modal.detail-bank')
   </div>
 
