@@ -32,7 +32,7 @@ Route::get('/login', Login::class)->name('login');
 Route::get('/register', Register::class);
 
 Route::get('/forgot-password', ForgotPassword::class)->name('ForgotPassword');
-Route::get('/resetpassword/{token}', ResetPassword::class);
+Route::any('/resetpassword/{token}', ResetPassword::class);
 
 Route::get('/dashboard/listadmin', ListAdmins::class)->name('admin.list');
 Route::get('/dashboard/listuser', ListUsers::class)->name('user.list');
