@@ -8,7 +8,7 @@
         </div>
       </div>
 
-      <form class="flex cursor-pointer flex-col px-10" x-on:submit.prevent="createNewBank()">
+      <form class="flex cursor-pointer flex-col px-10" x-on:submit.prevent="createNewBank()" x-ref="formAddBank">
         <label for="name" class="relative w-full pb-3">
           <p class="font-bold text-navy">Name</p>
           <input type="text" name="name" id="name" class="peer mt-2 outline-none"

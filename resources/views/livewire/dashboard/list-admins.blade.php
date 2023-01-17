@@ -103,7 +103,9 @@
     // create admin data
     create() {
       const data = new FormData(this.$refs.formAddAdmin)
-      console.log(this.$refs.formAddAdmin)
+      // console.log(this.$refs.formAddAdmin)
+      const pyld = {}
+      data.forEach((val, key) => pyld[key] = val)
       // data.append('name', this.newAdmin.name)
       // data.append('email', this.newAdmin.email)
       // data.append('password', this.newAdmin.password)
@@ -116,7 +118,7 @@
 
       fetch(`{{ env('API_URL') }}${path}`, {
         method: "POST",
-        body: data,
+        body: JSON.stringify(pyld),
         headers: {
           'Content-type': 'application/json;charset=UTF-8',
           'Authorization': localStorage.getItem('token'),
