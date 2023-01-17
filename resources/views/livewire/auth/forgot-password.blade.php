@@ -20,12 +20,12 @@
                     if (status == false) {
                         let msg = ``
                         for (m of this.msg) {
-                            msg += `<p>${m}</p>`
+                            msg += m
                         }
                         Swal.fire({
                             icon: 'error'
                             , title: 'Oops...'
-                            , html: msg
+                            , text: msg
                         })
                         // window.location.replace('')
                         return
@@ -33,14 +33,14 @@
                     // success alert
                     Swal.fire(
                         'Success!'
-                        , 'Registration Success!'
+                        , 'Send Email Succes, Please Check Your!'
                         , 'success'
                     ).then(res => {
-                        window.location.replace(`{{ env('APP_URL') }}/login`)
+                        // window.location.replace(`{{ env('APP_URL') }}/login`)
                     })
                     // window.location.replace(`{{ env('APP_URL') }}/login`)
                 });
-        },
+        }
         , token: localStorage.getItem('token')
         , checkLogged() {
             if (this.token) {
