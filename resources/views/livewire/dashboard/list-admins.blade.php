@@ -39,7 +39,7 @@
         this.roleId = this.resData.data.role_id
         // console.log(this.resData)
 
-        // redirect to dashboard user if logged in user has role_id != 2 
+        // redirect to dashboard user if logged in user has role_id != 2
         if (this.roleId != 2) {
           window.location.replace(`{{ route('home') }}`)
         }
@@ -100,7 +100,7 @@
     },
     message: '',
     isSubmit: false,
-    // create admin data 
+    // create admin data
     create() {
       const data = new FormData(this.$refs.formAddAdmin)
       console.log(this.$refs.formAddAdmin)
