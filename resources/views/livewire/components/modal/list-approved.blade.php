@@ -1,5 +1,5 @@
 <div class="relative w-full">
-  <div class="absolute inset-x-0 -top-28 z-20 mx-auto w-full lg:w-10/12">
+  <div class="absolute inset-x-0 -top-20 z-20 mx-auto w-full lg:w-10/12">
     <div class="relative mb-10 rounded-xl bg-white pb-10 pt-8 shadow-lg shadow-navy/50">
       <div class="relative mx-auto mb-12 flex w-max flex-col items-center justify-center gap-3">
         <h1 class="mb-2 text-2xl font-bold text-navy lg:text-3xl">Detail <span class="text-orange-2">Approved</span></h1>
@@ -8,23 +8,23 @@
         </div>
       </div>
 
-      <div class="relative mx-auto rounded-xl bg-white lg:w-10/12">
-        <ul class="flex gap-3 rounded-t-xl bg-orange-1 px-3 py-4 font-semibold text-navy">
+      <div class="relative mx-auto w-11/12 rounded-xl bg-gray-1/30 lg:w-10/12">
+        <ul class="flex items-center gap-3 rounded-t-xl bg-orange-1 px-3 py-4 font-semibold text-navy">
           <li class="w-10 text-center">No</li>
-          <li class="w-64">Bank</li>
-          <li class="w-56">Loaned Amount</li>
+          <li class="w-36 lg:w-64">Bank</li>
+          <li class="w-32 lg:w-56">Loaned Amount</li>
         </ul>
 
         <template x-for="(accept, i) of item.accepted_bank">
-          <ul class="flex flex-col gap-3 px-3 py-4 font-medium text-navy lg:flex-row lg:items-center">
+          <ul class="flex items-center gap-3 px-3 py-4 font-medium text-navy">
             <li class="w-10 text-center" x-text="i + 1"></li>
-            <li class="w-64" x-text="accept.bank.name"></li>
-            <li class="w-56" x-text="'$' + accept.loaned_amount.toLocaleString()"></li>
+            <li class="w-36 lg:w-64" x-text="accept.bank.name"></li>
+            <li class="w-32 lg:w-56" x-text="'$' + accept.loaned_amount.toLocaleString()"></li>
           </ul>
         </template>
       </div>
 
     </div>
   </div>
-  <div class="fixed inset-0 z-10 bg-gray-1/40 backdrop-blur-sm" x-on:click="showApproved = false"></div>
+  <div class="fixed inset-0 z-10 bg-white/10 backdrop-blur-sm" x-on:click="showApproved = false"></div>
 </div>

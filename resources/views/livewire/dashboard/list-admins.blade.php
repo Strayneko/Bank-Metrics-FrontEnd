@@ -3,6 +3,7 @@
     showSidebar: false,
     showMessage: 'Please wait...',
     token: localStorage.getItem('token'),
+    isLoading: true,
     resData: [],
     roleId: 0,
     // redirect to login page if user is not logged in
@@ -36,6 +37,8 @@
         if (this.roleId != 2) {
           window.location.replace(`{{ route('home') }}`)
         }
+
+        this.isLoading = false
       })
     }
   }))
@@ -59,7 +62,7 @@
         })
     }
   }))
-  
+
   Alpine.data('createAdmin', () => ({
     newAdmin: {
       name: "",
@@ -126,6 +129,10 @@
   }))
 </script>
 <main class="container relative flex justify-end font-poppins" x-data="listAdminDashboard" x-init="checkLogin()">
+  <template x-if="isLoading">
+    @livewire('components.loading')
+  </template>
+
   <!-- show navbar for mobile -->
   @livewire('partials.nav-mobile')
   <!-- show sidebar -->
@@ -142,7 +149,7 @@
         </div>
       </div>
 
-      <div class="w-full" x-show="isAddActive" x-transition.duration.500ms x-data="createAdmin"
+      <div class="w-full" x-show="isAddActive" x-transition.duration.200ms x-data="createAdmin"
         x-init="checkLogged()">
         @livewire('components.modal.add-admin')
       </div>

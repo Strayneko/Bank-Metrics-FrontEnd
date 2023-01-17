@@ -8,7 +8,7 @@
 
 @layer base {
     ::-webkit-scrollbar {
-        @apply w-[.4vw];
+        @apply w-0;
     }
     ::-webkit-scrollbar-track {
         @apply rounded-[.3rem] bg-gray-1/80;
@@ -19,10 +19,41 @@
     ::-webkit-scrollbar-thumb:hover {
         @apply rounded-[.3rem] bg-white shadow-[inset_0_0_.7rem] shadow-gray-2;
     }
+    .show-scroll::-webkit-scrollbar {
+        @apply w-[.4vw];
+    }
 }
 
 @layer components {
     .container {
         @apply py-5;
+    }
+
+    .loading {
+        @apply h-10 w-10 animate-loading text-orange-2;
+        background: conic-gradient(
+                from -45deg at top 20px left 50%,
+                #0000,
+                currentColor 1deg 90deg,
+                #0000 91deg
+            ),
+            conic-gradient(
+                from 45deg at right 20px top 50%,
+                #0000,
+                currentColor 1deg 90deg,
+                #0000 91deg
+            ),
+            conic-gradient(
+                from 135deg at bottom 20px left 50%,
+                #0000,
+                currentColor 1deg 90deg,
+                #0000 91deg
+            ),
+            conic-gradient(
+                from -135deg at left 20px top 50%,
+                #0000,
+                currentColor 1deg 90deg,
+                #0000 91deg
+            );
     }
 }

@@ -4,6 +4,7 @@
     showMessage: 'Please wait...',
     isShow: false,
     token: localStorage.getItem('token'),
+    isLoading: true,
     resData: [],
     roleId: 0,
     // redirect to login page if user is not logged in
@@ -44,6 +45,8 @@
         if (this.roleId != 2) {
           window.location.replace(`{{ route('home') }}`)
         }
+
+        this.isLoading = false
       })
     }
   }))
@@ -238,6 +241,9 @@
   }))
 </script>
 <main class="container relative flex justify-end font-poppins" x-data="listBankDashboard" x-init="checkLogin()">
+  <template x-if="isLoading">
+    @livewire('components.loading')
+  </template>
   @livewire('partials.nav-mobile')
 
   @livewire('partials.sidebar')
@@ -252,7 +258,7 @@
           class="relative h-2 w-40 rounded-lg bg-orange-1 after:absolute after:inset-0 after:m-auto after:h-5 after:w-16 after:rounded-xl after:bg-navy">
         </div>
       </div>
-      <div x-show="isAddActive" x-transition.duration.500ms x-data="createBank" x-init="checkLogged()">
+      <div x-show="isAddActive" x-transition.duration.200ms x-data="createBank" x-init="checkLogged()">
         @livewire('components.modal.add-bank')
       </div>
 

@@ -13,20 +13,41 @@
         'Content-type': 'application/json;charset=UTF-8',
         'Authorization': localStorage.getItem('token')
       },
-      getData() {
-        // fetch admin list
-        fetch(`{{ env('API_URL') }}/api/admin`, {
-            method: 'GET',
-            headers: this.headers,
-          }).then(res => res.json())
+      fetchData() {
+        this.getAdmin();
+        this.getLoanData();
+        this.getUsers();
+      },
+      getAdmin() {
 
-          .then(res => this.admins = res.data);
+        const reqTime = Date.now(); //get current timestamp
+        const path = '/api/admin';
+        const apiKey = generateKey(path, reqTime); //generate api kay
+        const headers = this.headers;
+        headers['Request-Time'] = reqTime; // add Request time to header
+        headers['D-App-Key'] = apiKey; //add api key to header
 
-        // get submissions
-        fetch(`{{ env('API_URL') }}/api/loan/all`, {
+        // request
+        fetch(`{{ env('API_URL') }}${path}`, {
             method: 'GET',
-            headers: this.headers,
-          }).then(res => res.json())
+            headers,
+          })
+          .then(res => res.json())
+          .then(res => this.admins = res.data)
+      },
+      getLoanData() {
+        const reqTime = Date.now();
+        const path = '/api/loan/all';
+        const apiKey = generateKey(path, reqTime);
+        const headers = this.headers;
+        headers['Request-Time'] = reqTime;
+        headers['D-App-Key'] = apiKey;
+
+        fetch(`{{ env('API_URL') }}${path}`, {
+            method: 'GET',
+            headers,
+          })
+          .then(res => res.json())
           .then(res => {
             this.submissions = res.data
             // filter accepted submission
@@ -34,22 +55,30 @@
             // filter rejected submission
             this.rejectedSubmission = this.submissions.filter((submission) => submission.status === 0)
           })
+      },
+      getUsers() {
+        const reqTime = Date.now();
+        const path = '/api/user';
+        const apiKey = generateKey(path, reqTime);
+        const headers = this.headers;
+        headers['Request-Time'] = reqTime;
+        headers['D-App-Key'] = apiKey;
 
-        // get users
-        fetch(`{{ env('API_URL') }}/api/user`, {
-          method: 'GET',
-          headers: this.headers,
-        }).then(async res => {
-          data = await res.json()
-          this.users = data.data
-          // console.log(this.users)
-          this.showMessage = 'No data user found!'
-        })
-      }
+        fetch(`{{ env('API_URL') }}${path}`, {
+            method: 'GET',
+            headers,
+          })
+          .then(res => res.json())
+          .then(res => {
+            this.users = res.data
+            this.showMessage = 'No Data Found!'
+          })
+      },
+
     }))
   </script>
 
-  <div x-data="usersDashboard" x-init="getData"
+  <div x-data="usersDashboard" x-init="fetchData"
     class="mx-auto w-11/12 rounded-xl pb-6 lg:mx-0 lg:w-full lg:bg-gray-1 lg:p-6">
     {{-- Start Section Navbar --}}
     <div
@@ -118,13 +147,13 @@
     {{-- End Section Navbar --}}
 
     {{-- Start Section Table --}}
-    <div class="overflow-hidden rounded-xl bg-white">
+    <div class="overflow-hidden rounded-xl bg-gray-1/30 lg:bg-white">
       <ul class="flex gap-3 bg-orange-1 px-3 py-4 font-semibold text-navy">
         <li class="w-10 text-center">No</li>
-        <li class="w-64">Nama</li>
+        <li class="w-64">Name</li>
         <div class="hidden gap-3 lg:flex">
-          <li class="w-56">Tanggal Lahir</li>
-          <li class="w-80">Alamat</li>
+          <li class="w-56">Date Of Birth</li>
+          <li class="w-80">Address</li>
         </div>
       </ul>
 

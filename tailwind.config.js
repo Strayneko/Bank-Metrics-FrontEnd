@@ -34,9 +34,20 @@ module.exports = {
                     from: { transform: "rotate(360deg)" },
                     to: { transform: "rotate(0deg)" },
                 },
+                loading: {
+                    "50%": {
+                        width: "60px",
+                        height: "60px",
+                        transform: "rotate(180deg)",
+                    },
+                    "100%": {
+                        transform: "rotate(360deg)",
+                    },
+                },
             },
             animation: {
                 spinLeft: "spinLeft 4.5s linear infinite",
+                loading: "loading 1.5s infinite cubic-bezier(0.3, 1, 0, 1)",
             },
         },
     },

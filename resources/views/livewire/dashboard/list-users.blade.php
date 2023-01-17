@@ -3,6 +3,7 @@
     showMessage: 'Please wait...',
     showSidebar: false,
     token: localStorage.getItem('token'),
+    isLoading: true,
     resData: [],
     roleId: 0,
     // redirect to login page if user is not logged in
@@ -43,6 +44,8 @@
           window.location.replace(`{{ route('home') }}`)
           // console.log(this.roleId)
         }
+
+        this.isLoading = false
       })
     }
   }))
@@ -71,6 +74,10 @@
   }))
 </script>
 <main class="container relative flex justify-end font-poppins" x-data="listUserDashboard" x-init="checkLogin()">
+  <template x-if="isLoading">
+    @livewire('components.loading')
+  </template>
+
   @livewire('partials.nav-mobile')
 
   @livewire('partials.sidebar')

@@ -87,7 +87,7 @@
               required>
           </div>
           <div class="m-5 text-right">
-            <a href="" class="font-poppins text-[#0F0742] hover:text-[#4d36e4]">Forgot Password?</a>
+            <a href="{{ route ('ForgotPassword')}}" class="font-poppins text-[#0F0742] hover:text-[#4d36e4]">Forgot Password?</a>
           </div>
           <div class="m-5 mb-20 flex justify-between gap-5 lg:m-0 lg:mb-0 lg:gap-0">
             <button type="submit"
@@ -100,9 +100,9 @@
       </div>
     </div>
     <div
-      class="hidden rounded-2xl bg-[#FCC997] md:mx-10 md:block md:h-[490px] md:w-[430px] lg:m-0 lg:h-[440px] lg:w-[293px]">
+      class="hidden rounded-2xl bg-[#FCC997] md:mx-10 md:block md:h-[490px] md:w-[430px] lg:m-0 lg:h-[540px] lg:w-[793px]">
       <img src="{{ asset('assets/IconLogin.png') }}" alt=""
-        class="mx-auto md:w-[420px] md:p-5 md:pt-24 lg:w-[250px] lg:pt-8">
+        class="mx-auto md:w-[420px] md:p-5 md:pt-24 lg:w-[550px] lg:pt-8">
     </div>
   </div>
 </div>

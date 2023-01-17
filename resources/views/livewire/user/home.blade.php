@@ -5,29 +5,44 @@
       showMessage: 'Please wait...',
       submissionData: [],
       getSubmission() {
-        fetch(`{{ env('API_URL') }}/api/loan/list`, {
+        const reqTime = Date.now()
+        const path = '/api/loan/list'
+        const apiKey = generateKey(path, reqTime)
+
+        fetch(`{{ env('API_URL') }}${path}`, {
           method: 'GET',
           headers: {
-            'Authorization': localStorage.getItem('token')
+            'Authorization': localStorage.getItem('token'),
+            'Request-Time': reqTime,
+            'D-App-Key': apiKey
           }
         }).then(async res => {
           this.submissionData = await res.json()
           this.showMessage = 'No data Submissions found!'
-          console.log(this.submissionData)
+          // console.log(this.submissionData)
+          console.log(generateKey)
         })
       }
     }))
 
     Alpine.data('rejected', () => ({
       resReject: [],
+      showMessage: 'Please wait...',
       getRejected(id) {
-        fetch(`{{ env('API_URL') }}/api/loan/rejection_reason/${id}`, {
+        const reqTime = Date.now()
+        const path = `/api/loan/rejection_reason/${id}`
+        const apiKey = generateKey(path, reqTime)
+
+        fetch(`{{ env('API_URL') }}${path}`, {
           method: 'GET',
           headers: {
-            'Authorization': localStorage.getItem('token')
+            'Authorization': localStorage.getItem('token'),
+            'Request-Time': reqTime,
+            'D-App-Key': apiKey
           }
         }).then(async res => {
           this.resReject = await res.json()
+          this.showMessage = 'No data Submissions found!'
           // console.log(this.resReject)
         })
       },
@@ -43,7 +58,7 @@
     <h1 class="mx-auto mb-10 w-max text-3xl font-bold" x-text="'Welcome ' + resData.data.name"></h1>
 
     <template x-if="resData.data.profile">
-      <div class="relative rounded-xl bg-white" x-data="submission" x-init="getSubmission()">
+      <div class="relative rounded-xl bg-gray-1/30 lg:bg-white" x-data="submission" x-init="getSubmission()">
         <ul class="flex gap-3 rounded-t-xl bg-orange-1 px-3 py-4 font-semibold text-navy">
           <li class="w-10 text-center">No</li>
           <li class="w-64">Date</li>
@@ -55,7 +70,7 @@
         </ul>
 
         <template x-if="submissionData.length == 0">
-          <div class="my-10 pb-10e text-center text-2xl font-bold text-navy">
+          <div class="my-10 pb-10 text-center text-2xl font-bold text-navy">
             <h1 x-text="showMessage"></h1>
 
           </div>
@@ -91,8 +106,7 @@
         <p class="text-xl font-semibold">Please fill in your personal data first!</p>
         <a href="{{ route('user.profile') }}"
           class="rounded-lg bg-orange-1 px-4 py-2 font-bold text-white transition-all duration-150 hover:-translate-y-1 hover:bg-orange-2/30 hover:shadow-sm hover:shadow-orange-1">Go
-          to
-          Profile!</a>
+          to Profile!</a>
       </div>
     </template>
   </div>
