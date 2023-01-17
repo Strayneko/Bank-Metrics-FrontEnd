@@ -13,11 +13,17 @@
         // console.log('hello')
       }
 
-      fetch(`{{ env('API_URL') }}/api/user/me`, {
+      const reqTime = Date.now()
+      const path = '/api/user/me'
+      const apikey = generateKey(path, reqTime)
+
+      fetch(`{{ env('API_URL') }}${path}`, {
         method: 'GET',
         headers: {
           'Content-type': 'application/json;charset=UTF-8',
-          'Authorization': this.token
+          'Authorization': this.token,
+          'Request-Time': reqTime,
+          'D-App-Key': apikey
         }
       }).then(async res => {
         this.resData = await res.json()
@@ -38,13 +44,29 @@
         }
 
         this.isLoading = false
+      }).catch(err => {
+        Swal.fire({
+          icon: 'error',
+          title: 'Error!',
+          text: 'Internal Server Error! Please Try Again Later.',
+        })
       })
     },
 
     dataCountry: [],
     getCountry() {
-      fetch(`{{ env('API_URL') }}/api/countries`, {
-        method: 'GET'
+      const reqTime = Date.now()
+      const path = '/api/countries'
+      const apikey = generateKey(path, reqTime)
+
+      fetch(`{{ env('API_URL') }}${path}`, {
+        method: 'GET',
+        headers: {
+          'Content-type': 'application/json;charset=UTF-8',
+          'Authorization': this.token,
+          'Request-Time': reqTime,
+          'D-App-Key': apikey
+        },
       }).then(async res => {
         const data = await res.json()
         // console.log(data)
@@ -59,10 +81,16 @@
 
       this.isSubmit = true
 
-      fetch(`{{ env('API_URL') }}/api/user/me`, {
+      const reqTime = Date.now()
+      const path = '/api/user/me'
+      const apikey = generateKey(path, reqTime)
+
+      fetch(`{{ env('API_URL') }}${path}`, {
         method: 'POST',
         headers: {
-          'Authorization': this.token
+          'Authorization': this.token,
+          'Request-Time': reqTime,
+          'D-App-Key': apikey
         },
         body: body
       }).then(async res => {
@@ -89,6 +117,12 @@
           text: data.message
         }).then(res => {
           window.location.replace(`{{ env('APP_URL') }}/user/profile`)
+        })
+      }).catch(err => {
+        Swal.fire({
+          icon: 'error',
+          title: 'Error!',
+          text: 'Internal Server Error! Please Try Again Later.',
         })
       })
 

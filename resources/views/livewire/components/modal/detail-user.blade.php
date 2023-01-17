@@ -4,17 +4,30 @@
     Alpine.data('submission', () => ({
       submissionData: [],
       getSubmission(id) {
+        const reqTime = Date.now()
+        const path = `/api/loan/list`
+        const apiKey = generateKey(path, reqTime)
+
         /** 
          * Get loan list by user id
          */
-        fetch(`{{ env('API_URL') }}/api/loan/list?user_id=${id}`, {
+        fetch(`{{ env('API_URL') }}${path}?user_id=${id}`, {
           method: 'GET',
           headers: {
-            'Authorization': localStorage.getItem('token')
+            'Content-type': 'application/json;charset=UTF-8',
+            'Authorization': localStorage.getItem('token'),
+            'Request-Time': reqTime,
+            'D-App-Key': apiKey
           }
         }).then(async res => {
           this.submissionData = await res.json()
           // console.log(this.submissionData)
+        }).catch(err => {
+          Swal.fire({
+            icon: 'error',
+            title: 'Error!',
+            text: 'Internal Server Error! Please Try Again Later.',
+          })
         })
       }
     }))

@@ -8,7 +8,7 @@
           class="relative h-2 w-[105%] rounded-lg bg-orange-1 after:absolute after:inset-0 after:m-auto after:h-5 after:w-16 after:rounded-xl after:bg-navy lg:w-[335px]">
         </div>
       </div>
-      <form x-on:submit.prevent="create()" class="flex cursor-pointer flex-col gap-3 px-[39px]">
+      <form x-on:submit.prevent="create()" x-ref="formAddAdmin" class="flex cursor-pointer flex-col gap-3 px-[39px]">
         <label for="name" class="relative w-full pb-3">
           <p class="font-bold text-navy">Name</p>
           <input type="text" name="name" id="name" class="peer mt-2 outline-none"

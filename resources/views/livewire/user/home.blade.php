@@ -20,7 +20,12 @@
           this.submissionData = await res.json()
           this.showMessage = 'No data Submissions found!'
           // console.log(this.submissionData)
-          console.log(generateKey)
+        }).catch(err => {
+          Swal.fire({
+            icon: 'error',
+            title: 'Error!',
+            text: 'Internal Server Error! Please Try Again Later.',
+          })
         })
       }
     }))
@@ -36,6 +41,7 @@
         fetch(`{{ env('API_URL') }}${path}`, {
           method: 'GET',
           headers: {
+            'Content-type': 'application/json;charset=UTF-8',
             'Authorization': localStorage.getItem('token'),
             'Request-Time': reqTime,
             'D-App-Key': apiKey
@@ -44,6 +50,12 @@
           this.resReject = await res.json()
           this.showMessage = 'No data Submissions found!'
           // console.log(this.resReject)
+        }).catch(err => {
+          Swal.fire({
+            icon: 'error',
+            title: 'Error!',
+            text: 'Internal Server Error! Please Try Again Later.',
+          })
         })
       },
 
@@ -78,17 +90,17 @@
         </template>
 
         <template x-if="submissionData.status == false">
-          <div class="my-10 pb-10 text-center flex flex-col gap-5 text-2xl font-bold text-navy">
+          <div class="my-10 flex flex-col gap-5 pb-10 text-center text-2xl font-bold text-navy">
             <h1 x-text="showMessage"></h1>
             <div>
               <a href="{{ route('user.user-submission') }}"
-              class="rounded-lg bg-orange-1 px-4 py-2 font-bold text-white transition-all duration-150 hover:-translate-y-1 hover:bg-orange-2/30 hover:shadow-sm hover:shadow-orange-1">Go
-              to
-              Submission!
+                class="rounded-lg bg-orange-1 px-4 py-2 font-bold text-white transition-all duration-150 hover:-translate-y-1 hover:bg-orange-2/30 hover:shadow-sm hover:shadow-orange-1">Go
+                to
+                Submission!
               </a>
             </div>
           </div>
-          
+
         </template>
 
         <template x-if="submissionData.data">

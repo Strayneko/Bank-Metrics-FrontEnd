@@ -16,14 +16,20 @@
         // console.log('hello')
       }
 
+      const reqTime = Date.now()
+      const path = '/api/user/me'
+      const apiKey = generateKey(path, reqTime)
+
       /**
        * Get profile
        */
-      fetch(`{{ env('API_URL') }}/api/user/me`, {
+      fetch(`{{ env('API_URL') }}${path}`, {
         method: 'GET',
         headers: {
           'Content-type': 'application/json;charset=UTF-8',
-          'Authorization': this.token
+          'Authorization': this.token,
+          'Request-Time': reqTime,
+          'D-App-Key': apiKey
         }
       }).then(async res => {
         this.resData = await res.json()
@@ -54,14 +60,20 @@
     showMessage: 'Please wait...',
     users: [],
     getUsers() {
+      const reqTime = Date.now()
+      const path = '/api/user'
+      const apiKey = generateKey(path, reqTime)
+
       /**
        * Get list user
        */
-      fetch(`{{ env('API_URL') }}/api/user`, {
+      fetch(`{{ env('API_URL') }}${path}`, {
           method: 'GET',
           headers: {
             'Content-type': 'application/json;charset=UTF-8',
-            'Authorization': localStorage.getItem('token')
+            'Authorization': localStorage.getItem('token'),
+            'Request-Time': reqTime,
+            'D-App-Key': apiKey
           }
         })
         .then(async res => {
@@ -104,7 +116,7 @@
             <h1 x-text="showMessage"></h1>
           </div>
         </template>
-          <!-- call table list from template -->
+        <!-- call table list from template -->
         <template x-for="(user, i) of users">
           @livewire('components.list-user-action')
         </template>

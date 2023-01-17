@@ -34,6 +34,13 @@
           })
           .then(res => res.json())
           .then(res => this.admins = res.data)
+          .catch(err => {
+            Swal.fire({
+              icon: 'error',
+              title: 'Error!',
+              text: 'Internal Server Error! Please Try Again Later.',
+            })
+          })
       },
       getLoanData() {
         const reqTime = Date.now();
@@ -44,17 +51,21 @@
         headers['D-App-Key'] = apiKey;
 
         fetch(`{{ env('API_URL') }}${path}`, {
-            method: 'GET',
-            headers,
+          method: 'GET',
+          headers,
+        }).then(res => res.json()).then(res => {
+          this.submissions = res.data
+          // filter accepted submission
+          this.acceptedSubmission = this.submissions.filter((submission) => submission.status === 1)
+          // filter rejected submission
+          this.rejectedSubmission = this.submissions.filter((submission) => submission.status === 0)
+        }).catch(err => {
+          Swal.fire({
+            icon: 'error',
+            title: 'Error!',
+            text: 'Internal Server Error! Please Try Again Later.',
           })
-          .then(res => res.json())
-          .then(res => {
-            this.submissions = res.data
-            // filter accepted submission
-            this.acceptedSubmission = this.submissions.filter((submission) => submission.status === 1)
-            // filter rejected submission
-            this.rejectedSubmission = this.submissions.filter((submission) => submission.status === 0)
-          })
+        })
       },
       getUsers() {
         const reqTime = Date.now();
@@ -65,14 +76,18 @@
         headers['D-App-Key'] = apiKey;
 
         fetch(`{{ env('API_URL') }}${path}`, {
-            method: 'GET',
-            headers,
+          method: 'GET',
+          headers,
+        }).then(res => res.json()).then(res => {
+          this.users = res.data
+          this.showMessage = 'No Data Found!'
+        }).catch(err => {
+          Swal.fire({
+            icon: 'error',
+            title: 'Error!',
+            text: 'Internal Server Error! Please Try Again Later.',
           })
-          .then(res => res.json())
-          .then(res => {
-            this.users = res.data
-            this.showMessage = 'No Data Found!'
-          })
+        })
       },
 
     }))

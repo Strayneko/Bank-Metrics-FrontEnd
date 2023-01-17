@@ -16,9 +16,9 @@
           // console.log('hello')
         }
 
-        const reqTime = Date.now()
+        const reqTime = Date.now() // get current timestamp
         const path = '/api/user/me'
-        const apiKey = generateKey(path, reqTime)
+        const apiKey = generateKey(path, reqTime) // generate api key
 
         /** 
          * Get profile user
@@ -45,6 +45,12 @@
 
           this.roleId = this.resData.data.role_id
           this.isLoading = false
+        }).catch(err => {
+          Swal.fire({
+            icon: 'error',
+            title: 'Error!',
+            text: 'Internal Server Error! Please Try Again Later.',
+          })
         })
       },
     }))
