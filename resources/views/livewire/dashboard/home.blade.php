@@ -15,14 +15,20 @@
         // console.log('hello')
       }
 
+      const reqTime = Date.now()
+      const path = '/api/user/me'
+      const apiKey = generateKey(path, reqTime)
+
       /** 
        * Get profile user
        */
-      fetch(`{{ env('API_URL') }}/api/user/me`, {
+      fetch(`{{ env('API_URL') }}${path}`, {
         method: 'GET',
         headers: {
           'Content-type': 'application/json;charset=UTF-8',
-          'Authorization': this.token
+          'Authorization': this.token,
+          'Request-Time': reqTime,
+          'D-App-Key': apiKey
         }
       }).then(async res => {
         this.resData = await res.json()
@@ -50,12 +56,12 @@
   @livewire('partials.nav-mobile')
 
   @livewire('partials.sidebar')
-<!-- redirect to dashboard user if user's role_id = 1 -->
+  <!-- redirect to dashboard user if user's role_id = 1 -->
   <template x-if="roleId == 1">
     @livewire('user.home')
   </template>
-  
-<!-- redirect to dashboard admin if user's role_id = 2 -->
+
+  <!-- redirect to dashboard admin if user's role_id = 2 -->
 
   <template x-if="roleId == 2">
     @livewire('admin.home')
