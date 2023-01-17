@@ -10,7 +10,7 @@
     <li class="w-96" x-text="bank.name"></li>
   </div>
   <div class="flex flex-col gap-3 pl-11 lg:flex-row lg:items-center lg:pl-0" x-show="width > 768 ? true : showBank"
-    x-transition.duration.500ms>
+    x-transition.duration.200ms>
     <li class="lg:w-64">
       <span class="lg:hidden">Max Loan : </span>
       <span x-text="bank.loaning_percentage + '%'"></span>
