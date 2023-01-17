@@ -3,8 +3,10 @@
         user: {
             email: ""
         , }
-        , msg: ''
+        , msg: '',
+        isLoad: false
         , forgot() {
+            this.isLoad = true
             const data = new FormData()
             data.append('email', this.user.email)
 
@@ -13,6 +15,7 @@
                     , body: data
                 })
                 .then(async (response) => {
+                    this.isLoad = false
                     let data = await response.json()
                     let status = data.status
                     this.msg = data.message
@@ -48,6 +51,13 @@
 
 </script>
 <div class="container" x-data="Forgot" x-init="checkLogged()">
+    <template x-if="isLoad">
+        <div class="fixed inset-0 z-[100] bg-white/10 backdrop-blur-sm">
+            <div class="flex h-screen w-full items-center justify-center bg-gray-1/30">
+              <div class="loading"></div>
+            </div>
+          </div>
+    </template>
     <div class="flex justify-between pt-[56px]">
         <div class="">
             <div class="">
