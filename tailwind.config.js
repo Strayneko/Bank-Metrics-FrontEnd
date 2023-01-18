@@ -44,10 +44,20 @@ module.exports = {
                         transform: "rotate(360deg)",
                     },
                 },
+                arrowColor1: {
+                    "25%, 100%": { stroke: "#FCC997" },
+                    "0%, 75%": { stroke: "#FF5927" },
+                },
+                arrowColor2: {
+                    "25%, 100%": { stroke: "#FF5927" },
+                    "0%, 75%": { stroke: "#FCC997" },
+                },
             },
             animation: {
                 spinLeft: "spinLeft 4.5s linear infinite",
                 loading: "loading 1.5s infinite cubic-bezier(0.3, 1, 0, 1)",
+                arrowColor1: "arrowColor1 2s ease-in-out infinite",
+                arrowColor2: "arrowColor2 2s ease-in-out infinite",
             },
         },
     },

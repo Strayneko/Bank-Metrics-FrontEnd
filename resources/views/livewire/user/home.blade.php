@@ -4,10 +4,21 @@
     Alpine.data('submission', () => ({
       showMessage: 'Please wait...',
       submissionData: [],
-      getSubmission() {
+      pageNumber: 0,
+      size: 5,
+      total: '',
+      loansData: [],
+      startAt: 0,
+      pages: [],
+      getSubmission(index) {
+        this.showMessage = 'Please wait...'
+
         const reqTime = Date.now()
         const path = '/api/loan/list'
         const apiKey = generateKey(path, reqTime)
+        this.loansData = []
+
+        this.pageNumber = index
 
         fetch(`{{ env('API_URL') }}${path}`, {
           method: 'GET',
@@ -18,8 +29,32 @@
           }
         }).then(async res => {
           this.submissionData = await res.json()
-          this.showMessage = 'No data Submissions found!'
           // console.log(this.submissionData)
+
+          // console.log(this.pageNumber)
+
+          const start = this.pageNumber * this.size
+          const end = start + this.size
+          // console.log(start)
+          // console.log(end)
+
+          this.startAt = start
+
+          this.total = this.submissionData.data.loans.length
+          // console.log(this.total)
+
+          this.loansData = this.submissionData.data.loans.slice(start, end)
+          // console.log(this.loansData)
+
+          this.pages = Array.from({
+            length: Math.ceil(this.total / this.size)
+          }, (val, i) => i)
+          // console.log(this.pages)
+
+          if (this.loansData.length == 0) {
+            this.showMessage = 'No data Submissions found!'
+          }
+
         }).catch(err => {
           Swal.fire({
             icon: 'error',
@@ -27,7 +62,7 @@
             text: 'Internal Server Error! Please Try Again Later.',
           })
         })
-      }
+      },
     }))
 
     Alpine.data('rejected', () => ({
@@ -70,7 +105,7 @@
     <h1 class="mx-auto mb-10 w-max text-3xl font-bold" x-text="'Welcome ' + resData.data.name"></h1>
 
     <template x-if="resData.data.profile">
-      <div class="relative rounded-xl bg-gray-1/30 lg:bg-white" x-data="submission" x-init="getSubmission()">
+      <div class="relative rounded-xl bg-gray-1/30 lg:bg-white" x-data="submission" x-init="getSubmission(0)">
         <ul class="flex gap-3 rounded-t-xl bg-orange-1 px-3 py-4 font-semibold text-navy">
           <li class="w-10 text-center">No</li>
           <li class="w-64">Date</li>
@@ -81,7 +116,7 @@
           </div>
         </ul>
 
-        <template x-if="submissionData.length == 0">
+        <template x-if="loansData.length == 0">
           <div class="my-10 pb-10 text-center text-2xl font-bold text-navy">
             <h1 x-text="showMessage"></h1>
 
@@ -104,10 +139,72 @@
         </template>
 
         <template x-if="submissionData.data">
-          <template x-for="(item, i) of submissionData.data.loans">
+          <template x-for="(item, i) of loansData">
             @livewire('components.list-submission')
           </template>
         </template>
+
+        {{-- Start pagination --}}
+        <div class="flex justify-end py-8 px-10">
+          <ul class="flex w-max items-center rounded-md font-semibold text-orange-1 outline outline-2 outline-orange-1">
+            <li>
+              <button class="group py-2 pl-4 disabled:cursor-not-allowed" type="button" x-on:click="getSubmission(0)"
+                :disabled="pageNumber == 0">
+                <svg width="22" height="22" viewBox="0 0 22 22" fill="none"
+                  xmlns="http://www.w3.org/2000/svg">
+                  <path d="M11 4L3 11L11 19" stroke="#FF5927" stroke-width="3.77953" stroke-linejoin="round"
+                    class="group-hover:animate-arrowColor1" />
+                  <path d="M20 4L12 11L20 19" stroke="#FCC997" stroke-width="3.77953" stroke-linejoin="round"
+                    class="group-hover:animate-arrowColor2" />
+                </svg>
+              </button>
+            </li>
+
+            <li>
+              <button class="group px-4 py-2 disabled:cursor-not-allowed" type="button"
+                x-on:click="getSubmission(pageNumber - 1)" :disabled="pageNumber == 0">
+                <svg width="22" height="22" viewBox="0 0 22 22" fill="none"
+                  xmlns="http://www.w3.org/2000/svg">
+                  <path d="M20 4L12 11L20 19" stroke="#FCC997" stroke-width="3.77953" stroke-linejoin="round"
+                    class="transition-all duration-200 group-hover:stroke-orange-2/60" />
+                </svg>
+              </button>
+            </li>
+
+            <template x-for="num in pages">
+              <li class="-mr-[.25px]">
+                <button type="button" x-on:click="getSubmission(num)"
+                  class="flex h-10 w-8 cursor-pointer items-center justify-center outline outline-1 outline-orange-1"
+                  x-text="num + 1" :class="pageNumber == num ? 'bg-orange-1 text-white' : ''"></button>
+              </li>
+            </template>
+
+            <li>
+              <button class="group px-4 py-2 disabled:cursor-not-allowed" type="button"
+                x-on:click="getSubmission(pageNumber + 1)" :disabled="pageNumber == (pages.length - 1)">
+                <svg width="22" height="22" viewBox="0 0 22 22" fill="none"
+                  xmlns="http://www.w3.org/2000/svg">
+                  <path d="M2.44653 4L10.4465 11L2.44653 19" stroke="#FCC997" stroke-width="3.77953"
+                    stroke-linejoin="round" class="transition-all duration-200 group-hover:stroke-orange-2/60" />
+                </svg>
+              </button>
+            </li>
+
+            <li>
+              <button class="group py-2 pr-4 disabled:cursor-not-allowed" type="button"
+                x-on:click="getSubmission(pages.length - 1)" :disabled="pageNumber == (pages.length - 1)">
+                <svg width="22" height="22" viewBox="0 0 22 22" fill="none"
+                  xmlns="http://www.w3.org/2000/svg">
+                  <path d="M11.4465 4L19.4465 11L11.4465 19" stroke="#FF5927" stroke-width="3.77953"
+                    stroke-linejoin="round" class="group-hover:animate-arrowColor1" />
+                  <path d="M2.44653 4L10.4465 11L2.44653 19" stroke="#FCC997" stroke-width="3.77953"
+                    stroke-linejoin="round" class="group-hover:animate-arrowColor2" />
+                </svg>
+              </button>
+            </li>
+          </ul>
+        </div>
+        {{-- End Pagination --}}
 
       </div>
     </template>

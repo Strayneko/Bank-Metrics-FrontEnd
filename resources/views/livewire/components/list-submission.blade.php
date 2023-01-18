@@ -1,7 +1,7 @@
 <ul class="flex flex-col gap-3 px-3 py-4 font-medium text-navy lg:flex-row lg:items-center" x-data="rejected"
   x-on:click="showDetail = !showDetail">
   <div class="flex items-center gap-3">
-    <li class="w-10 text-center" x-text="i + 1"></li>
+    <li class="w-10 text-center" x-text="startAt + i + 1"></li>
     <li class="flex w-64 flex-col">
       <span x-text="(new Date(item.created_at)).toDateString()"></span>
       <span x-text="(new Date(item.created_at)).toLocaleTimeString()"></span>
