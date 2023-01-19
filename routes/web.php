@@ -5,6 +5,7 @@ use App\Http\Livewire\Auth\Login;
 use App\Http\Livewire\Auth\Register;
 use App\Http\Livewire\Auth\ForgotPassword;
 use App\Http\Livewire\Auth\ResetPassword;
+use App\Http\Livewire\Auth\VerifyEmail;
 use App\Http\Livewire\Dashboard\ListAdmins;
 use App\Http\Livewire\Dashboard\ListUsers;
 use App\Http\Livewire\Dashboard\ListBank;
@@ -33,6 +34,7 @@ Route::get('/register', Register::class);
 
 Route::get('/forgot-password', ForgotPassword::class)->name('ForgotPassword');
 Route::any('/resetpassword/{token}', ResetPassword::class);
+Route::get('/verifyEmail/{confirmation_code}', VerifyEmail::class);
 
 Route::get('/dashboard/listadmin', ListAdmins::class)->name('admin.list');
 Route::get('/dashboard/listuser', ListUsers::class)->name('user.list');
