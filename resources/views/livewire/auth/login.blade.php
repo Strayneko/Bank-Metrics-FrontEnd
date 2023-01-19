@@ -13,7 +13,8 @@
   Alpine.data("Login", () => ({
     user: {
       email: "",
-      password: ""
+      password: "",
+      confirmed: true
       confirmed: true
     },
     dataResponse: [],
@@ -21,8 +22,28 @@
     login() {
       const data = new FormData()
       const confirmation = this.user.confirmed
+      if(confirmation === false){
+        Swal.fire({
+            icon: 'error',
+            title: 'Oops..',
+            text: 'Please Verify Your Email Firts'
+        })
+        return
+      }
+      const confirmation = this.user.confirmed
       data.append('email', this.user.email)
       data.append('password', this.user.password)
+      data.append('confirmed', this.user.confirmed)
+
+
+      if(confirmation != true){
+        Swal.fire({
+            icon: 'error',
+            title: 'Oopss..',
+            text: 'Please Verify Your Email First!'
+        })
+        return
+      }
 
       if(confirmation != true){
         Swal.fire({
@@ -40,6 +61,7 @@
         .then(async (response) => {
           this.dataResponse = await response.json()
           // console.log(this.dataResponse.message)
+
 
           if (this.dataResponse.status == false) {
             // alert(this.dataResponse.message)
