@@ -14,13 +14,24 @@
     user: {
       email: "",
       password: ""
+      confirmed: true
     },
     dataResponse: [],
     // login function
     login() {
       const data = new FormData()
+      const confirmation = this.user.confirmed
       data.append('email', this.user.email)
       data.append('password', this.user.password)
+
+      if(confirmation != true){
+        Swal.fire({
+            icon: 'error',
+            title: 'Oopss..',
+            text: 'Please Verify Your Email First!'
+        })
+        return
+      }
 
       fetch(`{{ env('API_URL') }}/api/auth/login`, {
           method: "POST",

@@ -39,7 +39,7 @@
           // success alert
           Swal.fire(
             'Success!',
-            'Registration Success!',
+            'Registration Success And Please Check Your Email To Verification',
             'success'
           ).then(res => {
             window.location.replace(`{{ env('APP_URL') }}/login`)
