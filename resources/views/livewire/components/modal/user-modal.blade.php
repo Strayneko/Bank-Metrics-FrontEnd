@@ -23,7 +23,7 @@
         <label for="name" class="relative w-full pb-3">
           <p class="font-bold text-navy">Name</p>
           <input type="text" name="name" id="name" class="peer mt-2 outline-none"
-            placeholder="Insert your name" :value="userData.name" disabled>
+            placeholder="Insert your name" :value="userData.name">
           <div
             class="absolute inset-x-0 bottom-0 mx-auto block h-0.5 w-0 rounded-lg bg-navy transition-all duration-300 peer-hover:w-full">
           </div>
