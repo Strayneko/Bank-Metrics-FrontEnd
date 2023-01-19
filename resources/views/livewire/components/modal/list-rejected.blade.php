@@ -17,6 +17,13 @@
 
         <template x-if="resReject.length == 0">
           <div class="my-10 pb-10 text-center text-2xl font-bold text-navy">
+            <template x-if="isLoad">
+              <div class="mb-5">
+                <div class="flex h-20 w-full items-center justify-center">
+                  <div class="loading"></div>
+                </div>
+              </div>
+            </template>
             <h1 x-text="showMessage"></h1>
           </div>
         </template>

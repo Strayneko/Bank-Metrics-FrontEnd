@@ -10,7 +10,9 @@
       loansData: [],
       startAt: 0,
       pages: [],
+      isLoad: false,
       getSubmission() {
+        this.isLoad = true
         this.showMessage = 'Please wait...'
 
         const reqTime = Date.now()
@@ -25,6 +27,7 @@
             'D-App-Key': apiKey
           }
         }).then(async res => {
+          this.isLoad = false
           this.submissionData = await res.json()
           // console.log(this.submissionData)
 
@@ -78,7 +81,9 @@
     Alpine.data('rejected', () => ({
       resReject: [],
       showMessage: 'Please wait...',
+      isLoad: false,
       getRejected(id) {
+        this.isLoad = true
         const reqTime = Date.now()
         const path = `/api/loan/rejection_reason/${id}`
         const apiKey = generateKey(path, reqTime)
@@ -92,6 +97,7 @@
             'D-App-Key': apiKey
           }
         }).then(async res => {
+          this.isLoad = false
           this.resReject = await res.json()
           this.showMessage = 'No data Submissions found!'
           // console.log(this.resReject)
@@ -128,6 +134,13 @@
 
         <template x-if="loansData.length == 0">
           <div class="my-10 pb-10 text-center text-2xl font-bold text-navy">
+            <template x-if="isLoad">
+              <div class="mb-5">
+                <div class="flex h-20 w-full items-center justify-center">
+                  <div class="loading"></div>
+                </div>
+              </div>
+            </template>
             <h1 x-text="showMessage"></h1>
           </div>
 

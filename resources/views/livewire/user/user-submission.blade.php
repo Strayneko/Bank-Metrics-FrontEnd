@@ -120,7 +120,18 @@
               class="relative h-2 w-[285px] rounded-lg bg-orange-1 after:absolute after:inset-0 after:m-auto after:h-5 after:w-16 after:rounded-xl after:bg-navy">
             </div>
           </div>
-          <form class="flex cursor-pointer flex-col px-10" x-ref="subForm" x-on:submit.prevent="createSubmission()">
+          <form class="relative flex cursor-pointer flex-col px-10" x-ref="subForm"
+            x-on:submit.prevent="createSubmission()">
+
+            <template x-if="isSubmit">
+              <div class="absolute inset-0 z-50 h-full w-full bg-white/10 backdrop-blur-sm">
+                <div class="mb-5 flex h-20 w-full items-center justify-center">
+                  <div class="loading"></div>
+                </div>
+                <h1 class="text-center text-xl font-bold text-navy">Please wait...</h1>
+              </div>
+            </template>
+
             <label for="loan_amount" class="relative mb-3 w-full pb-3">
               <p class="font-bold text-navy">Submission</p>
               <input type="number" name="loan_amount" id="loan_amount" class="peer mt-2 w-full outline-none"

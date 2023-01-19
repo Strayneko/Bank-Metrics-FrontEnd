@@ -1,7 +1,6 @@
 <script>
   Alpine.data('listBankDashboard', () => ({
     showSidebar: false,
-    showMessage: 'Please wait...',
     isShow: false,
     token: localStorage.getItem('token'),
     isLoading: true,
@@ -207,6 +206,8 @@
 
 
     // redirect to login page if user is not logged in for modal
+    showMessage: 'Please wait...',
+    isLoad: false,
     pageNumber: 0,
     size: 5,
     total: '',
@@ -220,6 +221,7 @@
     },
     // fetch api for get bank list from database
     getBanks() {
+      this.isLoad = true
       const reqTime = Date.now()
       const path = '/api/bank'
       const apiKey = generateKey(path, reqTime)
@@ -254,6 +256,8 @@
           length: Math.ceil(this.total / this.size)
         }, (val, i) => i)
         // console.log(this.pages)
+        this.isLoad = false
+        this.showMessage = 'No data bank found!'
 
       }).catch(err => {
         Swal.fire({
@@ -411,6 +415,13 @@
         <!-- Loading -->
         <template x-if="banks.length == 0">
           <div class="my-10 pb-10 text-center text-2xl font-bold text-navy">
+            <template x-if="isLoad">
+              <div class="mb-5">
+                <div class="flex h-20 w-full items-center justify-center">
+                  <div class="loading"></div>
+                </div>
+              </div>
+            </template>
             <h1 x-text="showMessage"></h1>
           </div>
         </template>

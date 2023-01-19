@@ -57,6 +57,7 @@
 
   Alpine.data('listAdmin', () => ({
     showMessage: 'Please wait...',
+    isLoad: false,
     admins: [],
     pageNumber: 0,
     size: 5,
@@ -66,6 +67,7 @@
     pages: [],
     // fetch admin list from admin api
     getAdmins() {
+      this.isLoad = true
       // console.log(generateKey)
 
       const reqTime = Date.now()
@@ -104,6 +106,7 @@
         }, (val, i) => i)
         // console.log(this.pages)
 
+        this.isLoad = false
         this.showMessage = 'No data Admin found!'
       }).catch(err => {
         Swal.fire({
@@ -127,7 +130,7 @@
       // console.log(this.listAdmins)
 
       if (this.listAdmins.length == 0) {
-        this.showMessage = 'No data Submissions found!'
+        this.showMessage = 'No data admin found!'
       }
     }
   }))
@@ -253,6 +256,13 @@
 
         <template x-if="admins.length == 0">
           <div class="my-10 text-center text-2xl font-bold text-navy">
+            <template x-if="isLoad">
+              <div class="mb-5">
+                <div class="flex h-20 w-full items-center justify-center">
+                  <div class="loading"></div>
+                </div>
+              </div>
+            </template>
             <h1 x-text="showMessage"></h1>
           </div>
         </template>

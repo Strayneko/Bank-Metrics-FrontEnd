@@ -67,7 +67,9 @@
           })
         })
       },
+      isLoad: false,
       getUsers() {
+        this.isLoad = true
         const reqTime = Date.now();
         const path = '/api/user';
         const apiKey = generateKey(path, reqTime);
@@ -81,6 +83,7 @@
         }).then(res => res.json()).then(res => {
           this.users = res.data
           this.showMessage = 'No Data Found!'
+          this.isLoad = false
         }).catch(err => {
           Swal.fire({
             icon: 'error',
@@ -174,6 +177,13 @@
 
       <template x-if="users.length == 0">
         <div class="my-10 text-center text-2xl font-bold text-navy">
+          <template x-if="isLoad">
+            <div class="mb-5">
+              <div class="flex h-20 w-full items-center justify-center">
+                <div class="loading"></div>
+              </div>
+            </div>
+          </template>
           <h1 x-text="showMessage"></h1>
         </div>
       </template>
