@@ -15,7 +15,6 @@
       email: "",
       password: "",
       confirmed: true
-      confirmed: true
     },
     dataResponse: [],
     // login function
@@ -30,29 +29,9 @@
         })
         return
       }
-      const confirmation = this.user.confirmed
       data.append('email', this.user.email)
       data.append('password', this.user.password)
       data.append('confirmed', this.user.confirmed)
-
-
-      if(confirmation != true){
-        Swal.fire({
-            icon: 'error',
-            title: 'Oopss..',
-            text: 'Please Verify Your Email First!'
-        })
-        return
-      }
-
-      if(confirmation != true){
-        Swal.fire({
-            icon: 'error',
-            title: 'Oopss..',
-            text: 'Please Verify Your Email First!'
-        })
-        return
-      }
 
       fetch(`{{ env('API_URL') }}/api/auth/login`, {
           method: "POST",
