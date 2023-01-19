@@ -6,7 +6,7 @@
       <span x-text="(new Date(item.created_at)).toDateString()"></span>
       <span x-text="(new Date(item.created_at)).toLocaleTimeString()"></span>
     </li>
-    <li class="w-56" x-text="'$' + item.loan_amount.toLocaleString()"></li>
+    <li class="w-56" x-text="'$' + Number(item.loan_amount).toLocaleString()"></li>
   </div>
   <div class="flex flex-col gap-3 pl-12 lg:flex-row lg:items-center lg:pl-0" x-show="width > 768 ? true : showDetail"
     x-transition.duration.200ms>
