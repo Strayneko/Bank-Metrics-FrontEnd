@@ -36,16 +36,18 @@
           const end = start + this.size
           // console.log(start, end)
 
-          this.total = this.submissionData.data.loans.length
-          // console.log(this.total)
+          if (this.submissionData.data) {
+            this.total = this.submissionData.data.loans.length
+            // console.log(this.total)
 
-          this.loansData = this.submissionData.data.loans.slice(start, end)
-          // console.log(this.loansData)
+            this.loansData = await this.submissionData.data.loans.slice(start, end)
+            // console.log(this.loansData)
 
-          this.pages = Array.from({
-            length: Math.ceil(this.total / this.size)
-          }, (val, i) => i)
-          // console.log(this.pages)
+            this.pages = Array.from({
+              length: Math.ceil(this.total / this.size)
+            }, (val, i) => i)
+            // console.log(this.pages)
+          }
 
           if (this.loansData.length == 0) {
             this.showMessage = 'No data Submissions found!'
@@ -141,23 +143,18 @@
                 </div>
               </div>
             </template>
-            <h1 x-text="showMessage"></h1>
+            <h1 class="mb-5" x-text="showMessage"></h1>
+
+            <template x-if="submissionData.status == false">
+              <div>
+                <a href="{{ route('user.user-submission') }}"
+                  class="rounded-lg bg-orange-1 px-4 py-2 font-bold text-white transition-all duration-150 hover:-translate-y-1 hover:bg-orange-2/30 hover:shadow-sm hover:shadow-orange-1">Go
+                  to
+                  Submission!
+                </a>
+              </div>
+            </template>
           </div>
-
-        </template>
-
-        <template x-if="submissionData.status == false">
-          <div class="my-10 flex flex-col gap-5 pb-10 text-center text-2xl font-bold text-navy">
-            <h1 x-text="showMessage"></h1>
-            <div>
-              <a href="{{ route('user.user-submission') }}"
-                class="rounded-lg bg-orange-1 px-4 py-2 font-bold text-white transition-all duration-150 hover:-translate-y-1 hover:bg-orange-2/30 hover:shadow-sm hover:shadow-orange-1">Go
-                to
-                Submission!
-              </a>
-            </div>
-          </div>
-
         </template>
 
         <template x-if="submissionData.data">
