@@ -208,7 +208,7 @@
 
     // redirect to login page if user is not logged in for modal
     pageNumber: 0,
-    size: 2,
+    size: 5,
     total: '',
     bankLists: [],
     startAt: 0,
