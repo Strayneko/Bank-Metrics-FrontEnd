@@ -57,6 +57,7 @@
   }))
 
   Alpine.data('listUser', () => ({
+    isLoad: false,
     showMessage: 'Please wait...',
     users: [],
     pageNumber: 0,
@@ -66,6 +67,7 @@
     startAt: 0,
     pages: [],
     getUsers() {
+      this.isLoad = true
       const reqTime = Date.now()
       const path = '/api/user'
       const apiKey = generateKey(path, reqTime)
@@ -99,6 +101,7 @@
         // console.log(this.pages)
 
         this.showMessage = 'No data user found!'
+        this.isLoad = false
       })
     },
     async viewPage(index) {
@@ -148,6 +151,13 @@
         <!-- Loading -->
         <template x-if="users.length == 0">
           <div class="my-10 pb-10 text-center text-2xl font-bold text-navy">
+            <template x-if="isLoad">
+              <div class="mb-5">
+                <div class="flex h-20 w-full items-center justify-center">
+                  <div class="loading"></div>
+                </div>
+              </div>
+            </template>
             <h1 x-text="showMessage"></h1>
           </div>
         </template>

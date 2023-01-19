@@ -8,7 +8,18 @@
         </div>
       </div>
 
-      <form class="flex cursor-pointer flex-col px-10" x-on:submit.prevent="createNewBank()" x-ref="formAddBank">
+      <form class="relative flex cursor-pointer flex-col px-10" x-on:submit.prevent="createNewBank()" x-ref="formAddBank">
+
+        <template x-if="isSubmit">
+          <div
+            class="absolute inset-0 z-50 flex h-full w-full flex-col items-center justify-center bg-white/10 backdrop-blur-sm">
+            <div class="mb-5 flex h-20 w-full items-center justify-center">
+              <div class="loading"></div>
+            </div>
+            <h1 class="text-center text-xl font-bold text-navy">Please wait...</h1>
+          </div>
+        </template>
+
         <label for="name" class="relative w-full pb-3">
           <p class="font-bold text-navy">Name</p>
           <input type="text" name="name" id="name" class="peer mt-2 outline-none"

@@ -8,7 +8,19 @@
           class="relative h-2 w-[105%] rounded-lg bg-orange-1 after:absolute after:inset-0 after:m-auto after:h-5 after:w-16 after:rounded-xl after:bg-navy lg:w-[335px]">
         </div>
       </div>
-      <form x-on:submit.prevent="create()" x-ref="formAddAdmin" class="flex cursor-pointer flex-col gap-3 px-[39px]">
+      <form x-on:submit.prevent="create()" x-ref="formAddAdmin"
+        class="relative flex cursor-pointer flex-col gap-3 px-[39px]">
+
+        <template x-if="isSubmit">
+          <div
+            class="absolute inset-0 z-50 flex h-full w-full flex-col items-center justify-center bg-white/10 backdrop-blur-sm">
+            <div class="mb-5 flex h-20 w-full items-center justify-center">
+              <div class="loading"></div>
+            </div>
+            <h1 class="text-center text-xl font-bold text-navy">Please wait...</h1>
+          </div>
+        </template>
+
         <label for="name" class="relative w-full pb-3">
           <p class="font-bold text-navy">Name</p>
           <input type="text" name="name" id="name" class="peer mt-2 outline-none"
