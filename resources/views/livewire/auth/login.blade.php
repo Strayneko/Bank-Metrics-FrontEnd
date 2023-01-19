@@ -13,14 +13,26 @@
   Alpine.data("Login", () => ({
     user: {
       email: "",
-      password: ""
+      password: "",
+      confirmed: true
     },
     dataResponse: [],
     // login function
     login() {
       const data = new FormData()
+      const confirmation = this.user.confirmed
       data.append('email', this.user.email)
       data.append('password', this.user.password)
+      data.append('confirmed', this.user.confirmed)
+
+      if(confirmation != true){
+        Swal.fire({
+            icon: 'error',
+            title: 'Oops..',
+            text: 'Please Verify Your Email Firts'
+        })
+        return
+      }
 
       fetch(`{{ env('API_URL') }}/api/auth/login`, {
           method: "POST",
@@ -29,6 +41,7 @@
         .then(async (response) => {
           this.dataResponse = await response.json()
           // console.log(this.dataResponse.message)
+
 
           if (this.dataResponse.status == false) {
             // alert(this.dataResponse.message)

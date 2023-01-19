@@ -6,8 +6,10 @@
       password: ""
     },
     msg: '',
+    isLoad: false,
     // register function
     register() {
+      this.isLoad = true
       const data = new FormData()
       data.append('name', this.user.name)
       data.append('email', this.user.email)
@@ -18,6 +20,7 @@
           body: data
         })
         .then(async (response) => {
+          this.isLoad = false
           let data = await response.json()
           let status = data.status
           this.msg = data.message
@@ -39,7 +42,7 @@
           // success alert
           Swal.fire(
             'Success!',
-            'Registration Success!',
+            'Registration Success and please check your email to verification!',
             'success'
           ).then(res => {
             window.location.replace(`{{ env('APP_URL') }}/login`)
@@ -56,6 +59,13 @@
   }));
 </script>
 <div class="container" x-data="Register" x-init="checkLogged()">
+    <template x-if="isLoad">
+        <div class="fixed inset-0 z-[100] bg-white/10 backdrop-blur-sm">
+            <div class="flex h-screen w-full items-center justify-center bg-gray-1/30">
+                <div class="loading"></div>
+            </div>
+            </div>
+    </template>
   <div class="flex justify-between pt-[56px]">
     <div class="">
       <div class="">
