@@ -194,7 +194,7 @@
               </li>
             </template>
 
-            <li class="-mr-[.25px]">
+            <li class="-mr-[.25px]" :hidden="pages.length - 1 == 0">
               <button type="button" x-on:click="viewPage(pages.length - 1)"
                 class="flex h-9 w-6 cursor-pointer items-center justify-center outline outline-1 outline-orange-1"
                 x-text="pages.length" :class="pageNumber == pages.length - 1 ? 'bg-orange-1 text-white' : ''"></button>
