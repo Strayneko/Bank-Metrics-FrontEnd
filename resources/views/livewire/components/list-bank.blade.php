@@ -15,11 +15,11 @@
       <span class="lg:hidden">Max Loan : </span>
       <span x-text="bank.loaning_percentage + '%'"></span>
     </li>
-    <li class="flex items-center gap-4 lg:w-48">
+    <li class="flex items-center gap-3 lg:w-48">
       <a x-on:click="isShow = !isShow"
         class="cursor-pointer rounded-lg bg-orange-1 px-3 py-1 text-center text-white transition-all duration-300 hover:bg-[#EAA765]">Detail</a>
       <a x-on:click="isShowUpdate = !isShowUpdate"
-        class="cursor-pointer rounded-lg bg-orange-1 px-3 py-1 text-center text-white transition-all duration-300 hover:bg-[#EAA765]">Update</a>
+        class="cursor-pointer rounded-lg bg-navy/40 px-3 py-1 text-center text-white transition-all duration-300 hover:bg-[#EAA765]">Update</a>
 
       <a x-on:click="deleteBank(bank.id)"
         class="cursor-pointer rounded-lg bg-red-500 px-3 py-1 text-center text-white transition-all duration-300 hover:bg-[#EAA765]">Delete</a>

@@ -62,7 +62,7 @@
       </li>
     </ul>
     <a x-on:click="isShow = false"
-      class="relative z-10 inline-block w-full rounded-lg border-2 border-orange-1 bg-transparent px-20 py-3 text-center font-bold text-navy outline-none transition-all duration-200 before:absolute before:left-0 before:top-0 before:-z-10 before:block before:h-full before:w-0 before:bg-orange-1 before:transition-all before:duration-200 hover:text-white hover:before:w-full disabled:bg-orange-1 disabled:text-white">Back</a>
+      class="relative z-10 inline-block w-full cursor-pointer rounded-lg border-2 border-orange-1 bg-transparent px-20 py-3 text-center font-bold text-navy outline-none transition-all duration-200 before:absolute before:left-0 before:top-0 before:-z-10 before:block before:h-full before:w-0 before:bg-orange-1 before:transition-all before:duration-200 hover:text-white hover:before:w-full disabled:bg-orange-1 disabled:text-white">Back</a>
   </div>
 
   <div class="fixed inset-0 z-10 bg-white/10 backdrop-blur-sm" x-on:click="isShow = false"></div>
