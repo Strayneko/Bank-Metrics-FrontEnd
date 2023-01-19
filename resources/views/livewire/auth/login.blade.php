@@ -21,11 +21,7 @@
     login() {
       const data = new FormData()
       const confirmation = this.user.confirmed
-      data.append('email', this.user.email)
-      data.append('password', this.user.password)
-      data.append('confirmed', this.user.confirmed)
-
-      if(confirmation != true){
+      if(confirmation === false){
         Swal.fire({
             icon: 'error',
             title: 'Oops..',
@@ -33,6 +29,10 @@
         })
         return
       }
+      data.append('email', this.user.email)
+      data.append('password', this.user.password)
+      data.append('confirmed', this.user.confirmed)
+
 
       fetch(`{{ env('API_URL') }}/api/auth/login`, {
           method: "POST",
