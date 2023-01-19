@@ -157,56 +157,62 @@
       }).then((result) => {
         if (result.isConfirmed) {
           /**
-          * Fetch api to delete data bank
-          */
+           * Fetch api to delete data bank
+           */
           fetch(`{{ env('API_URL') }}${path}`, {
-            method: "POST",
-            headers: {
-              'Content-type': 'application/json;charset=UTF-8',
-              'Authorization': localStorage.getItem('token'),
-              'Request-Time': reqTime,
-              'D-App-Key': apiKey
-            }
-          })
-          .then(async (response) => {
-          let data = await response.json()
-          let status = data.status
-          this.message = data.message
-
-          let msg = ``
-          for (m of this.message) {
-            msg += `<p>${m}</p>`
-          }
-
-          if (status == false) {
-            Swal.fire({
-              icon: 'error',
-              title: 'Oops...',
-              html: msg
+              method: "POST",
+              headers: {
+                'Content-type': 'application/json;charset=UTF-8',
+                'Authorization': localStorage.getItem('token'),
+                'Request-Time': reqTime,
+                'D-App-Key': apiKey
+              }
             })
-            // window.location.replace('')
-            return
-          }
-          Swal.fire({
-            icon: 'success',
-            title: 'Success!',
-            text: 'Delete Bank Success!'
-          }).then(res => {
-            window.location.replace(`{{ env('APP_URL') }}/dashboard/bank`)
-          })
-        }).catch(err => {
-          Swal.fire({
-            icon: 'error',
-            title: 'Error!',
-            text: 'Internal Server Error! Please Try Again Later.',
-          })
-        })
+            .then(async (response) => {
+              let data = await response.json()
+              let status = data.status
+              this.message = data.message
+
+              let msg = ``
+              for (m of this.message) {
+                msg += `<p>${m}</p>`
+              }
+
+              if (status == false) {
+                Swal.fire({
+                  icon: 'error',
+                  title: 'Oops...',
+                  html: msg
+                })
+                // window.location.replace('')
+                return
+              }
+              Swal.fire({
+                icon: 'success',
+                title: 'Success!',
+                text: 'Delete Bank Success!'
+              }).then(res => {
+                window.location.replace(`{{ env('APP_URL') }}/dashboard/bank`)
+              })
+            }).catch(err => {
+              Swal.fire({
+                icon: 'error',
+                title: 'Error!',
+                text: 'Internal Server Error! Please Try Again Later.',
+              })
+            })
         }
       })
     },
 
 
     // redirect to login page if user is not logged in for modal
+    pageNumber: 0,
+    size: 2,
+    total: '',
+    bankLists: [],
+    startAt: 0,
+    pages: [],
     checkLogged() {
       if (!this.token) {
         window.location.href(`{{ route('home') }}`)
@@ -232,6 +238,23 @@
       }).then(async res => {
         this.banks = await res.json()
         // console.log(this.banks)
+
+        // console.log(this.pageNumber)
+        const start = this.pageNumber * this.size
+        const end = start + this.size
+        // console.log(start, end)
+
+        this.total = this.banks.data.length
+        // console.log(this.total)
+
+        this.bankLists = this.banks.data.slice(start, end)
+        // console.log(this.bankLists)
+
+        this.pages = Array.from({
+          length: Math.ceil(this.total / this.size)
+        }, (val, i) => i)
+        // console.log(this.pages)
+
       }).catch(err => {
         Swal.fire({
           icon: 'error',
@@ -239,6 +262,26 @@
           text: 'Internal Server Error! Please Try Again Later.',
         })
       })
+    },
+    async viewPage(index) {
+      this.bankLists = []
+      this.pageNumber = index
+
+      const start = this.pageNumber * this.size
+      const end = start + this.size
+      // console.log(start, end)
+
+      this.startAt = start
+      this.total = this.banks.data.length
+      // console.log(this.total)
+
+      this.bankLists = await this.banks.data.slice(start, end)
+      // console.log(this.bankLists)
+
+      this.pages = Array.from({
+        length: Math.ceil(this.total / this.size)
+      }, (val, i) => i)
+      // console.log(this.pages)
     }
   }))
 
@@ -373,9 +416,84 @@
         </template>
 
         <!-- call table list template -->
-        <template x-for="(bank, i) of banks.data">
+        <template x-for="(bank, i) of bankLists">
           @livewire('components.list-bank')
         </template>
+
+        {{-- Start pagination --}}
+        <div class="flex justify-end py-8 px-10">
+          <ul class="flex w-max items-center rounded-md font-semibold text-orange-1 outline outline-2 outline-orange-1">
+            <li>
+              <button class="group py-1 pl-3 disabled:cursor-not-allowed" type="button" x-on:click="viewPage(0)"
+                :disabled="pageNumber == 0">
+                <svg width="22" height="22" viewBox="0 0 22 22" fill="none"
+                  xmlns="http://www.w3.org/2000/svg">
+                  <path d="M11 4L3 11L11 19" stroke="#FF5927" stroke-width="3.77953" stroke-linejoin="round"
+                    class="group-hover:animate-arrowColor1" />
+                  <path d="M20 4L12 11L20 19" stroke="#FCC997" stroke-width="3.77953" stroke-linejoin="round"
+                    class="group-hover:animate-arrowColor2" />
+                </svg>
+              </button>
+            </li>
+
+            <li>
+              <button class="group py-1 pr-4 disabled:cursor-not-allowed" type="button"
+                x-on:click="viewPage(pageNumber - 1)" :disabled="pageNumber == 0">
+                <svg width="22" height="22" viewBox="0 0 22 22" fill="none"
+                  xmlns="http://www.w3.org/2000/svg">
+                  <path d="M20 4L12 11L20 19" stroke="#FCC997" stroke-width="3.77953" stroke-linejoin="round"
+                    class="transition-all duration-200 group-hover:stroke-orange-2/60" />
+                </svg>
+              </button>
+            </li>
+
+            <li class="-mr-[.25px]">
+              <button type="button" x-on:click="viewPage(0)"
+                class="flex h-9 w-6 cursor-pointer items-center justify-center outline outline-1 outline-orange-1"
+                :class="pageNumber == 0 ? 'bg-orange-1 text-white' : ''">1</button>
+            </li>
+
+            <template x-for="num in pages">
+              <li class="-mr-[.25px]" :hidden="pageNumber != num || pageNumber == 0 || pageNumber == pages.length - 1">
+                <button type="button" x-on:click="viewPage(num)"
+                  class="flex h-9 w-6 cursor-pointer items-center justify-center outline outline-1 outline-orange-1"
+                  x-text="num + 1" :class="pageNumber == num ? 'bg-orange-1 text-white' : ''"></button>
+              </li>
+            </template>
+
+            <li class="-mr-[.25px]" :hidden="pages.length - 1 == 0">
+              <button type="button" x-on:click="viewPage(pages.length - 1)"
+                class="flex h-9 w-6 cursor-pointer items-center justify-center outline outline-1 outline-orange-1"
+                x-text="pages.length" :class="pageNumber == pages.length - 1 ? 'bg-orange-1 text-white' : ''"></button>
+            </li>
+
+            <li>
+              <button class="group py-1 pl-4 disabled:cursor-not-allowed" type="button"
+                x-on:click="viewPage(pageNumber + 1)" :disabled="pageNumber == (pages.length - 1)">
+                <svg width="22" height="22" viewBox="0 0 22 22" fill="none"
+                  xmlns="http://www.w3.org/2000/svg">
+                  <path d="M2.44653 4L10.4465 11L2.44653 19" stroke="#FCC997" stroke-width="3.77953"
+                    stroke-linejoin="round" class="transition-all duration-200 group-hover:stroke-orange-2/60" />
+                </svg>
+              </button>
+            </li>
+
+            <li>
+              <button class="group py-1 pr-3 disabled:cursor-not-allowed" type="button"
+                x-on:click="viewPage(pages.length - 1)" :disabled="pageNumber == (pages.length - 1)">
+                <svg width="22" height="22" viewBox="0 0 22 22" fill="none"
+                  xmlns="http://www.w3.org/2000/svg">
+                  <path d="M11.4465 4L19.4465 11L11.4465 19" stroke="#FF5927" stroke-width="3.77953"
+                    stroke-linejoin="round" class="group-hover:animate-arrowColor1" />
+                  <path d="M2.44653 4L10.4465 11L2.44653 19" stroke="#FCC997" stroke-width="3.77953"
+                    stroke-linejoin="round" class="group-hover:animate-arrowColor2" />
+                </svg>
+              </button>
+            </li>
+          </ul>
+        </div>
+        {{-- End Pagination --}}
+
       </div>
     </div>
   </section>

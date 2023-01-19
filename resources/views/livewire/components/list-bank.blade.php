@@ -6,7 +6,7 @@
 }"
   x-on:click="showBank = !showBank">
   <div class="flex items-center gap-3">
-    <li class="w-10 text-center" x-text="i + 1"></li>
+    <li class="w-10 text-center" x-text="startAt + i + 1"></li>
     <li class="w-96" x-text="bank.name"></li>
   </div>
   <div class="flex flex-col gap-3 pl-11 lg:flex-row lg:items-center lg:pl-0" x-show="width > 768 ? true : showBank"
