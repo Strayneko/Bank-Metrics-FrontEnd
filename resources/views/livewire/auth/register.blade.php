@@ -42,7 +42,7 @@
           // success alert
           Swal.fire(
             'Success!',
-            'Registration Success and please check your email to verification And Please Check Your Email To Verification',
+            'Registration Success! Please Check Your Email To Verification',
             'success'
           ).then(res => {
             window.location.replace(`{{ env('APP_URL') }}/login`)
@@ -59,13 +59,13 @@
   }));
 </script>
 <div class="container" x-data="Register" x-init="checkLogged()">
-    <template x-if="isLoad">
-        <div class="fixed inset-0 z-[100] bg-white/10 backdrop-blur-sm">
-            <div class="flex h-screen w-full items-center justify-center bg-gray-1/30">
-                <div class="loading"></div>
-            </div>
-            </div>
-    </template>
+  <template x-if="isLoad">
+    <div class="fixed inset-0 z-[100] bg-white/10 backdrop-blur-sm">
+      <div class="flex h-screen w-full items-center justify-center bg-gray-1/30">
+        <div class="loading"></div>
+      </div>
+    </div>
+  </template>
   <div class="flex justify-between pt-[56px]">
     <div class="">
       <div class="">
