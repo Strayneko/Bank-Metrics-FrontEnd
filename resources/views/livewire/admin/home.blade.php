@@ -81,7 +81,7 @@
           method: 'GET',
           headers,
         }).then(res => res.json()).then(res => {
-          this.users = res.data
+          this.users = res.data.slice(0, 5)
           this.showMessage = 'No Data Found!'
           this.isLoad = false
         }).catch(err => {
