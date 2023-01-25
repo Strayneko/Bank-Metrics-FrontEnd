@@ -131,6 +131,82 @@
       }
     }
   }))
+
+  Alpine.data('submission', () => ({
+    showUser: false,
+    width: (window.innerWidth > 0) ? window.innerWidth : screen.width,
+    showDetail: false,
+
+    showMessage: 'Please wait...',
+    submissionData: [],
+    pageNumber: 0,
+    size: 5,
+    total: '',
+    listSubmissions: [],
+    startAt: 0,
+    pages: [],
+    getSubmission(id) {
+      const reqTime = Date.now()
+      const path = `/api/loan/list`
+      const apiKey = generateKey(path, reqTime)
+
+      /** 
+       * Get loan list by user id
+       */
+      fetch(`{{ env('API_URL') }}${path}?user_id=${id}`, {
+        method: 'GET',
+        headers: {
+          'Content-type': 'application/json;charset=UTF-8',
+          'Authorization': localStorage.getItem('token'),
+          'Request-Time': reqTime,
+          'D-App-Key': apiKey
+        }
+      }).then(async res => {
+        this.submissionData = await res.json()
+        // console.log(this.submissionData)
+
+        if (this.submissionData.data) {
+          const start = this.pageNumber * this.size
+          const end = start + this.size
+          this.total = this.submissionData.data.loans.length
+
+          this.listSubmissions = this.submissionData.data.loans.slice(start, end)
+          // console.log(this.listSubmissions)
+
+          this.pages = Array.from({
+            length: Math.ceil(this.total / this.size)
+          }, (val, i) => i)
+          // console.log(this.pages)
+        }
+
+
+        this.showMessage = 'No data submission found!'
+      }).catch(err => {
+        Swal.fire({
+          icon: 'error',
+          title: 'Error!',
+          text: 'Internal Server Error! Please Try Again Later.',
+        })
+      })
+    },
+    async viewPage(index) {
+      // console.log(this.submissionData)
+      this.listSubmissions = []
+      this.pageNumber = index
+
+      const start = this.pageNumber * this.size
+      const end = start + this.size
+      // console.log(start, end)
+
+      this.startAt = start
+      this.listSubmissions = await this.submissionData.data.loans.slice(start, end)
+      // console.log(this.listSubmissions)
+
+      if (this.listSubmissions.length == 0) {
+        this.showMessage = 'No data Submissions found!'
+      }
+    }
+  }))
 </script>
 <main class="container relative flex justify-end font-poppins" x-data="listUserDashboard" x-init="checkLogin()">
   <template x-if="isLoading">
@@ -152,10 +228,10 @@
 
       <div x-data="listUser" x-init="getUsers()">
         <div class="relative mb-4 flex w-full justify-end pr-16">
-          <div class="relative w-72">
+          <div class="relative w-full lg:w-72">
             <input type="text" name="search" id="search" x-model="search" x-on:keyup="viewPage(0)"
               placeholder="Search User..."
-              class="relative rounded-lg border-2 border-transparent py-2 pl-9 outline-none transition-all duration-200 hover:border-orange-1 focus:border-orange-1 active:border-orange-1">
+              class="relative rounded-lg border-2 border-transparent bg-gray-1/40 py-2 pl-9 outline-none transition-all duration-200 hover:border-orange-1 focus:border-orange-1 active:border-orange-1 lg:bg-white">
             <div class="absolute inset-y-0 left-3 mt-[14px] w-4">
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" class="fill-gray-2">
                 <path

@@ -1,79 +1,4 @@
 <section class="absolute inset-x-0 -top-32 mx-auto w-full pb-12">
-
-  <script>
-    Alpine.data('submission', () => ({
-      showMessage: 'Please wait...',
-      submissionData: [],
-      pageNumber: 0,
-      size: 5,
-      total: '',
-      listSubmissions: [],
-      startAt: 0,
-      pages: [],
-      getSubmission(id) {
-        const reqTime = Date.now()
-        const path = `/api/loan/list`
-        const apiKey = generateKey(path, reqTime)
-
-        /** 
-         * Get loan list by user id
-         */
-        fetch(`{{ env('API_URL') }}${path}?user_id=${id}`, {
-          method: 'GET',
-          headers: {
-            'Content-type': 'application/json;charset=UTF-8',
-            'Authorization': localStorage.getItem('token'),
-            'Request-Time': reqTime,
-            'D-App-Key': apiKey
-          }
-        }).then(async res => {
-          this.submissionData = await res.json()
-          // console.log(this.submissionData)
-
-          if (this.submissionData.data) {
-            const start = this.pageNumber * this.size
-            const end = start + this.size
-            this.total = this.submissionData.data.loans.length
-
-            this.listSubmissions = this.submissionData.data.loans.slice(start, end)
-            // console.log(this.listSubmissions)
-
-            this.pages = Array.from({
-              length: Math.ceil(this.total / this.size)
-            }, (val, i) => i)
-            // console.log(this.pages)
-          }
-
-
-          this.showMessage = 'No data submission found!'
-        }).catch(err => {
-          Swal.fire({
-            icon: 'error',
-            title: 'Error!',
-            text: 'Internal Server Error! Please Try Again Later.',
-          })
-        })
-      },
-      async viewPage(index) {
-        // console.log(this.submissionData)
-        this.listSubmissions = []
-        this.pageNumber = index
-
-        const start = this.pageNumber * this.size
-        const end = start + this.size
-        // console.log(start, end)
-
-        this.startAt = start
-        this.listSubmissions = await this.submissionData.data.loans.slice(start, end)
-        // console.log(this.listSubmissions)
-
-        if (this.listSubmissions.length == 0) {
-          this.showMessage = 'No data Submissions found!'
-        }
-      }
-    }))
-  </script>
-
   <div class="relative z-20 mx-auto w-full rounded-xl bg-white py-10 px-6 shadow-md shadow-navy/60 lg:w-3/5 lg:p-10">
     <div class="relative mx-auto mb-6 flex w-max flex-col items-center justify-center gap-3">
       <h1 class="text-3xl font-bold text-orange-2">Detail <span class="text-navy">User</span></h1>
@@ -133,10 +58,10 @@
     </ul>
 
     <div class="w-full">
-      <h1 class="py-3 text-center text-lg font-semibold text-navy">User's Submissions</h1>
+      <h1 class="py-3 text-center text-xl font-bold text-navy">User's Submissions</h1>
     </div>
 
-    <div class="relative mx-auto w-full rounded-xl bg-gray-1/30" x-data="submission" x-init="getSubmission(user.id)">
+    <div class="relative mx-auto w-full rounded-xl bg-gray-1/30">
       <ul class="flex gap-3 rounded-t-xl bg-orange-1 px-3 py-4 font-semibold text-navy">
         <li class="w-10 text-center">No</li>
         <li class="w-32 lg:w-64">Date</li>
@@ -144,7 +69,7 @@
       </ul>
 
       <template x-if="listSubmissions.length == 0">
-        <div class="my-10 text-center text-2xl font-bold text-navy">
+        <div class="py-7 text-center text-xl font-bold text-navy">
           <h1 x-text="showMessage"></h1>
         </div>
       </template>
