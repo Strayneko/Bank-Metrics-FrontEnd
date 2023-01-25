@@ -120,7 +120,9 @@
   </script>
 
   <div class="mx-auto w-11/12 rounded-xl pb-6 lg:mx-0 lg:w-full lg:bg-gray-1 lg:p-6">
-    <h1 class="mx-auto mb-10 w-max text-3xl font-bold" x-text="'Welcome ' + resData.data.name"></h1>
+    <div class="w-full">
+      <h1 class="mx-auto mb-10 text-center text-3xl font-bold" x-text="'Welcome ' + resData.data.name"></h1>
+    </div>
 
     <template x-if="resData.data.profile">
       <div class="relative rounded-xl bg-gray-1/30 lg:bg-white" x-data="submission" x-init="getSubmission()">
