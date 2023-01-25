@@ -1,5 +1,6 @@
 <script>
   Alpine.data('listBankDashboard', () => ({
+    showMessage: 'Please wait...',
     showSidebar: false,
     isShow: false,
     token: localStorage.getItem('token'),
@@ -206,7 +207,7 @@
 
 
     // redirect to login page if user is not logged in for modal
-    showMessage: 'Please wait...',
+
     isLoad: false,
     pageNumber: 0,
     size: 5,
@@ -220,7 +221,7 @@
       }
     },
 
-    showMessage: 'Please wait...',
+    showMessages: 'Please wait...',
     // fetch api for get bank list from database
     getBanks() {
       this.isLoad = true
@@ -242,7 +243,7 @@
       }).then(async res => {
         this.banks = await res.json()
         // console.log(this.banks)
-        this.showMessage = 'No data Bank found!'
+        this.showMessages = 'No data Bank found!'
         // console.log(this.pageNumber)
         const start = this.pageNumber * this.size
         const end = start + this.size
@@ -251,7 +252,7 @@
         this.total = this.banks.data.length
         // console.log(this.total)
 
-        this.bankLists = this.banks.data.slice(start, end)
+        this.bankLists = await this.banks.data.slice(start, end)
         // console.log(this.bankLists)
 
         this.pages = Array.from({
@@ -415,8 +416,8 @@
           <li class="hidden w-48 lg:block">Action</li>
         </ul>
         <!-- Loading -->
-        <template x-if="banks.length == 0">
-          <div class="my-10 pb-10 text-center text-2xl font-bold text-navy">
+        <template x-if="bankLists.length == 0">
+          <div class="my-10 text-center text-2xl font-bold text-navy">
             <template x-if="isLoad">
               <div class="mb-5">
                 <div class="flex h-20 w-full items-center justify-center">
