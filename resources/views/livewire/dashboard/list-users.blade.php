@@ -66,6 +66,7 @@
     listUsers: [],
     startAt: 0,
     pages: [],
+    search: '',
     getUsers() {
       this.isLoad = true
       const reqTime = Date.now()
@@ -117,6 +118,14 @@
       this.listUsers = await this.users.slice(start, end)
       // console.log(this.listUsers)
 
+      if (this.search != '') {
+        this.listUsers = []
+        this.listUsers = await this.users.filter(user => {
+          // console.log('hello');
+          return user.name.toLowerCase().includes(this.search.toLowerCase())
+        })
+      }
+
       if (this.listUsers.length == 0) {
         this.showMessage = 'No data users found!'
       }
@@ -141,39 +150,54 @@
         </div>
       </div>
 
-      <div class="relative rounded-xl bg-white" x-data="listUser" x-init="getUsers()">
-        <ul class="flex gap-3 rounded-t-xl bg-orange-1 px-3 py-4 font-semibold text-navy">
-          <li class="w-10 text-center">No</li>
-          <li class="w-56 lg:w-80">Name</li>
-          <li class="hidden w-80 lg:block">Email</li>
-          <li class="hidden w-24 lg:block">Action</li>
-        </ul>
-        <!-- Loading -->
-        <template x-if="users.length == 0">
-          <div class="my-10 pb-10 text-center text-2xl font-bold text-navy">
-            <template x-if="isLoad">
-              <div class="mb-5">
-                <div class="flex h-20 w-full items-center justify-center">
-                  <div class="loading"></div>
-                </div>
-              </div>
-            </template>
-            <h1 x-text="showMessage"></h1>
+      <div x-data="listUser" x-init="getUsers()">
+        <div class="relative mb-4 flex w-full justify-end pr-16">
+          <div class="relative w-72">
+            <input type="text" name="search" id="search" x-model="search" x-on:keyup="viewPage(0)"
+              placeholder="Search User..."
+              class="relative rounded-lg border-2 border-transparent py-2 pl-9 outline-none transition-all duration-200 hover:border-orange-1 focus:border-orange-1 active:border-orange-1">
+            <div class="absolute inset-y-0 left-3 mt-[14px] w-4">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" class="fill-gray-2">
+                <path
+                  d="M416 208c0 45.9-14.9 88.3-40 122.7L502.6 457.4c12.5 12.5 12.5 32.8 0 45.3s-32.8 12.5-45.3 0L330.7 376c-34.4 25.2-76.8 40-122.7 40C93.1 416 0 322.9 0 208S93.1 0 208 0S416 93.1 416 208zM208 352c79.5 0 144-64.5 144-144s-64.5-144-144-144S64 128.5 64 208s64.5 144 144 144z" />
+              </svg>
+            </div>
           </div>
-        </template>
-        <!-- call table list from template -->
-        <template x-for="(user, i) of listUsers">
-          @livewire('components.list-user-action')
-        </template>
+        </div>
 
-        <template x-if="listUsers.length > 0">
-          {{-- Start pagination --}}
-          @livewire('components.paginate')
-          {{-- End Pagination --}}
-        </template>
+        <div class="relative rounded-xl bg-white">
+          <ul class="flex gap-3 rounded-t-xl bg-orange-1 px-3 py-4 font-semibold text-navy">
+            <li class="w-10 text-center">No</li>
+            <li class="w-56 lg:w-80">Name</li>
+            <li class="hidden w-80 lg:block">Email</li>
+            <li class="hidden w-24 lg:block">Action</li>
+          </ul>
+          <!-- Loading -->
+          <template x-if="listUsers.length == 0">
+            <div class="my-10 pb-10 text-center text-2xl font-bold text-navy">
+              <template x-if="isLoad">
+                <div class="mb-5">
+                  <div class="flex h-20 w-full items-center justify-center">
+                    <div class="loading"></div>
+                  </div>
+                </div>
+              </template>
+              <h1 x-text="showMessage"></h1>
+            </div>
+          </template>
+          <!-- call table list from template -->
+          <template x-for="(user, i) of listUsers">
+            @livewire('components.list-user-action')
+          </template>
 
+          <template x-if="listUsers.length > 0">
+            {{-- Start pagination --}}
+            @livewire('components.paginate')
+            {{-- End Pagination --}}
+          </template>
+
+        </div>
       </div>
-
     </div>
   </section>
 </main>
