@@ -218,7 +218,7 @@
       }
     },
 
-    showMessage: 'Please wait...',
+    showMessages: 'Please wait...',
     // fetch api for get bank list from database
     getBanks() {
       const reqTime = Date.now()
@@ -239,7 +239,7 @@
       }).then(async res => {
         this.banks = await res.json()
         // console.log(this.banks)
-        this.showMessage = 'No data Bank found!'
+        this.showMessages = 'No data Bank found!'
         // console.log(this.pageNumber)
         const start = this.pageNumber * this.size
         const end = start + this.size
@@ -412,7 +412,7 @@
         <!-- Loading -->
         <template x-if="banks.length == 0">
           <div class="my-10 pb-10 text-center text-2xl font-bold text-navy">
-            <h1 x-text="showMessage"></h1>
+            <h1 x-text="showMessages"></h1>
           </div>
         </template>
 
