@@ -219,6 +219,8 @@
         window.location.href(`{{ route('home') }}`)
       }
     },
+
+    showMessage: 'Please wait...',
     // fetch api for get bank list from database
     getBanks() {
       this.isLoad = true
@@ -240,7 +242,7 @@
       }).then(async res => {
         this.banks = await res.json()
         // console.log(this.banks)
-
+        this.showMessage = 'No data Bank found!'
         // console.log(this.pageNumber)
         const start = this.pageNumber * this.size
         const end = start + this.size
