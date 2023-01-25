@@ -164,6 +164,10 @@
     </div>
     {{-- End Section Navbar --}}
 
+    <div class="w-full">
+      <h1 class="my-5 px-2 text-2xl font-semibold text-navy">Newest User</h1>
+    </div>
+
     {{-- Start Section Table --}}
     <div class="overflow-hidden rounded-xl bg-gray-1/30 lg:bg-white">
       <ul class="flex gap-3 bg-orange-1 px-3 py-4 font-semibold text-navy">
@@ -191,6 +195,13 @@
       <template x-for="(user, i) of users">
         @livewire('components.list-user')
       </template>
+
+      <div class="flex w-full justify-end px-6 pb-6" x-show="users.length > 0">
+        <a href="{{ route('user.list') }}"
+          class="rounded-lg bg-orange-1 px-4 py-2 font-bold text-white transition-all duration-200 hover:bg-orange-2/70">View
+          All
+          Users</a>
+      </div>
 
     </div>
     {{-- End Section Table --}}

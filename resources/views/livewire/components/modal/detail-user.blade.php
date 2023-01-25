@@ -132,6 +132,10 @@
       </template>
     </ul>
 
+    <div class="w-full">
+      <h1 class="py-3 text-center text-lg font-semibold text-navy">User's Submissions</h1>
+    </div>
+
     <div class="relative mx-auto w-full rounded-xl bg-gray-1/30" x-data="submission" x-init="getSubmission(user.id)">
       <ul class="flex gap-3 rounded-t-xl bg-orange-1 px-3 py-4 font-semibold text-navy">
         <li class="w-10 text-center">No</li>
