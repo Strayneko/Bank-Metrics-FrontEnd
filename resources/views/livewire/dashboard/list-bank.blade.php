@@ -1,7 +1,6 @@
 <script>
   Alpine.data('listBankDashboard', () => ({
     showSidebar: false,
-    showMessage: 'Please wait...',
     isShow: false,
     token: localStorage.getItem('token'),
     isLoading: true,
@@ -218,6 +217,8 @@
         window.location.href(`{{ route('home') }}`)
       }
     },
+
+    showMessage: 'Please wait...',
     // fetch api for get bank list from database
     getBanks() {
       const reqTime = Date.now()
@@ -238,7 +239,7 @@
       }).then(async res => {
         this.banks = await res.json()
         // console.log(this.banks)
-
+        this.showMessage = 'No data Bank found!'
         // console.log(this.pageNumber)
         const start = this.pageNumber * this.size
         const end = start + this.size
