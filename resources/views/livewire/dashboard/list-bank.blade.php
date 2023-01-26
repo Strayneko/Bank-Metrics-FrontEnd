@@ -421,23 +421,25 @@
         @livewire('components.modal.add-bank')
       </div>
 
-      <div class="mb-6">
-        <a x-on:click="isAddActive = !isAddActive"
-          class="inline-block cursor-pointer rounded-md bg-white px-6 py-2 font-semibold text-navy shadow-md shadow-navy/30 transition-all duration-300 hover:-translate-y-0.5 hover:shadow-lg hover:shadow-navy/40">Create
-          Bank</a>
-      </div>
-
       <div x-data="listBank" x-init="getBanks()">
-        <div class="relative mb-4 flex w-full justify-end">
-          <div class="relative w-full lg:w-72">
-            <input type="text" name="search" id="search" x-model="search" x-on:keyup="viewPage(0)"
-              placeholder="Search Bank..."
-              class="relative w-full rounded-lg border-2 border-transparent bg-gray-1/40 py-2 pl-9 outline-none transition-all duration-200 hover:border-orange-1 focus:border-orange-1 active:border-orange-1 lg:bg-white">
-            <div class="absolute inset-y-0 left-3 mt-[14px] w-4">
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" class="fill-gray-2">
-                <path
-                  d="M416 208c0 45.9-14.9 88.3-40 122.7L502.6 457.4c12.5 12.5 12.5 32.8 0 45.3s-32.8 12.5-45.3 0L330.7 376c-34.4 25.2-76.8 40-122.7 40C93.1 416 0 322.9 0 208S93.1 0 208 0S416 93.1 416 208zM208 352c79.5 0 144-64.5 144-144s-64.5-144-144-144S64 128.5 64 208s64.5 144 144 144z" />
-              </svg>
+        <div class="flex flex-col lg:flex-row lg:justify-between">
+          <div class="mb-6">
+            <a x-on:click="isAddActive = !isAddActive"
+              class="inline-block cursor-pointer rounded-md bg-white px-6 py-2 font-semibold text-navy shadow-md shadow-navy/30 transition-all duration-300 hover:-translate-y-0.5 hover:shadow-lg hover:shadow-navy/40">Create
+              Bank</a>
+          </div>
+
+          <div class="relative mb-4 flex w-full justify-end lg:w-max">
+            <div class="relative w-full lg:w-72">
+              <input type="text" name="search" id="search" x-model="search" x-on:keyup="viewPage(0)"
+                placeholder="Search Bank..."
+                class="relative w-full rounded-lg border-2 border-transparent bg-gray-1/40 py-2 pl-9 outline-none transition-all duration-200 hover:border-orange-1 focus:border-orange-1 active:border-orange-1 lg:bg-white">
+              <div class="absolute inset-y-0 left-3 mt-[14px] w-4">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" class="fill-gray-2">
+                  <path
+                    d="M416 208c0 45.9-14.9 88.3-40 122.7L502.6 457.4c12.5 12.5 12.5 32.8 0 45.3s-32.8 12.5-45.3 0L330.7 376c-34.4 25.2-76.8 40-122.7 40C93.1 416 0 322.9 0 208S93.1 0 208 0S416 93.1 416 208zM208 352c79.5 0 144-64.5 144-144s-64.5-144-144-144S64 128.5 64 208s64.5 144 144 144z" />
+                </svg>
+              </div>
             </div>
           </div>
         </div>
