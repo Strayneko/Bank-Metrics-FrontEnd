@@ -215,6 +215,7 @@
     bankLists: [],
     startAt: 0,
     pages: [],
+    search: '',
     checkLogged() {
       if (!this.token) {
         window.location.href(`{{ route('home') }}`)
@@ -279,11 +280,29 @@
       // console.log(start, end)
 
       this.startAt = start
-      this.total = this.banks.data.length
+      this.total = await this.banks.data.length
       // console.log(this.total)
+
+      this.pages = Array.from({
+        length: Math.ceil(this.total / this.size)
+      }, (val, i) => i)
 
       this.bankLists = await this.banks.data.slice(start, end)
       // console.log(this.bankLists)
+
+      if (this.search != '') {
+        this.bankLists = []
+        const bankFilter = await this.banks.data.filter(bank => {
+          return bank.name.toLowerCase().includes(this.search.toLowerCase())
+        })
+
+        this.total = bankFilter.length
+        this.pages = Array.from({
+          length: Math.ceil(this.total / this.size)
+        }, (val, i) => i)
+
+        this.bankLists = bankFilter.slice(start, end)
+      }
 
       this.pages = Array.from({
         length: Math.ceil(this.total / this.size)
@@ -408,39 +427,57 @@
           Bank</a>
       </div>
 
-      <div class="overflow-hidden rounded-xl bg-gray-1/30 lg:bg-white" x-data="listBank" x-init="getBanks()">
-        <ul class="flex gap-3 bg-orange-1 px-3 py-4 font-semibold text-navy">
-          <li class="w-10 text-center">No</li>
-          <li class="w-96">Name Bank</li>
-          <li class="hidden w-64 lg:block">Max Loan</li>
-          <li class="hidden w-48 lg:block">Action</li>
-        </ul>
-        <!-- Loading -->
-        <template x-if="bankLists.length == 0">
-          <div class="my-10 text-center text-2xl font-bold text-navy">
-            <template x-if="isLoad">
-              <div class="mb-5">
-                <div class="flex h-20 w-full items-center justify-center">
-                  <div class="loading"></div>
-                </div>
-              </div>
-            </template>
-            <h1 x-text="showMessage"></h1>
+      <div x-data="listBank" x-init="getBanks()">
+        <div class="relative mb-4 flex w-full justify-end">
+          <div class="relative w-full lg:w-72">
+            <input type="text" name="search" id="search" x-model="search" x-on:keyup="viewPage(0)"
+              placeholder="Search Bank..."
+              class="relative w-full rounded-lg border-2 border-transparent bg-gray-1/40 py-2 pl-9 outline-none transition-all duration-200 hover:border-orange-1 focus:border-orange-1 active:border-orange-1 lg:bg-white">
+            <div class="absolute inset-y-0 left-3 mt-[14px] w-4">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" class="fill-gray-2">
+                <path
+                  d="M416 208c0 45.9-14.9 88.3-40 122.7L502.6 457.4c12.5 12.5 12.5 32.8 0 45.3s-32.8 12.5-45.3 0L330.7 376c-34.4 25.2-76.8 40-122.7 40C93.1 416 0 322.9 0 208S93.1 0 208 0S416 93.1 416 208zM208 352c79.5 0 144-64.5 144-144s-64.5-144-144-144S64 128.5 64 208s64.5 144 144 144z" />
+              </svg>
+            </div>
           </div>
-        </template>
+        </div>
 
-        <!-- call table list template -->
-        <template x-for="(bank, i) of bankLists">
-          @livewire('components.list-bank')
-        </template>
+        <div class="overflow-hidden rounded-xl bg-gray-1/30 lg:bg-white">
+          <ul class="flex gap-3 bg-orange-1 px-3 py-4 font-semibold text-navy">
+            <li class="w-10 text-center">No</li>
+            <li class="w-96">Name Bank</li>
+            <li class="hidden w-64 lg:block">Max Loan</li>
+            <li class="hidden w-48 lg:block">Action</li>
+          </ul>
+          <!-- Loading -->
+          <template x-if="bankLists.length == 0">
+            <div class="my-10 text-center text-2xl font-bold text-navy">
+              <template x-if="isLoad">
+                <div class="mb-5">
+                  <div class="flex h-20 w-full items-center justify-center">
+                    <div class="loading"></div>
+                  </div>
+                </div>
+              </template>
+              <h1 x-text="showMessage"></h1>
+            </div>
+          </template>
 
-        <template x-if="bankLists.length > 0">
-          {{-- Start pagination --}}
-          @livewire('components.paginate')
-          {{-- End Pagination --}}
-        </template>
+          <!-- call table list template -->
+          <template x-for="(bank, i) of bankLists">
+            @livewire('components.list-bank')
+          </template>
+
+          <template x-if="bankLists.length > 0">
+            {{-- Start pagination --}}
+            @livewire('components.paginate')
+            {{-- End Pagination --}}
+          </template>
+
+        </div>
 
       </div>
+
     </div>
   </section>
 </main>

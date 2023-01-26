@@ -115,15 +115,29 @@
       // console.log(start, end)
 
       this.startAt = start
+      this.total = this.users.length
+
+      this.pages = Array.from({
+        length: Math.ceil(this.total / this.size)
+      }, (val, i) => i)
+
+
       this.listUsers = await this.users.slice(start, end)
       // console.log(this.listUsers)
 
       if (this.search != '') {
         this.listUsers = []
-        this.listUsers = await this.users.filter(user => {
+        const userFilter = await this.users.filter(user => {
           // console.log('hello');
           return user.name.toLowerCase().includes(this.search.toLowerCase())
         })
+
+        this.total = userFilter.length
+        this.pages = Array.from({
+          length: Math.ceil(this.total / this.size)
+        }, (val, i) => i)
+
+        this.listUsers = userFilter.slice(start, end)
       }
 
       if (this.listUsers.length == 0) {
