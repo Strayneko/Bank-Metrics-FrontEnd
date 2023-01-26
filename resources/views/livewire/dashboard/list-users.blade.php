@@ -227,11 +227,11 @@
       </div>
 
       <div x-data="listUser" x-init="getUsers()">
-        <div class="relative mb-4 flex w-full justify-end pr-16">
+        <div class="relative mb-4 flex w-full justify-end">
           <div class="relative w-full lg:w-72">
             <input type="text" name="search" id="search" x-model="search" x-on:keyup="viewPage(0)"
               placeholder="Search User..."
-              class="relative rounded-lg border-2 border-transparent bg-gray-1/40 py-2 pl-9 outline-none transition-all duration-200 hover:border-orange-1 focus:border-orange-1 active:border-orange-1 lg:bg-white">
+              class="relative w-full rounded-lg border-2 border-transparent bg-gray-1/40 py-2 pl-9 outline-none transition-all duration-200 hover:border-orange-1 focus:border-orange-1 active:border-orange-1 lg:bg-white">
             <div class="absolute inset-y-0 left-3 mt-[14px] w-4">
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" class="fill-gray-2">
                 <path
