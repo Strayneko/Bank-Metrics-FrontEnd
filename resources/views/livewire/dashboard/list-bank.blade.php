@@ -284,7 +284,7 @@
       // console.log(this.total)
 
       this.pages = Array.from({
-        length: Math.ceil(this.total / this.size)
+        length: Math.ceil(await this.total / this.size)
       }, (val, i) => i)
 
       this.bankLists = await this.banks.data.slice(start, end)
@@ -298,16 +298,11 @@
 
         this.total = bankFilter.length
         this.pages = Array.from({
-          length: Math.ceil(this.total / this.size)
+          length: Math.ceil(await this.total / this.size)
         }, (val, i) => i)
 
         this.bankLists = bankFilter.slice(start, end)
       }
-
-      this.pages = Array.from({
-        length: Math.ceil(this.total / this.size)
-      }, (val, i) => i)
-      // console.log(this.pages)
     }
   }))
 
@@ -462,7 +457,7 @@
       // console.log(this.total)
 
       this.pages = Array.from({
-        length: Math.ceil(this.total / this.size)
+        length: Math.ceil(await this.total / this.size)
       }, (val, i) => i)
 
       this.bankLists = await this.banks.slice(start, end)
@@ -476,16 +471,11 @@
 
         this.total = bankFilter.length
         this.pages = Array.from({
-          length: Math.ceil(this.total / this.size)
+          length: Math.ceil(await this.total / this.size)
         }, (val, i) => i)
 
         this.bankLists = bankFilter.slice(start, end)
       }
-
-      this.pages = Array.from({
-        length: Math.ceil(this.total / this.size)
-      }, (val, i) => i)
-      // console.log(this.pages)
     },
     restoreBank(id) {
       const reqTime = Date.now()
