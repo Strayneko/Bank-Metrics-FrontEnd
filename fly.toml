@@ -16,7 +16,7 @@ processes = []
   LOG_LEVEL = "info"
   LOG_STDERR_FORMATTER = "Monolog\\Formatter\\JsonFormatter"
   APP_URL = "https://metrics-fe.fly.dev"
-  API_URL = "https://metrics-be.fly.dev"
+  API_URL = "https://metrics-api.fly.dev"
   
 [experimental]
   auto_rollback = true
