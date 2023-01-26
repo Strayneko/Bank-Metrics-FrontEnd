@@ -134,8 +134,9 @@
 
             <label for="loan_amount" class="relative mb-3 w-full pb-3">
               <p class="font-bold text-navy">Submission</p>
-              <input type="number" name="loan_amount" id="loan_amount" class="peer mt-2 w-full outline-none"
-                placeholder="Insert your loaning amount">
+              <input type="number" name="loan_amount" id="loan_amount"
+                class="peer mt-2 w-full pl-6 text-navy outline-none" placeholder="Insert your loaning amount">
+              <span class="absolute bottom-3 left-0 text-xl font-semibold text-navy">$</span>
               <div
                 class="absolute inset-x-0 bottom-0 mx-auto block h-0.5 w-0 rounded-lg bg-navy transition-all duration-300 peer-hover:w-full">
               </div>
