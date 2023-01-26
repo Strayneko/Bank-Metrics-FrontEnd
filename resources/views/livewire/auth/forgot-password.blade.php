@@ -36,7 +36,7 @@
                     // success alert
                     Swal.fire(
                         'Success!'
-                        , 'Send Email Succes, Please Check Your!'
+                        , 'Send Email Succes, Please Check Your Email!'
                         , 'success'
                     )
                 });
