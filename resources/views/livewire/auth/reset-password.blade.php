@@ -10,6 +10,10 @@
       const password = this.reset.password
       const passwordConfirm = this.reset.password_confirmation
 
+      /**
+       * Show error message if password and
+       * confirmation password is not same
+       */
       if (password != passwordConfirm) {
         Swal.fire({
           icon: 'error',
@@ -25,6 +29,9 @@
       const url = window.location.pathname
       const token = url.replace('/resetpassword/', '')
 
+      /**
+       * Fetch to reset password
+       */
       fetch(`{{ env('API_URL') }}/api/resetPassword/${token}`, {
         method: "POST",
         body: data
@@ -64,6 +71,7 @@
     },
     token: localStorage.getItem('token'),
     checkLogged() {
+      // check if user already login then redirected to dashboard based on their role
       if (this.token) {
         window.location.replace(`{{ route('home') }}`)
       }

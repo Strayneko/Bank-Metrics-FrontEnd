@@ -21,11 +21,15 @@
     login() {
       const data = new FormData()
       const confirmation = this.user.confirmed
-      if(confirmation === false){
+
+      /**
+       * Show an alert if the user doesn't verify their email
+       */
+      if (confirmation === false) {
         Swal.fire({
-            icon: 'error',
-            title: 'Oops..',
-            text: 'Please Verify Your Email Firts'
+          icon: 'error',
+          title: 'Oops..',
+          text: 'Please Verify Your Email Firts'
         })
         return
       }
@@ -34,28 +38,26 @@
       data.append('confirmed', this.user.confirmed)
 
       fetch(`{{ env('API_URL') }}/api/auth/login`, {
-          method: "POST",
-          body: data
-        })
-        .then(async (response) => {
-          this.dataResponse = await response.json()
-          // console.log(this.dataResponse.message)
+        method: "POST",
+        body: data
+      }).then(async (response) => {
+        this.dataResponse = await response.json()
+        // console.log(this.dataResponse.message)
 
+        if (this.dataResponse.status == false) {
+          // alert(this.dataResponse.message)
+          Swal.fire({
+            icon: 'error',
+            title: 'Oops...',
+            text: this.dataResponse.message
+          })
 
-          if (this.dataResponse.status == false) {
-            // alert(this.dataResponse.message)
-            Swal.fire({
-              icon: 'error',
-              title: 'Oops...',
-              text: this.dataResponse.message
-            })
-
-            // window.location.replace('')
-          } else {
-            localStorage.setItem('token', this.dataResponse.data.auth.token)
-            window.location.replace(`{{ env('APP_URL') }}`)
-          }
-        });
+          // window.location.replace('')
+        } else {
+          localStorage.setItem('token', this.dataResponse.data.auth.token)
+          window.location.replace(`{{ env('APP_URL') }}`)
+        }
+      })
     },
 
     token: localStorage.getItem('token'),
@@ -65,7 +67,7 @@
         window.location.replace(`{{ route('home') }}`)
       }
     }
-  }));
+  }))
 </script>
 <div class="container" x-data="Login" x-init="checkLogged()">
   <div class="flex justify-between pt-[56px]">
@@ -99,7 +101,8 @@
               required>
           </div>
           <div class="m-5 text-right">
-            <a href="{{ route ('ForgotPassword')}}" class="font-poppins text-[#0F0742] hover:text-[#4d36e4]">Forgot Password?</a>
+            <a href="{{ route('ForgotPassword') }}" class="font-poppins text-[#0F0742] hover:text-[#4d36e4]">Forgot
+              Password?</a>
           </div>
           <div class="m-5 mb-20 flex justify-between gap-5 lg:m-0 lg:mb-0 lg:gap-0">
             <button type="submit"

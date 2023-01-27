@@ -7,15 +7,24 @@
     resData: [],
     roleId: 0,
     checkLogin() {
+      /**
+       * Redirect to login page if there is no token in localstorage
+       */
       if (!this.token) {
         window.location.href = `{{ route('login') }}`
         // console.log('hello')
       }
 
+      /**
+       * Generate api key from time request and endpoint api
+       */
       const reqTime = Date.now()
       const path = '/api/user/me'
       const apikey = generateKey(path, reqTime)
 
+      /**
+       * Fetch for check login
+       */
       fetch(`{{ env('API_URL') }}/api/user/me`, {
         method: 'GET',
         headers: {
@@ -37,6 +46,9 @@
 
         this.roleId = this.resData.data.role_id
 
+        /**
+         * Redirect to home if role is not user or role id is not 1
+         */
         if (this.roleId != 1) {
           window.location.replace(`{{ route('home') }}`)
         }
@@ -47,6 +59,9 @@
 
     isSubmit: false,
     createSubmission() {
+      /**
+       * Create form data and set the value from form
+       */
       const body = new FormData(this.$refs.subForm)
       // console.log(this.$refs.subForm)
       const pyld = {}
@@ -58,6 +73,9 @@
       const path = '/api/loan/get_loan'
       const apikey = generateKey(path, reqTime)
 
+      /**
+       * Fetch to create new submission
+       */
       fetch(`{{ env('API_URL') }}${path}`, {
         method: 'POST',
         headers: {
@@ -73,6 +91,9 @@
         const data = await res.json()
         // console.log(data)
 
+        /**
+         * Show error message if response status is false
+         */
         if (data.status == false) {
           Swal.fire({
             icon: 'error',
@@ -81,6 +102,7 @@
           })
           return
         }
+
         Swal.fire({
           icon: 'success',
           title: 'Success!',

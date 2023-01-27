@@ -71,10 +71,16 @@
       this.isLoad = true
       // console.log(generateKey)
 
+      /**
+       * Generate api key from time request and endpoint api
+       */
       const reqTime = Date.now()
       const path = '/api/admin'
       const apiKey = generateKey(path, reqTime)
 
+      /**
+       * Get list admins
+       */
       fetch(`{{ env('API_URL') }}${path}`, {
         method: 'GET',
         headers: {
@@ -86,12 +92,18 @@
       }).then(async res => {
         data = await res.json()
 
+        /**
+         * If response status is true, insert
+         * the response data into variable
+         */
         if (data.status) {
           this.admins = data.data
         }
         // console.log(this.admins)
 
-        // console.log(this.pageNumber)
+        /**
+         * Set number start and end for slice data
+         */
         const start = this.pageNumber * this.size
         const end = start + this.size
         // console.log(start, end)
@@ -99,9 +111,15 @@
         this.total = this.admins.length
         // console.log(this.total)
 
+        /**
+         * Slice the data and insert into variable
+         */
         this.listAdmins = this.admins.slice(start, end)
         // console.log(this.listAdmins)
 
+        /**
+         * Generate number of pages from total data.
+         */
         this.pages = Array.from({
           length: Math.ceil(this.total / this.size)
         }, (val, i) => i)
@@ -118,25 +136,43 @@
       })
     },
     async viewPage(index) {
-      // console.log(this.submissionData)
+      /**
+       * Reset list admins and set page number
+       */
       this.listAdmins = []
       this.pageNumber = index
 
+      /**
+       * Set number start and end for slice data
+       */
       const start = this.pageNumber * this.size
       const end = start + this.size
       // console.log(start, end)
 
+      /**
+       * Set number of start list on new page
+       */
       this.startAt = start
       this.total = this.admins.length
       // console.log(this.total)
 
+      /**
+       * Generate number of pages from list users data.
+       */
       this.pages = Array.from({
         length: Math.ceil(this.total / this.size)
       }, (val, i) => i)
 
+      /**
+       * Slice the data and insert into variable 
+       */
       this.listAdmins = await this.admins.slice(start, end)
       // console.log(this.listAdmins)
 
+      /**
+       * If there a search value, reset list admins
+       * and then slice the data with filter
+       */
       if (this.search != '') {
         this.listAdmins = []
         const adminFilter = await this.admins.filter(admin => {
@@ -177,6 +213,9 @@
 
       this.isSubmit = true
 
+      /**
+       * Generate api key from time request and endpoint api
+       */
       const reqTime = Date.now()
       const path = '/api/admin'
       const apiKey = generateKey(path, reqTime)
@@ -203,6 +242,10 @@
         for (m of this.message) {
           msg += `<p>${m}</p>`
         }
+
+        /**
+         * Show error message if response status is false
+         */
         if (status == false) {
           // alert for failed creating admin's data
           Swal.fire({

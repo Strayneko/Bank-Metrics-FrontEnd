@@ -115,6 +115,9 @@
           msg += `<p>${m}</p>`
         }
 
+        /**
+         * Show error message if response status is false
+         */
         if (status == false) {
           Swal.fire({
             icon: 'error',
@@ -124,6 +127,7 @@
           // window.location.replace('')
           return
         }
+
         Swal.fire({
           icon: 'success',
           title: 'Success!',
@@ -141,11 +145,16 @@
     },
 
     deleteBank(id) {
-
+      /**
+       * Generate api key from time request and endpoint api
+       */
       const reqTime = Date.now()
       const path = `/api/bank/delete/${id}`
       const apiKey = generateKey(path, reqTime)
 
+      /**
+       * Show modal confirm
+       */
       Swal.fire({
         title: 'Are you sure?',
         text: "You won't be able to revert this!",
@@ -178,6 +187,9 @@
                 msg += `<p>${m}</p>`
               }
 
+              /**
+               * Show error message if response status is false
+               */
               if (status == false) {
                 Swal.fire({
                   icon: 'error',
@@ -187,6 +199,7 @@
                 // window.location.replace('')
                 return
               }
+
               Swal.fire({
                 icon: 'success',
                 title: 'Success!',
@@ -206,7 +219,6 @@
     },
 
 
-    // redirect to login page if user is not logged in for modal
 
     isLoad: false,
     pageNumber: 0,
@@ -217,6 +229,7 @@
     pages: [],
     search: '',
     checkLogged() {
+      // redirect to login page if user is not logged in
       if (!this.token) {
         window.location.href(`{{ route('home') }}`)
       }
@@ -246,6 +259,10 @@
         // console.log(this.banks)
         this.showMessages = 'No data Bank found!'
         // console.log(this.pageNumber)
+
+        /**
+         * Set number start and end for slice data
+         */
         const start = this.pageNumber * this.size
         const end = start + this.size
         // console.log(start, end)
@@ -253,9 +270,15 @@
         this.total = this.banks.data.length
         // console.log(this.total)
 
+        /**
+         * Slice the data and insert into variable
+         */
         this.bankLists = await this.banks.data.slice(start, end)
         // console.log(this.bankLists)
 
+        /**
+         * Generate number of pages from total data.
+         */
         this.pages = Array.from({
           length: Math.ceil(this.total / this.size)
         }, (val, i) => i)
@@ -272,24 +295,44 @@
       })
     },
     async viewPage(index) {
+      /**
+       * Reset list banks and set page number
+       */
       this.bankLists = []
       this.pageNumber = index
 
+      /**
+       * Set number start and end for slice data
+       */
       const start = this.pageNumber * this.size
       const end = start + this.size
       // console.log(start, end)
 
+
+      /**
+       * Set number of start list on new page
+       */
       this.startAt = start
       this.total = await this.banks.data.length
       // console.log(this.total)
 
+      /**
+       * Generate number of pages from list users data.
+       */
       this.pages = Array.from({
         length: Math.ceil(await this.total / this.size)
       }, (val, i) => i)
 
+      /**
+       * Slice the data and insert into variable 
+       */
       this.bankLists = await this.banks.data.slice(start, end)
       // console.log(this.bankLists)
 
+      /**
+       * If there a search value, reset list banks
+       * and then slice the data with filter
+       */
       if (this.search != '') {
         this.bankLists = []
         const bankFilter = await this.banks.data.filter(bank => {
@@ -361,6 +404,9 @@
           msg += `<p>${m}</p>`
         }
 
+        /**
+         * Show error message if response status is false
+         */
         if (status == false) {
           Swal.fire({
             icon: 'error',
@@ -370,6 +416,7 @@
           // window.location.replace('')
           return
         }
+
         Swal.fire({
           icon: 'success',
           title: 'Success!',
@@ -407,6 +454,10 @@
     search: '',
     getDeletedBanks() {
       this.isLoad = true
+
+      /**
+       * Generate api key from time request and endpoint api
+       */
       const reqTime = Date.now()
       const path = '/api/bank/trash'
       const apiKey = generateKey(path, reqTime)
@@ -427,15 +478,25 @@
 
         this.banks = await response.data
 
+        /**
+         * Set number start and end for slice data
+         */
         const start = this.pageNumber * this.size
         const end = start + this.size
         this.total = await this.banks.length
 
+        /**
+         * Slice the data and insert into variable 
+         */
         this.bankLists = await this.banks.slice(start, end)
 
+        /**
+         * Generate number of pages from list users data.
+         */
         this.pages = Array.from({
           length: Math.ceil(this.total / this.size)
         }, (val, i) => i)
+
       }).catch(err => {
         Swal.fire({
           icon: 'error',
@@ -445,24 +506,43 @@
       })
     },
     async viewPage(index) {
+      /**
+       * Reset list banks and set page number
+       */
       this.bankLists = []
       this.pageNumber = index
 
+      /**
+       * Set number start and end for slice data
+       */
       const start = this.pageNumber * this.size
       const end = start + this.size
       // console.log(start, end)
 
+      /**
+       * Set number of start list on new page
+       */
       this.startAt = start
       this.total = await this.banks.length
       // console.log(this.total)
 
+      /**
+       * Generate number of pages from list users data.
+       */
       this.pages = Array.from({
         length: Math.ceil(await this.total / this.size)
       }, (val, i) => i)
 
+      /**
+       * Slice the data and insert into variable 
+       */
       this.bankLists = await this.banks.slice(start, end)
       // console.log(this.bankLists)
 
+      /**
+       * If there a search value, reset list banks
+       * and then slice the data with filter
+       */
       if (this.search != '') {
         this.bankLists = []
         const bankFilter = await this.banks.filter(bank => {
@@ -478,10 +558,16 @@
       }
     },
     restoreBank(id) {
+      /**
+       * Generate api key from time request and endpoint api
+       */
       const reqTime = Date.now()
       const path = `/api/bank/restore/${id}`
       const apiKey = generateKey(path, reqTime)
 
+      /**
+       * Show modal confirmation
+       */
       Swal.fire({
         title: 'Are you sure?',
         icon: 'warning',
@@ -490,6 +576,9 @@
         cancelButtonColor: '#d33',
         confirmButtonText: 'Yes, restore!'
       }).then((result) => {
+        /**
+         * Fetch to delete restore bank if the result is true
+         */
         if (result.isConfirmed) {
           fetch(`{{ env('API_URL') }}${path}`, {
             method: 'GET',

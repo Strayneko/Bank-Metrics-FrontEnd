@@ -16,12 +16,15 @@
         // console.log('hello')
       }
 
+      /**
+       * Generate api key from time request and endpoint api
+       */
       const reqTime = Date.now()
       const path = '/api/user/me'
       const apiKey = generateKey(path, reqTime)
 
       /**
-       * Get profile
+       * Get profile user
        */
       fetch(`{{ env('API_URL') }}${path}`, {
         method: 'GET',
@@ -69,12 +72,16 @@
     search: '',
     getUsers() {
       this.isLoad = true
+
+      /**
+       * Generate api key from time request and endpoint api
+       */
       const reqTime = Date.now()
       const path = '/api/user'
       const apiKey = generateKey(path, reqTime)
 
       /**
-       * Get list user
+       * Get list users
        */
       fetch(`{{ env('API_URL') }}${path}`, {
         method: 'GET',
@@ -89,13 +96,22 @@
         this.users = data.data
         // console.log(this.users)
 
+        /**
+         * Set number start and end for slice data
+         */
         const start = this.pageNumber * this.size
         const end = start + this.size
         this.total = this.users.length
 
+        /**
+         * Slice the data and insert into variable listusers.
+         */
         this.listUsers = this.users.slice(start, end)
         // console.log(this.listUsers)
 
+        /**
+         * Generate number of pages from total data.
+         */
         this.pages = Array.from({
           length: Math.ceil(this.total / this.size)
         }, (val, i) => i)
@@ -106,25 +122,43 @@
       })
     },
     async viewPage(index) {
-      // console.log(this.submissionData)
+      /**
+       * Reset list users and set page number
+       */
       this.listUsers = []
       this.pageNumber = index
 
+      /**
+       * Set number start and end for slice data
+       */
       const start = this.pageNumber * this.size
       const end = start + this.size
       // console.log(start, end)
 
+      /**
+       * Set number of start list on new page
+       */
       this.startAt = start
       this.total = this.users.length
 
+      /**
+       * Generate number of pages from list users data.
+       */
       this.pages = Array.from({
         length: Math.ceil(this.total / this.size)
       }, (val, i) => i)
 
 
+      /**
+       * Slice the data and insert into variable listUsers.
+       */
       this.listUsers = await this.users.slice(start, end)
       // console.log(this.listUsers)
 
+      /**
+       * If there a search value, reset list user
+       * and then slice the data with filter
+       */
       if (this.search != '') {
         this.listUsers = []
         const userFilter = await this.users.filter(user => {
@@ -160,6 +194,9 @@
     startAt: 0,
     pages: [],
     getSubmission(id) {
+      /**
+       * Generate api key from time request and endpoint api
+       */
       const reqTime = Date.now()
       const path = `/api/loan/list`
       const apiKey = generateKey(path, reqTime)
@@ -179,7 +216,13 @@
         this.submissionData = await res.json()
         // console.log(this.submissionData)
 
+        /**
+         * If response data is not null
+         */
         if (this.submissionData.data) {
+          /**
+           * Set number start and end for slice data
+           */
           const start = this.pageNumber * this.size
           const end = start + this.size
           this.total = this.submissionData.data.loans.length
@@ -187,6 +230,9 @@
           this.listSubmissions = this.submissionData.data.loans.slice(start, end)
           // console.log(this.listSubmissions)
 
+          /**
+           * Set number start and end for slice data
+           */
           this.pages = Array.from({
             length: Math.ceil(this.total / this.size)
           }, (val, i) => i)
@@ -204,15 +250,28 @@
       })
     },
     async viewPage(index) {
-      // console.log(this.submissionData)
+      /**
+       * Reset listSubmissions data and set page number
+       */
       this.listSubmissions = []
       this.pageNumber = index
 
+      /**
+       * Set number start and end for slice data
+       */
       const start = this.pageNumber * this.size
       const end = start + this.size
       // console.log(start, end)
 
+      /**
+       * Set number of start list on new page
+       */
       this.startAt = start
+
+
+      /**
+       * Slice the data and insert into variable.
+       */
       this.listSubmissions = await this.submissionData.data.loans.slice(start, end)
       // console.log(this.listSubmissions)
 

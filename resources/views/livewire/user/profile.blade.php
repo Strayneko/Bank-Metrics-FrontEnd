@@ -8,15 +8,24 @@
     resData: [],
     roleId: 0,
     checkLogin() {
+      /**
+       * Redirect to login page if there is no token in localstorage
+       */
       if (!this.token) {
         window.location.href = `{{ route('login') }}`
         // console.log('hello')
       }
 
+      /**
+       * Generate api key from time request and endpoint api
+       */
       const reqTime = Date.now()
       const path = '/api/user/me'
       const apikey = generateKey(path, reqTime)
 
+      /**
+       * Fetch for check login
+       */
       fetch(`{{ env('API_URL') }}${path}`, {
         method: 'GET',
         headers: {
@@ -27,6 +36,7 @@
         }
       }).then(async res => {
         this.resData = await res.json()
+
         /**
          * Redirect to login if user not found
          */
@@ -36,9 +46,15 @@
         }
         // console.log(this.userData)
 
+        /**
+         * Set role id and insert response data into variable
+         */
         this.roleId = this.resData.data.role_id
         this.userData = this.resData.data
 
+        /**
+         * Redirect to home if role is not user or role id is not 1
+         */
         if (this.roleId != 1) {
           window.location.replace(`{{ route('home') }}`)
         }
@@ -55,10 +71,17 @@
 
     dataCountry: [],
     getCountry() {
+      /**
+       * Generate api key from time request and endpoint api
+       */
       const reqTime = Date.now()
       const path = '/api/countries'
       const apikey = generateKey(path, reqTime)
 
+      /**
+       * Fetch data country and insert the
+       * response data into varibale
+       */
       fetch(`{{ env('API_URL') }}${path}`, {
         method: 'GET',
         headers: {
@@ -76,15 +99,24 @@
 
     isSubmit: false,
     updateProfile() {
+      /**
+       * Create form data and set the value from form
+       */
       const body = new FormData(this.$refs.userForm)
       // console.log(this.$refs.userForm)
 
       this.isSubmit = true
 
+      /**
+       * Generate api key from time request and endpoint api
+       */
       const reqTime = Date.now()
       const path = '/api/user/me'
       const apikey = generateKey(path, reqTime)
 
+      /**
+       * Fetch to update user profile
+       */
       fetch(`{{ env('API_URL') }}${path}`, {
         method: 'POST',
         headers: {
@@ -103,6 +135,10 @@
         for (m of data.message) {
           msg += `<p>${m}</p>`
         }
+
+        /**
+         * Show error message if response status is false
+         */
         if (data.status == false) {
           Swal.fire({
             icon: 'error',
@@ -111,6 +147,7 @@
           })
           return
         }
+
         Swal.fire({
           icon: 'success',
           title: 'Success!',

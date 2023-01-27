@@ -15,10 +15,16 @@
         this.isLoad = true
         this.showMessage = 'Please wait...'
 
+        /**
+         * Generate api key from time request and endpoint api
+         */
         const reqTime = Date.now()
         const path = '/api/loan/list'
         const apiKey = generateKey(path, reqTime)
 
+        /**
+         * Fetch to get submission data
+         */
         fetch(`{{ env('API_URL') }}${path}`, {
           method: 'GET',
           headers: {
@@ -31,11 +37,19 @@
           this.submissionData = await res.json()
           // console.log(this.submissionData)
 
-          // console.log(this.pageNumber)
+          /**
+           * Set number start and end for slice data
+           */
           const start = this.pageNumber * this.size
           const end = start + this.size
           // console.log(start, end)
 
+          /**
+           * If response returns data, then slice the data
+           * and insert into variable loansData. And
+           * get number of length data and insert
+           * it into varible total.
+           */
           if (this.submissionData.data) {
             this.total = this.submissionData.data.loans.length
             // console.log(this.total)
@@ -43,6 +57,9 @@
             this.loansData = await this.submissionData.data.loans.slice(start, end)
             // console.log(this.loansData)
 
+            /**
+             * Generate number of pages from total data.
+             */
             this.pages = Array.from({
               length: Math.ceil(this.total / this.size)
             }, (val, i) => i)
@@ -62,15 +79,27 @@
         })
       },
       async viewPage(index) {
-        // console.log(this.submissionData)
+        /**
+         * Reset loans data and set page number
+         */
         this.loansData = []
         this.pageNumber = index
 
+        /**
+         * Set number start and end for slice data
+         */
         const start = this.pageNumber * this.size
         const end = start + this.size
         // console.log(start, end)
 
+        /**
+         * Set number of start list on new page
+         */
         this.startAt = start
+
+        /**
+         * Slice the data and insert into variable loansData.
+         */
         this.loansData = await this.submissionData.data.loans.slice(start, end)
         // console.log(this.loansData)
 
@@ -86,6 +115,10 @@
       isLoad: false,
       getRejected(id) {
         this.isLoad = true
+
+        /**
+         * Generate api key from time request and endpoint api
+         */
         const reqTime = Date.now()
         const path = `/api/loan/rejection_reason/${id}`
         const apiKey = generateKey(path, reqTime)

@@ -13,6 +13,9 @@
           cancelButtonColor: '#d33',
           confirmButtonText: 'Yes, sign out!'
         }).then((result) => {
+          /**
+           * Fetch to endpoint logout if the result is true
+           */
           if (result.isConfirmed) {
             fetch(`{{ env('API_URL') }}/api/auth/logout`, {
               method: 'POST',
@@ -22,6 +25,11 @@
             }).then(async res => {
               const data = await res.json()
 
+              /**
+               * If response status true, remove token
+               * form local storage and redirect to
+               * login page
+               */
               if (data.status) {
                 localStorage.setItem('logout', true)
                 localStorage.removeItem('token')
