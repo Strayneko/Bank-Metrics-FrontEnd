@@ -501,7 +501,13 @@
           }).then(async res => {
             const response = await res.json()
             // console.log(response);
-            window.location.replace(`{{ route('bank.list') }}`)
+            Swal.fire({
+              icon: 'success',
+              title: 'Success!',
+              text: 'Restore Bank Success!',
+            }).then(() => {
+              window.location.replace(`{{ route('bank.list') }}`)
+            })
           }).catch(err => {
             Swal.fire({
               icon: 'error',
