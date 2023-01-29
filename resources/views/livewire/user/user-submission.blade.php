@@ -106,7 +106,7 @@
         Swal.fire({
           icon: 'success',
           title: 'Success!',
-          text: data.message
+          text: 'Your Submission Was Submited Successfully!'
         }).then(res => {
           window.location.replace(`{{ env('APP_URL') }}`)
           // console.log(res)
