@@ -248,7 +248,7 @@
                     <li class="flex gap-10">
                       <span class="w-48">Employment</span>
                       <span class="w-full"
-                        x-text="userData.profile.employement == 1 ? 'Full-Time' : 'Half-Time'"></span>
+                        x-text="userData.profile.employement == 1 ? 'Full-Time' : 'Non Full-Time'"></span>
                     </li>
                   </div>
                 </template>

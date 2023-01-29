@@ -51,7 +51,7 @@
       <li class="flex flex-col justify-between lg:flex-row">
         <span class="inline-block w-52 text-base font-normal lg:text-lg lg:font-semibold">Employment</span>
         <template x-if="bank.employment == 0">
-          <span class="w-full flex-1">Half-Time</span>
+          <span class="w-full flex-1">Non Full-Time</span>
         </template>
         <template x-if="bank.employment == 1">
           <span class="w-full flex-1">Full-Time</span>

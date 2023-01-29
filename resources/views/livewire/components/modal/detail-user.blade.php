@@ -47,7 +47,7 @@
           </li>
           <li class="flex flex-col justify-between lg:flex-row">
             <span class="inline-block w-40 text-base font-normal lg:text-lg lg:font-semibold">Employement</span>
-            <span class="flex-1" x-text="user.user_profile.employement ? 'Full-Time' : 'Half-Time'"></span>
+            <span class="flex-1" x-text="user.user_profile.employement ? 'Full-Time' : 'Non Full-Time'"></span>
           </li>
           <li class="flex flex-col justify-between lg:flex-row">
             <span class="inline-block w-40 text-base font-normal lg:text-lg lg:font-semibold">Nationality</span>

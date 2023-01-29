@@ -86,7 +86,7 @@
             class="w-full cursor-pointer rounded-md border-2 border-orange-1 bg-white p-2 font-medium text-navy outline-none transition-all duration-200 hover:bg-orange-1"
             x-model="newBank.employment">
             {{-- <option selected disabled class="text-white font-semibold">Choose your employment</option> --}}
-            <option value="0" class="bg-white font-medium">Half-Time</option>
+            <option value="0" class="bg-white font-medium">Non Full-Time</option>
             <option value="1" class="bg-white font-medium">Full-Time</option>
             <option value="2" class="bg-white font-medium">Both</option>
           </select>
