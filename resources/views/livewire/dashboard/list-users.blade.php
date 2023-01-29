@@ -67,7 +67,7 @@
     size: 5,
     total: '',
     listUsers: [],
-    startAt: 0,
+    startListAt: 0,
     pages: [],
     search: '',
     getUsers() {
@@ -138,7 +138,7 @@
       /**
        * Set number of start list on new page
        */
-      this.startAt = start
+      this.startListAt = start
       this.total = this.users.length
 
       /**
