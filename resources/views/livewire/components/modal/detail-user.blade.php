@@ -16,11 +16,11 @@
     <ul class="mx-auto mb-6 flex flex-col gap-3 rounded-lg bg-[#FFE1C5] p-6 text-lg font-semibold text-navy lg:gap-0">
       <li class="flex flex-col justify-between lg:flex-row">
         <span class="inline-block w-40 text-base font-normal lg:text-lg lg:font-semibold">Name</span>
-        <span class="flex-1" x-text="user.name"></span>
+        <span class="flex-1 break-all" x-text="user.name"></span>
       </li>
       <li class="flex flex-col justify-between lg:flex-row">
         <span class="inline-block w-40 text-base font-normal lg:text-lg lg:font-semibold">Email</span>
-        <span class="flex-1" x-text="user.email"></span>
+        <span class="flex-1 break-all" x-text="user.email"></span>
       </li>
 
       <template x-if="!user.user_profile">
@@ -39,7 +39,7 @@
           </li>
           <li class="flex flex-col justify-between lg:flex-row">
             <span class="inline-block w-40 text-base font-normal lg:text-lg lg:font-semibold">Address </span>
-            <span class="flex-1" x-text="user.user_profile.address"></span>
+            <span class="flex-1 break-all" x-text="user.user_profile.address"></span>
           </li>
           <li class="flex flex-col justify-between lg:flex-row">
             <span class="inline-block w-40 text-base font-normal lg:text-lg lg:font-semibold">Status</span>
