@@ -53,7 +53,9 @@
        * Redirect to home if there is token in localstorage
        */
       if (this.token) {
-        window.location.replace(`{{ route('home') }}`)
+        setTimeout(() => {
+          window.location.replace(`{{ route('home') }}`)
+        }, 0);
       }
     }
   }));

@@ -64,7 +64,9 @@
     // check if user already login then redirected to dashboard based on their role
     checkLogged() {
       if (this.token) {
-        window.location.replace(`{{ route('home') }}`)
+        setTimeout(() => {
+          window.location.replace(`{{ route('home') }}`)
+        }, 0);
       }
     }
   }))
