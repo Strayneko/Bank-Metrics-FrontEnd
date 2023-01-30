@@ -113,7 +113,7 @@
             required>
             <option value="null" selected disabled class="bg-white font-semibold">Choose your employement</option>
             <option :selected="userData.profile ? (userData.profile.employement == 0 ? true : false) : false"
-              value="0" class="bg-white font-medium">Half-Time</option>
+              value="0" class="bg-white font-medium">Non Full-Time</option>
             <option :selected="userData.profile ? (userData.profile.employement == 1 ? true : false) : false"
               value="1" class="bg-white font-medium">Full-Time</option>
           </select>

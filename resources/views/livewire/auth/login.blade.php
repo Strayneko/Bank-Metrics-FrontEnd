@@ -65,7 +65,7 @@
     checkLogged() {
       if (this.token) {
         setTimeout(() => {
-          window.location.href = `{{ env('APP_URL') }}`
+          window.location.replace(`{{ route('home') }}`)
         }, 0);
       }
     }
