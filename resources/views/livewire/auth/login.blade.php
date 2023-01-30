@@ -64,13 +64,15 @@
     // check if user already login then redirected to dashboard based on their role
     checkLogged() {
       if (this.token) {
-        window.location.replace(`{{ route('home') }}`)
+        setTimeout(() => {
+          window.location.href = `{{ env('APP_URL') }}`
+        }, 0);
       }
     }
   }))
 </script>
-<div class="container" x-data="Login" x-init="checkLogged()">
-  <div class="flex justify-between pt-[56px]">
+<div class="container" x-data="Login">
+  <div class="flex justify-between pt-[56px]" x-init="checkLogged()">
     <div class="">
       <div class="">
         <a href="">
