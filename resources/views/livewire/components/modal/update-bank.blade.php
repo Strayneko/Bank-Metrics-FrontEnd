@@ -83,7 +83,7 @@
             x-model="bank.employment">
             {{-- <option selected disabled class="text-white font-semibold">Choose your employment</option> --}}
             <option :selected="bank.employment ? (bank.employment == 0 ? true : false) : false" value="0"
-              class="bg-white font-medium">Half-Time</option>
+              class="bg-white font-medium">Non Full-Time</option>
             <option :selected="bank.employment ? (bank.employment == 1 ? true : false) : false" value="1"
               class="bg-white font-medium">Full-Time</option>
             <option :selected="bank.employment ? (bank.employment == 2 ? true : false) : false" value="2"
